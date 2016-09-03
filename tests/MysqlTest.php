@@ -12,7 +12,7 @@ use OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement;
  * Class MysqlTest
  *
  * Tests for the Mysql Connection Class
- * @covers Connection
+ * @covers \OlajosCs\QueryBuilder\MySQL\Connection
  */
 class MysqlTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,10 +25,10 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test Connection object
      *
-     * @covers Connection::select()
-     * @covers Connection::insert()
-     * @covers Connection::update()
-     * @covers Connection::delete()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::select()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::insert()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::update()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::delete()
      */
     public function testConnection()
     {
