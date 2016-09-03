@@ -14,11 +14,13 @@ class Connection extends \PDO implements \OlajosCs\QueryBuilder\Contracts\Connec
     /**
      * Return an empty select statement
      *
+     * @param string[]|string $fields
+     *
      * @return Statements\SelectStatement
      */
-    public function select()
+    public function select($fields = [])
     {
-        return new Statements\SelectStatement();
+        return new Statements\SelectStatement($fields);
     }
 
 
