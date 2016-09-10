@@ -50,6 +50,18 @@ interface SelectStatement
 
 
     /**
+     * Set a where condition with or glue
+     *
+     * @param $field
+     * @param $operator
+     * @param $value
+     *
+     * @return SelectStatement
+     */
+    public function whereOr($field, $operator, $value);
+
+
+    /**
      * Returns the query as a string
      *
      * @return string

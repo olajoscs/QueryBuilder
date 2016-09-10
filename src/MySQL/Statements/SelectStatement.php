@@ -88,6 +88,19 @@ class SelectStatement implements SelectStatementInterface, Query
     /**
      * @inheritdoc
      */
+    public function whereOr($field, $operator, $value)
+    {
+        $this->whereContainer->add(
+            new WhereElement($field, $operator, $value, WhereElement::GLUE_OR)
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     public function asString()
     {
         $query = 'SELECT ' . implode(',', $this->fields) . ' ';

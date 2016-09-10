@@ -4,6 +4,7 @@ namespace OlajosCs\QueryBuilder\MySQL;
 
 use OlajosCs\QueryBuilder\Mysql\Clauses\WhereContainer;
 use OlajosCs\QueryBuilder\Mysql\Clauses\WhereElement;
+use OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement;
 use OlajosCs\QueryBuilder\Operator;
 
 /**
@@ -71,6 +72,8 @@ class WhereTest extends MySQL
             $whereContainer->getParameters()
         );
     }
+
+
     /**
      * Test where conditions
      *
@@ -94,6 +97,28 @@ class WhereTest extends MySQL
             ->select('id')
             ->from('strings')
             ->where('id', Operator::IN, [1, 2]);
+        $this->assertEquals($string, $query->asString());
+    }
+
+
+    /**
+     * Test where conditions with or
+     *
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::whereOr()
+     *
+     * @return void
+     */
+    public function testWhereOr()
+    {
+        $connection = $this->getConnection();
+
+        $query = $connection
+            ->select('id')
+            ->from('strings')
+            ->whereOr('id', '=', 1)
+            ->whereOr('id', '=', 2);
+        $string = 'SELECT id FROM strings WHERE id = :where7 OR id = :where8';
+
         $this->assertEquals($string, $query->asString());
     }
 }
