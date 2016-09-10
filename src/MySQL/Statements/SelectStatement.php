@@ -128,6 +128,19 @@ class SelectStatement implements SelectStatementInterface, Query
     /**
      * @inheritdoc
      */
+    public function whereBetween($field, $min, $max)
+    {
+        $this->whereContainer->add(
+            new WhereElement($field, Operator::BETWEEN, [$min, $max])
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     public function asString()
     {
         $query = 'SELECT ' . implode(',', $this->fields) . ' ';

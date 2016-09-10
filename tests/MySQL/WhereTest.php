@@ -157,4 +157,26 @@ class WhereTest extends MySQL
 
         $this->assertEquals($string, $query->asString());
     }
+
+
+    /**
+     * Tests where between condition
+     *
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::whereBetween()
+     *
+     * @return void
+     */
+    public function testWhereBetween()
+    {
+        $connection = $this->getConnection();
+
+        $query = $connection
+            ->select('id')
+            ->from('strings')
+            ->whereBetween('id', 1, 8);
+
+        $string = 'SELECT id FROM strings WHERE id BETWEEN :where15 AND :where16';
+
+        $this->assertEquals($string, $query->asString());
+    }
 }

@@ -80,7 +80,19 @@ interface SelectStatement
      *
      * @return mixed
      */
-    public function WhereNotIn($field, array $values);
+    public function whereNotIn($field, array $values);
+
+
+    /**
+     * Set a where between condition
+     *
+     * @param string $field
+     * @param mixed  $min
+     * @param mixed  $max
+     *
+     * @return mixed
+     */
+    public function whereBetween($field, $min, $max);
 
 
     /**
