@@ -41,11 +41,4 @@ interface Container
      * @return bool
      */
     public function has();
-
-    /**
-     * Returns the parameters passed to where clauses - to use in bindings
-     *
-     * @return array
-     */
-    public function getParameters();
 }

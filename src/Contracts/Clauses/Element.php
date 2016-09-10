@@ -15,12 +15,4 @@ interface Element
      * @return mixed
      */
     public function asString();
-
-
-    /**
-     * Return the binding values of the clause
-     *
-     * @return array
-     */
-    public function getValues();
 }

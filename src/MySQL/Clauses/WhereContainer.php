@@ -2,8 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\Mysql\Clauses;
 
-use OlajosCs\QueryBuilder\Contracts\Clauses\Container;
-use OlajosCs\QueryBuilder\Contracts\Clauses\Element;
+use OlajosCs\QueryBuilder\Contracts\Clauses\ContainerWithBinding;
 use OlajosCs\QueryBuilder\Exceptions\InvalidGlueException;
 
 /**
@@ -11,37 +10,17 @@ use OlajosCs\QueryBuilder\Exceptions\InvalidGlueException;
  *
  * Defines a where container for the query builder
  */
-class WhereContainer implements Container
+class WhereContainer extends Container implements ContainerWithBinding
 {
-    /**
-     * @var WhereElement[] The list of the where elements in the container
-     */
-    private $list;
-
     /**
      * @var array The list of the binding parameters
      */
     private $parameters = [];
 
-
     /**
-     * @inheritdoc
+     * @var WhereElement[]
      */
-    public function add(Element $element)
-    {
-        $this->list[] = $element;
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function get()
-    {
-        return $this->list;
-    }
+    protected $list = [];
 
 
     /**
@@ -52,7 +31,7 @@ class WhereContainer implements Container
     {
         $query = '';
 
-        if (empty($this->list)) {
+        if (empty($this->get())) {
             return $query;
         }
 
@@ -97,14 +76,5 @@ class WhereContainer implements Container
     public function getParameters()
     {
         return $this->parameters;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function has()
-    {
-        return !empty($this->get());
     }
 }

@@ -67,7 +67,7 @@ interface SelectStatement
      * @param string $field
      * @param array  $values
      *
-     * @return mixed
+     * @return SelectStatement
      */
     public function whereIn($field, array $values);
 
@@ -78,7 +78,7 @@ interface SelectStatement
      * @param string $field
      * @param array  $values
      *
-     * @return mixed
+     * @return SelectStatement
      */
     public function whereNotIn($field, array $values);
 
@@ -90,7 +90,7 @@ interface SelectStatement
      * @param mixed  $min
      * @param mixed  $max
      *
-     * @return mixed
+     * @return SelectStatement
      */
     public function whereBetween($field, $min, $max);
 

@@ -3,6 +3,7 @@
 namespace OlajosCs\QueryBuilder\Mysql\Clauses;
 
 use OlajosCs\QueryBuilder\Contracts\Clauses\Element;
+use OlajosCs\QueryBuilder\Contracts\Clauses\ElementWithBinding;
 use OlajosCs\QueryBuilder\Operator;
 
 /**
@@ -10,7 +11,7 @@ use OlajosCs\QueryBuilder\Operator;
  *
  * Represents a where statement
  */
-class WhereElement implements Element
+class WhereElement implements Element, ElementWithBinding
 {
     /**
      * AND glue between clauses

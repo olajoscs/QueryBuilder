@@ -4,8 +4,6 @@ namespace OlajosCs\QueryBuilder\MySQL;
 
 use OlajosCs\QueryBuilder\Mysql\Clauses\WhereContainer;
 use OlajosCs\QueryBuilder\Mysql\Clauses\WhereElement;
-use OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement;
-use OlajosCs\QueryBuilder\Operator;
 
 /**
  * Class WhereTest
