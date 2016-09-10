@@ -38,6 +38,18 @@ interface SelectStatement
 
 
     /**
+     * Set a where condition
+     *
+     * @param string $field
+     * @param string $operator One of the Operator constants
+     * @param mixed  $value
+     *
+     * @return SelectStatement
+     */
+    public function where($field, $operator, $value);
+
+
+    /**
      * Returns the query as a string
      *
      * @return string

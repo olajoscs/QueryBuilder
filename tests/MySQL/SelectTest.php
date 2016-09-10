@@ -5,7 +5,7 @@ namespace OlajosCs\QueryBuilder\MySQL;
 /**
  * Class SelectTest
  *
- *
+ * Testing the select part of querybuilder
  */
 class SelectTest extends MySQL
 {

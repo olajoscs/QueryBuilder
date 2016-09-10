@@ -4,6 +4,8 @@ namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
 use OlajosCs\QueryBuilder\Contracts\Query;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
+use OlajosCs\QueryBuilder\Mysql\Clauses\WhereContainer;
+use OlajosCs\QueryBuilder\Mysql\Clauses\WhereElement;
 
 /**
  * Class SelectStatement
@@ -22,6 +24,11 @@ class SelectStatement implements SelectStatementInterface, Query
      */
     protected $table;
 
+    /**
+     * @var WhereContainer
+     */
+    protected $whereContainer;
+
 
     /**
      * SelectStatement constructor.
@@ -31,6 +38,7 @@ class SelectStatement implements SelectStatementInterface, Query
     public function __construct($fields = [])
     {
         $this->setFields($fields);
+        $this->whereContainer = new WhereContainer();
     }
 
 
@@ -67,10 +75,27 @@ class SelectStatement implements SelectStatementInterface, Query
     /**
      * @inheritdoc
      */
+    public function where($field, $operator, $value)
+    {
+        $this->whereContainer->add(
+            new WhereElement($field, $operator, $value, WhereElement::GLUE_AND)
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     public function asString()
     {
         $query = 'SELECT ' . implode(',', $this->fields) . ' ';
         $query .= 'FROM ' . $this->table;
+
+        if ($this->whereContainer->has()) {
+            $query .= $this->whereContainer->asString();
+        }
 
         return $query;
     }
@@ -80,6 +105,4 @@ class SelectStatement implements SelectStatementInterface, Query
     {
         return $this->asString();
     }
-
-
 }
