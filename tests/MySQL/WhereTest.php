@@ -44,7 +44,6 @@ class WhereTest extends MySQL
 
 
     /**
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::asString()
      * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::getParameters()
      * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::add()
      * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::get()
@@ -91,13 +90,6 @@ class WhereTest extends MySQL
             ->from('strings')
             ->where('id', '>', 1);
         $this->assertEquals($string, $query->asString());
-
-        $string = 'SELECT id FROM strings WHERE id IN (:where5,:where6)';
-        $query = $connection
-            ->select('id')
-            ->from('strings')
-            ->where('id', Operator::IN, [1, 2]);
-        $this->assertEquals($string, $query->asString());
     }
 
 
@@ -117,7 +109,51 @@ class WhereTest extends MySQL
             ->from('strings')
             ->whereOr('id', '=', 1)
             ->whereOr('id', '=', 2);
-        $string = 'SELECT id FROM strings WHERE id = :where7 OR id = :where8';
+        $string = 'SELECT id FROM strings WHERE id = :where5 OR id = :where6';
+
+        $this->assertEquals($string, $query->asString());
+    }
+
+
+    /**
+     * Tests where in condition
+     *
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::whereIn()
+     *
+     * @return void
+     */
+    public function testWhereIn()
+    {
+        $connection = $this->getConnection();
+
+        $query = $connection
+            ->select('id')
+            ->from('strings')
+            ->whereIn('id', [1, 2, 3, 4]);
+
+        $string = 'SELECT id FROM strings WHERE id IN (:where7,:where8,:where9,:where10)';
+
+        $this->assertEquals($string, $query->asString());
+    }
+
+
+    /**
+     * Tests where in condition
+     *
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::whereNotIn()
+     *
+     * @return void
+     */
+    public function testWhereNotIn()
+    {
+        $connection = $this->getConnection();
+
+        $query = $connection
+            ->select('id')
+            ->from('strings')
+            ->whereNotIn('id', [1, 2, 3, 4]);
+
+        $string = 'SELECT id FROM strings WHERE id NOT IN (:where11,:where12,:where13,:where14)';
 
         $this->assertEquals($string, $query->asString());
     }

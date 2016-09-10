@@ -6,6 +6,7 @@ use OlajosCs\QueryBuilder\Contracts\Query;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
 use OlajosCs\QueryBuilder\Mysql\Clauses\WhereContainer;
 use OlajosCs\QueryBuilder\Mysql\Clauses\WhereElement;
+use OlajosCs\QueryBuilder\Operator;
 
 /**
  * Class SelectStatement
@@ -92,6 +93,32 @@ class SelectStatement implements SelectStatementInterface, Query
     {
         $this->whereContainer->add(
             new WhereElement($field, $operator, $value, WhereElement::GLUE_OR)
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function whereIn($field, array $values)
+    {
+        $this->whereContainer->add(
+            new WhereElement($field, Operator::IN, $values)
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function whereNotIn($field, array $values)
+    {
+        $this->whereContainer->add(
+            new WhereElement($field, Operator::NOTIN, $values)
         );
 
         return $this;

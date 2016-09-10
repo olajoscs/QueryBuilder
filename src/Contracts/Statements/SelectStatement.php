@@ -52,13 +52,35 @@ interface SelectStatement
     /**
      * Set a where condition with or glue
      *
-     * @param $field
-     * @param $operator
-     * @param $value
+     * @param string $field
+     * @param string $operator
+     * @param mixed  $value
      *
      * @return SelectStatement
      */
     public function whereOr($field, $operator, $value);
+
+
+    /**
+     * Set a where in condition
+     *
+     * @param string $field
+     * @param array  $values
+     *
+     * @return mixed
+     */
+    public function whereIn($field, array $values);
+
+
+    /**
+     * Set a where not in condition
+     *
+     * @param string $field
+     * @param array  $values
+     *
+     * @return mixed
+     */
+    public function WhereNotIn($field, array $values);
 
 
     /**
