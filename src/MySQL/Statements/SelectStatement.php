@@ -4,8 +4,8 @@ namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
 use OlajosCs\QueryBuilder\Contracts\Query;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
-use OlajosCs\QueryBuilder\Mysql\Clauses\WhereContainer;
-use OlajosCs\QueryBuilder\Mysql\Clauses\WhereElement;
+use OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer;
+use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
 use OlajosCs\QueryBuilder\Operator;
 
 /**

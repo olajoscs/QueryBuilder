@@ -1,6 +1,6 @@
 <?php
 
-namespace OlajosCs\QueryBuilder\Mysql\Clauses;
+namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
 use OlajosCs\QueryBuilder\Contracts\Clauses\ContainerWithBinding;
 use OlajosCs\QueryBuilder\Exceptions\InvalidGlueException;

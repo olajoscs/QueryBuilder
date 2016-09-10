@@ -1,6 +1,6 @@
 <?php
 
-namespace OlajosCs\QueryBuilder\Mysql\Clauses;
+namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
 use OlajosCs\QueryBuilder\Contracts\Clauses\Element;
 use OlajosCs\QueryBuilder\Contracts\Clauses\ElementWithBinding;
