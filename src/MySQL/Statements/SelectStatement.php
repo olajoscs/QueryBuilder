@@ -4,6 +4,10 @@ namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
 use OlajosCs\QueryBuilder\Contracts\Query;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
+use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByContainer as GroupByContainerInterface;
+use OlajosCs\QueryBuilder\Contracts\Clauses\JoinContainer as JoinContainerInterface;
+use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByContainer as OrderByContainerInterface;
+use OlajosCs\QueryBuilder\Contracts\Clauses\WhereContainer as WhereContainerInterface;
 use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\JoinContainer;
@@ -32,22 +36,22 @@ class SelectStatement implements SelectStatementInterface, Query
     protected $table;
 
     /**
-     * @var WhereContainer
+     * @var WhereContainerInterface
      */
     protected $whereContainer;
 
     /**
-     * @var JoinContainer
+     * @var JoinContainerInterface
      */
     protected $joinContainer;
 
     /**
-     * @var OrderByContainer
+     * @var OrderByContainerInterface
      */
     protected $orderByContainer;
 
     /**
-     * @var GroupByContainer
+     * @var GroupByContainerInterface
      */
     protected $groupByContainer;
 

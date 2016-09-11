@@ -2,7 +2,14 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
-class JoinContainer extends Container
+use OlajosCs\QueryBuilder\Contracts\Clauses\JoinContainer as JoinContainerInterface;
+
+/**
+ * Class JoinContainer
+ *
+ * Defines the join container for mysql
+ */
+class JoinContainer extends Container implements JoinContainerInterface
 {
     /**
      * @var JoinContainer[]

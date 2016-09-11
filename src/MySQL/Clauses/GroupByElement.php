@@ -2,14 +2,14 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
-use OlajosCs\QueryBuilder\Contracts\Clauses\Element;
+use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByElement as GroupByElementInterface;
 
 /**
  * Class GroupByElement
  *
  * Defines a group by element to the query
  */
-class GroupByElement implements Element
+class GroupByElement implements GroupByElementInterface
 {
     /**
      * @var string Field name to group by
@@ -38,9 +38,7 @@ class GroupByElement implements Element
 
 
     /**
-     * Return the field name to group by
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getField()
     {

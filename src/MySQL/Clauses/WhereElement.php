@@ -2,8 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
-use OlajosCs\QueryBuilder\Contracts\Clauses\Element;
-use OlajosCs\QueryBuilder\Contracts\Clauses\ElementWithBinding;
+use OlajosCs\QueryBuilder\Contracts\Clauses\WhereElement as WhereElementInterface;
 use OlajosCs\QueryBuilder\Operator;
 
 /**
@@ -11,7 +10,7 @@ use OlajosCs\QueryBuilder\Operator;
  *
  * Represents a where statement
  */
-class WhereElement implements Element, ElementWithBinding
+class WhereElement implements WhereElementInterface
 {
     /**
      * AND glue between clauses
@@ -89,9 +88,7 @@ class WhereElement implements Element, ElementWithBinding
 
 
     /**
-     * Return the field name to check
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getField()
     {
@@ -117,9 +114,7 @@ class WhereElement implements Element, ElementWithBinding
 
 
     /**
-     * Return the operator of the comparison
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getOperator()
     {
@@ -128,9 +123,7 @@ class WhereElement implements Element, ElementWithBinding
 
 
     /**
-     * Return the glue before the clause
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getGlue()
     {
@@ -139,9 +132,7 @@ class WhereElement implements Element, ElementWithBinding
 
 
     /**
-     * Return the values which have to be given to binding
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getValues()
     {

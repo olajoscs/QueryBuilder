@@ -2,7 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
-use OlajosCs\QueryBuilder\Contracts\Clauses\ContainerWithBinding;
+use OlajosCs\QueryBuilder\Contracts\Clauses\WhereContainer as WhereContainerInterface;
 use OlajosCs\QueryBuilder\Exceptions\InvalidGlueException;
 
 /**
@@ -10,7 +10,7 @@ use OlajosCs\QueryBuilder\Exceptions\InvalidGlueException;
  *
  * Defines a where container for the query builder
  */
-class WhereContainer extends Container implements ContainerWithBinding
+class WhereContainer extends Container implements WhereContainerInterface
 {
     /**
      * @var array The list of the binding parameters

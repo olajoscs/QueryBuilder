@@ -2,9 +2,14 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
-use OlajosCs\QueryBuilder\Contracts\Clauses\Element;
+use OlajosCs\QueryBuilder\Contracts\Clauses\JoinElement as JoinElementInterface;
 
-class JoinElement implements Element
+/**
+ * Class JoinElement
+ *
+ * Define a join element
+ */
+class JoinElement implements JoinElementInterface
 {
     /**
      * Inner Join type
@@ -57,6 +62,16 @@ class JoinElement implements Element
     private $type;
 
 
+    /**
+     * Create a new Join element to the query
+     *
+     * @param string $tableLeft
+     * @param string $fieldLeft
+     * @param string $operator
+     * @param string $tableRight
+     * @param string $fieldRight
+     * @param string $type
+     */
     public function __construct($tableLeft, $fieldLeft, $operator, $tableRight, $fieldRight, $type)
     {
         $this->tableLeft  = $tableLeft;
@@ -84,9 +99,7 @@ class JoinElement implements Element
 
 
     /**
-     * Returns the name of the table on the left
-     *
-     * @return string
+     * @inheitdoc
      */
     public function getTableLeft()
     {
@@ -95,9 +108,7 @@ class JoinElement implements Element
 
 
     /**
-     * Returns the name of the table on the right
-     *
-     * @return string
+     * @inheitdoc
      */
     public function getTableRight()
     {
@@ -105,11 +116,8 @@ class JoinElement implements Element
     }
 
 
-
     /**
-     * Returns the name of the field on the left
-     *
-     * @return string
+     * @inheitdoc
      */
     public function getFieldLeft()
     {
@@ -118,9 +126,7 @@ class JoinElement implements Element
 
 
     /**
-     * Returns the name of the field on the right
-     *
-     * @return string
+     * @inheitdoc
      */
     public function getFieldRight()
     {
@@ -129,9 +135,7 @@ class JoinElement implements Element
 
 
     /**
-     * Returns the operator to join the 2 fields
-     *
-     * @return string
+     * @inheitdoc
      */
     public function getOperator()
     {
@@ -140,9 +144,7 @@ class JoinElement implements Element
 
 
     /**
-     * Returns the join type
-     *
-     * @return string
+     * @inheitdoc
      */
     public function getType()
     {

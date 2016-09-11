@@ -2,14 +2,14 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
-use OlajosCs\QueryBuilder\Contracts\Clauses\Element;
+use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByElement as OrderByElementInterface;
 
 /**
  * Class OrderByElement
  *
  * Defines an element in the order by clause
  */
-class OrderByElement implements Element
+class OrderByElement implements OrderByElementInterface
 {
     /**
      * Defines the nulls last order
@@ -71,9 +71,7 @@ class OrderByElement implements Element
 
 
     /**
-     * Return the field to order
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getField()
     {
@@ -82,9 +80,7 @@ class OrderByElement implements Element
 
 
     /**
-     * Return the order of the order
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getOrder()
     {
@@ -93,9 +89,7 @@ class OrderByElement implements Element
 
 
     /**
-     * Return the nulls position
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getNullsPosition()
     {
