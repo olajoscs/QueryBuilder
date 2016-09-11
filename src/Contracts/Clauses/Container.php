@@ -30,7 +30,7 @@ interface Container
     /**
      * Return the join of clauses as a string
      *
-     * @return mixed
+     * @return string
      */
     public function asString();
 

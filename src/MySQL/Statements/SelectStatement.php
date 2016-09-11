@@ -6,6 +6,8 @@ use OlajosCs\QueryBuilder\Contracts\Query;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
 use OlajosCs\QueryBuilder\MySQL\Clauses\JoinContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement;
+use OlajosCs\QueryBuilder\MySQL\Clauses\OrderByContainer;
+use OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
 use OlajosCs\QueryBuilder\Operator;
@@ -37,6 +39,11 @@ class SelectStatement implements SelectStatementInterface, Query
      */
     protected $joinContainer;
 
+    /**
+     * @var OrderByContainer
+     */
+    protected $orderByContainer;
+
 
     /**
      * SelectStatement constructor.
@@ -46,8 +53,9 @@ class SelectStatement implements SelectStatementInterface, Query
     public function __construct($fields = [])
     {
         $this->setFields($fields);
-        $this->whereContainer = new WhereContainer();
-        $this->joinContainer = new JoinContainer();
+        $this->whereContainer   = new WhereContainer();
+        $this->joinContainer    = new JoinContainer();
+        $this->orderByContainer = new OrderByContainer();
     }
 
 
@@ -148,6 +156,7 @@ class SelectStatement implements SelectStatementInterface, Query
                 JoinElement::TYPE_INNER
             )
         );
+
         return $this;
     }
 
@@ -168,6 +177,19 @@ class SelectStatement implements SelectStatementInterface, Query
     /**
      * @inheritdoc
      */
+    public function orderBy($field, $order = null, $nullsPosition = null)
+    {
+        $this->orderByContainer->add(
+            new OrderByElement($field, $order, $nullsPosition)
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     public function asString()
     {
         $query = 'SELECT ' . implode(',', $this->fields) . ' ';
@@ -179,6 +201,10 @@ class SelectStatement implements SelectStatementInterface, Query
 
         if ($this->whereContainer->has()) {
             $query .= $this->whereContainer->asString();
+        }
+
+        if ($this->orderByContainer->has()) {
+            $query .= $this->orderByContainer->asString();
         }
 
         return $query;

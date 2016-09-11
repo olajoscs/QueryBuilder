@@ -110,6 +110,18 @@ interface SelectStatement
 
 
     /**
+     * Creates an order by clause to the container
+     *
+     * @param string $field         Name of the field to order by
+     * @param string $order         Type of the order (one of the OrderByElement::ORDER_ constants)
+     * @param string $nullsPosition Position of the null values (one of the OrderByElement::NULLS_ constans)
+     *
+     * @return SelectStatement
+     */
+    public function orderBy($field, $order = null, $nullsPosition = null);
+
+
+    /**
      * Returns the query as a string
      *
      * @return string
