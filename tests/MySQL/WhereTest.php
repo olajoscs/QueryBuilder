@@ -25,7 +25,6 @@ class WhereTest extends MySQL
     public function testWhereClause()
     {
         $where1 = new WhereElement('id', '>', 1);
-
         $this->assertEquals('id', $where1->getField());
         $this->assertEquals('>', $where1->getOperator());
         $this->assertEquals([':where0' => 1], $where1->getValues());

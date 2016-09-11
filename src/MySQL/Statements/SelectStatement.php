@@ -4,6 +4,8 @@ namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
 use OlajosCs\QueryBuilder\Contracts\Query;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
+use OlajosCs\QueryBuilder\MySQL\Clauses\JoinContainer;
+use OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
 use OlajosCs\QueryBuilder\Operator;
@@ -30,6 +32,11 @@ class SelectStatement implements SelectStatementInterface, Query
      */
     protected $whereContainer;
 
+    /**
+     * @var JoinContainer
+     */
+    protected $joinContainer;
+
 
     /**
      * SelectStatement constructor.
@@ -40,6 +47,7 @@ class SelectStatement implements SelectStatementInterface, Query
     {
         $this->setFields($fields);
         $this->whereContainer = new WhereContainer();
+        $this->joinContainer = new JoinContainer();
     }
 
 
@@ -128,6 +136,25 @@ class SelectStatement implements SelectStatementInterface, Query
     /**
      * @inheritdoc
      */
+    public function join($tableRight, $fieldRight, $operator, $fieldLeft, $tableLeft = null)
+    {
+        $this->joinContainer->add(
+            new JoinElement(
+                $tableLeft ?: $this->table,
+                $fieldLeft,
+                $operator,
+                $tableRight,
+                $fieldRight,
+                JoinElement::TYPE_INNER
+            )
+        );
+        return $this;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     public function whereBetween($field, $min, $max)
     {
         $this->whereContainer->add(
@@ -145,6 +172,10 @@ class SelectStatement implements SelectStatementInterface, Query
     {
         $query = 'SELECT ' . implode(',', $this->fields) . ' ';
         $query .= 'FROM ' . $this->table;
+
+        if ($this->joinContainer->has()) {
+            $query .= $this->joinContainer->asString();
+        }
 
         if ($this->whereContainer->has()) {
             $query .= $this->whereContainer->asString();

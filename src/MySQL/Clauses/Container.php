@@ -10,7 +10,7 @@ abstract class Container implements ContainerInterface
     /**
      * @var Element[]
      */
-    protected $list;
+    protected $list = [];
 
     /**
      * Add an element to the container

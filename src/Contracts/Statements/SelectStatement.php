@@ -96,6 +96,20 @@ interface SelectStatement
 
 
     /**
+     * Joins an other table to the query
+     *
+     * @param string $tableRight The table to join
+     * @param string $fieldRight The field in the right table to join
+     * @param string $operator   The operator
+     * @param string $fieldLeft  The field in the left table
+     * @param string $tableLeft  The left table name
+     *
+     * @return SelectStatement
+     */
+    public function join($tableRight, $fieldRight, $operator, $fieldLeft, $tableLeft = null);
+
+
+    /**
      * Returns the query as a string
      *
      * @return string
