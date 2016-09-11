@@ -29,12 +29,6 @@ class WhereContainer extends Container implements ContainerWithBinding
      */
     public function asString()
     {
-        $query = '';
-
-        if (empty($this->get())) {
-            return $query;
-        }
-
         $and   = array();
         $or    = array();
         $query = ' WHERE ';

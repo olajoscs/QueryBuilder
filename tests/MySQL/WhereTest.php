@@ -2,8 +2,9 @@
 
 namespace OlajosCs\QueryBuilder\MySQL;
 
-use OlajosCs\QueryBuilder\Mysql\Clauses\WhereContainer;
-use OlajosCs\QueryBuilder\Mysql\Clauses\WhereElement;
+use OlajosCs\QueryBuilder\Exceptions\InvalidGlueException;
+use OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer;
+use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
 
 /**
  * Class WhereTest
@@ -19,6 +20,8 @@ class WhereTest extends MySQL
      * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::getGlue()
      * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::getValues()
      * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::asString()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::addValue()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::hasArrayOperator()
      *
      * @return void
      */
@@ -117,6 +120,9 @@ class WhereTest extends MySQL
      * Tests where in condition
      *
      * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::whereIn()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::hasArrayOperator()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::__construct()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::asString()
      *
      * @return void
      */
@@ -161,6 +167,8 @@ class WhereTest extends MySQL
      * Tests where between condition
      *
      * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::whereBetween()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::asString()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::asString()
      *
      * @return void
      */
@@ -176,5 +184,24 @@ class WhereTest extends MySQL
         $string = 'SELECT id FROM strings WHERE id BETWEEN :where15 AND :where16';
 
         $this->assertEquals($string, $query->asString());
+    }
+
+
+    /**
+     * Test that in case of nok glue exception is thrown
+     *
+     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::asString()
+     *
+     * @return void
+     */
+    public function testInvalidGlue()
+    {
+        $this->expectException(InvalidGlueException::class);
+
+        $where = new WhereElement('id', '=', 2, 'xor');
+        $container = new WhereContainer();
+
+        $container->add($where);
+        $container->asString();
     }
 }
