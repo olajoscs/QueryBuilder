@@ -96,7 +96,7 @@ interface SelectStatement
 
 
     /**
-     * Joins an other table to the query
+     * Join an other table to the query
      *
      * @param string $tableRight The table to join
      * @param string $fieldRight The field in the right table to join
@@ -110,7 +110,7 @@ interface SelectStatement
 
 
     /**
-     * Creates an order by clause to the container
+     * Create an order by clause to the container
      *
      * @param string $field         Name of the field to order by
      * @param string $order         Type of the order (one of the OrderByElement::ORDER_ constants)
@@ -119,6 +119,16 @@ interface SelectStatement
      * @return SelectStatement
      */
     public function orderBy($field, $order = null, $nullsPosition = null);
+
+
+    /**
+     * Create a group by clause to the container
+     *
+     * @param string $field
+     *
+     * @return SelectStatement
+     */
+    public function groupBy($field);
 
 
     /**

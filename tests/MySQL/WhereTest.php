@@ -74,6 +74,7 @@ class WhereTest extends MySQL
      * Test where conditions
      *
      * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::where()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::asString()
      *
      * @return void
      */

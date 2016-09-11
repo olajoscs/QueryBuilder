@@ -77,10 +77,11 @@ class OrderByText extends MySQL
      * Test the order by clause of the select statement
      *
      * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::orderBy()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::asString()
      *
      * @return void
      */
-    public function testOrderBYInSelect()
+    public function testOrderByInSelect()
     {
         $connection = $this->getConnection();
 

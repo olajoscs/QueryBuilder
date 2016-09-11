@@ -17,6 +17,7 @@ class JoinTest extends MySQL
      * Tests join clause in a full select query
      *
      * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::join()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::asString()
      *
      * @return void
      */

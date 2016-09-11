@@ -4,6 +4,8 @@ namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
 use OlajosCs\QueryBuilder\Contracts\Query;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
+use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByContainer;
+use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\JoinContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\OrderByContainer;
@@ -44,6 +46,11 @@ class SelectStatement implements SelectStatementInterface, Query
      */
     protected $orderByContainer;
 
+    /**
+     * @var GroupByContainer
+     */
+    protected $groupByContainer;
+
 
     /**
      * SelectStatement constructor.
@@ -56,6 +63,7 @@ class SelectStatement implements SelectStatementInterface, Query
         $this->whereContainer   = new WhereContainer();
         $this->joinContainer    = new JoinContainer();
         $this->orderByContainer = new OrderByContainer();
+        $this->groupByContainer = new GroupByContainer();
     }
 
 
@@ -190,6 +198,19 @@ class SelectStatement implements SelectStatementInterface, Query
     /**
      * @inheritdoc
      */
+    public function groupBy($field)
+    {
+        $this->groupByContainer->add(
+            new GroupByElement($field)
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     public function asString()
     {
         $query = 'SELECT ' . implode(',', $this->fields) . ' ';
@@ -205,6 +226,10 @@ class SelectStatement implements SelectStatementInterface, Query
 
         if ($this->orderByContainer->has()) {
             $query .= $this->orderByContainer->asString();
+        }
+
+        if ($this->groupByContainer->has()) {
+            $query .= $this->groupByContainer->asString();
         }
 
         return $query;
