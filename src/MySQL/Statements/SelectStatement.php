@@ -31,6 +31,16 @@ class SelectStatement implements SelectStatementInterface, Query
     protected $fields;
 
     /**
+     * @var int The limit for the query
+     */
+    protected $limit;
+
+    /**
+     * @var int The offset for the query
+     */
+    protected $offset;
+
+    /**
      * @var string The name of the table
      */
     protected $table;
@@ -215,6 +225,36 @@ class SelectStatement implements SelectStatementInterface, Query
     /**
      * @inheritdoc
      */
+    public function limit($limit)
+    {
+        if (!is_int($limit)) {
+            throw new \InvalidArgumentException(sprintf('Limit must be int, %s given', $limit));
+        }
+
+        $this->limit = $limit;
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function offset($offset)
+    {
+        if (!is_int($offset)) {
+            throw new \InvalidArgumentException(sprintf('Offset must be int, %s given', $offset));
+        }
+
+        $this->offset = $offset;
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     public function asString()
     {
         $query = 'SELECT ' . implode(',', $this->fields) . ' ';
@@ -234,6 +274,14 @@ class SelectStatement implements SelectStatementInterface, Query
 
         if ($this->groupByContainer->has()) {
             $query .= $this->groupByContainer->asString();
+        }
+
+        if ($this->limit !== null) {
+            $query .= sprintf(' LIMIT %s', $this->limit);
+        }
+
+        if ($this->offset !== null) {
+            $query .= sprintf(' OFFSET %s', $this->offset);
         }
 
         return $query;

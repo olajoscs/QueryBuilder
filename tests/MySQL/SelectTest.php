@@ -17,6 +17,8 @@ class SelectTest extends MySQL
      * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::from()
      * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::asString()
      * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::__toString()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::limit()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::offset()
      *
      * @return void
      */
@@ -41,5 +43,42 @@ class SelectTest extends MySQL
         $query = $connection->select()->from('strings')->setFields('*');
         $this->assertEquals($string, $query->asString());
         $this->assertEquals($string, (string)$query);
+
+        $query = $connection->select()->from('strings')->limit(2)->offset(1);
+        $string = 'SELECT * FROM strings LIMIT 2 OFFSET 1';
+        $this->assertEquals($string, $query->asString());
+        $this->assertEquals($string, (string)$query);
+    }
+
+
+    /**
+     * Test if invalid limit is given, exception is thrown
+     *
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::limit()
+     *
+     * @return void
+     */
+    public function testInvalidLimit()
+    {
+        $connection = $this->getConnection();
+        $this->expectException(\InvalidArgumentException::class);
+
+        $query = $connection->select()->from('strings')->limit('hello');
+    }
+
+
+    /**
+     * Test if invalid offset is given, exception is thrown
+     *
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::offset()
+     *
+     * @return void
+     */
+    public function testInvalidOffset()
+    {
+        $connection = $this->getConnection();
+        $this->expectException(\InvalidArgumentException::class);
+
+        $query = $connection->select()->from('strings')->offset('hello');
     }
 }

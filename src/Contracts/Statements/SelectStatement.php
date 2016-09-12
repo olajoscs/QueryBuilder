@@ -132,6 +132,26 @@ interface SelectStatement
 
 
     /**
+     * Set the limit for the query
+     *
+     * @param int $limit
+     *
+     * @return SelectStatement
+     */
+    public function limit($limit);
+
+
+    /**
+     * Set the offset for the query
+     *
+     * @param int $offset
+     *
+     * @return SelectStatement
+     */
+    public function offset($offset);
+
+
+    /**
      * Returns the query as a string
      *
      * @return string
