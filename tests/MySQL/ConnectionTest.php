@@ -31,7 +31,8 @@ class ConnectionTest extends MySQL
         $this->assertInstanceOf(ConnectionInterface::class, $connection);
         $this->assertInstanceOf(Connection::class, $connection);
 
-        $select = new SelectStatement();
+        $select = new SelectStatement($connection);
+        $select->setFields('*');
         $this->assertEquals($connection->select(), $select);
 
         $update = new UpdateStatement();

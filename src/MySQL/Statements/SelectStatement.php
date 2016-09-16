@@ -2,6 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
+use OlajosCs\QueryBuilder\Contracts\Connection;
 use OlajosCs\QueryBuilder\Contracts\Query;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
 use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByContainer as GroupByContainerInterface;
@@ -65,15 +66,25 @@ class SelectStatement implements SelectStatementInterface, Query
      */
     protected $groupByContainer;
 
+    /**
+     * @var \PDO
+     */
+    protected $connection;
+
+    /**
+     * @var array The binding parameters for the query
+     */
+    private $parameters;
+
 
     /**
      * SelectStatement constructor.
      *
-     * @param array $fields
+     * @param Connection $connection
      */
-    public function __construct($fields = [])
+    public function __construct(Connection $connection)
     {
-        $this->setFields($fields);
+        $this->connection       = $connection;
         $this->whereContainer   = new WhereContainer();
         $this->joinContainer    = new JoinContainer();
         $this->orderByContainer = new OrderByContainer();
@@ -257,6 +268,8 @@ class SelectStatement implements SelectStatementInterface, Query
      */
     public function asString()
     {
+        $this->parameters = [];
+
         $query = 'SELECT ' . implode(',', $this->fields) . ' ';
         $query .= 'FROM ' . $this->table;
 
@@ -266,6 +279,10 @@ class SelectStatement implements SelectStatementInterface, Query
 
         if ($this->whereContainer->has()) {
             $query .= $this->whereContainer->asString();
+            $this->parameters = array_merge(
+                $this->parameters,
+                $this->whereContainer->getParameters()
+            );
         }
 
         if ($this->orderByContainer->has()) {

@@ -2,6 +2,8 @@
 
 namespace OlajosCs\QueryBuilder\Contracts\Statements;
 
+use OlajosCs\QueryBuilder\Contracts\Connection;
+
 /**
  * Interface SelectStatement
  *
@@ -12,9 +14,9 @@ interface SelectStatement
     /**
      * SelectStatement constructor.
      *
-     * @param string[]|string $fields
+     * @param Connection $connection
      */
-    public function __construct($fields = []);
+    public function __construct(Connection $connection);
 
 
     /**
