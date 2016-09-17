@@ -52,11 +52,6 @@ class SelectStatement extends WhereStatement  implements SelectStatementInterfac
      */
     protected $groupByContainer;
 
-    /**
-     * @var array The binding parameters for the query
-     */
-    private $parameters;
-
 
     /**
      * SelectStatement constructor.
@@ -193,13 +188,7 @@ class SelectStatement extends WhereStatement  implements SelectStatementInterfac
             $query .= $this->joinContainer->asString();
         }
 
-        if ($this->whereContainer->has()) {
-            $query .= $this->whereContainer->asString();
-            $this->parameters = array_merge(
-                $this->parameters,
-                $this->whereContainer->getParameters()
-            );
-        }
+        $query .= parent::asString();
 
         if ($this->orderByContainer->has()) {
             $query .= $this->orderByContainer->asString();
@@ -218,15 +207,6 @@ class SelectStatement extends WhereStatement  implements SelectStatementInterfac
         }
 
         return $query;
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    public function execute()
-    {
-        return $this->connection->execute($this->asString(), $this->parameters);
     }
 
 

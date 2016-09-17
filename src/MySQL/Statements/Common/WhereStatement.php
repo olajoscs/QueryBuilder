@@ -22,6 +22,11 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
      */
     protected $whereContainer;
 
+    /**
+     * @var array The binding parameters for the query
+     */
+    protected $parameters = [];
+
 
     public function __construct(Connection $connection)
     {
@@ -95,4 +100,31 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
         return $this;
     }
 
+
+    /**
+     * @inheritDoc
+     */
+    public function execute()
+    {
+        return $this->connection->execute($this->asString(), $this->parameters);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function asString()
+    {
+        $query = '';
+        if ($this->whereContainer->has()) {
+            $query = $this->whereContainer->asString();
+
+            $this->parameters = array_merge(
+                $this->parameters,
+                $this->whereContainer->getParameters()
+            );
+        }
+
+        return $query;
+    }
 }

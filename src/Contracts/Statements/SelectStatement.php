@@ -91,14 +91,6 @@ interface SelectStatement extends WhereStatement
 
 
     /**
-     * Execute the query and return the statement
-     *
-     * @return \PDOStatement
-     */
-    public function execute();
-
-
-    /**
      * Return the result of the query as array of stdClasses
      *
      * @return object[]

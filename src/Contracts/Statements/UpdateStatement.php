@@ -30,13 +30,4 @@ interface UpdateStatement extends WhereStatement
      * @return UpdateStatement
      */
     public function setTable($table);
-
-
-    /**
-     * Execute the query and return the statement
-     *
-     * @return \PDOStatement
-     */
-    public function execute();
-
 }

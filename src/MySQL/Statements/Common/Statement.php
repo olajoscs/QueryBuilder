@@ -3,6 +3,7 @@
 namespace OlajosCs\QueryBuilder\Mysql\Statements\Common;
 
 use OlajosCs\QueryBuilder\Contracts\Connection;
+use OlajosCs\QueryBuilder\Contracts\Statements\Common\Statement as StatementInterface;
 
 
 /**
@@ -10,7 +11,7 @@ use OlajosCs\QueryBuilder\Contracts\Connection;
  *
  * Parent class of all the statements
  */
-abstract class Statement
+abstract class Statement implements StatementInterface
 {
     /**
      * @var \PDO

@@ -14,16 +14,10 @@ use OlajosCs\QueryBuilder\Exceptions\RowNotFoundException;
 class ConnectionGetTest extends MySQL
 {
     /**
-     * ConnectionGetTest constructor.
-     *
-     * @param string $name
-     * @param array  $data
-     * @param string $dataName
+     * @inheritDoc
      */
-    public function __construct($name = null, array $data = [], $dataName = '')
+    protected function setUp()
     {
-        parent::__construct($name, $data, $dataName);
-
         $this->seed();
     }
 

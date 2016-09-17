@@ -50,13 +50,11 @@ class Connection extends \PDO implements \OlajosCs\QueryBuilder\Contracts\Connec
 
 
     /**
-     * Return an empty delete statement
-     *
-     * @return Statements\DeleteStatement
+     * @inheritdoc
      */
     public function delete()
     {
-        return new Statements\DeleteStatement();
+        return new Statements\DeleteStatement($this);
     }
 
 

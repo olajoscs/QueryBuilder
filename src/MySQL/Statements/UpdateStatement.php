@@ -18,16 +18,6 @@ class UpdateStatement extends WhereStatement   implements UpdateStatementInterfa
      */
     protected $names = [];
 
-    /**
-     * @var string[]
-     */
-    protected $parameters = [];
-
-    /**
-     * @var string The name of the table
-     */
-    protected $table;
-
 
     /**
      * @inheritDoc
@@ -77,15 +67,6 @@ class UpdateStatement extends WhereStatement   implements UpdateStatementInterfa
     /**
      * @inheritDoc
      */
-    public function execute()
-    {
-        return $this->connection->execute($this->asString(), $this->parameters);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
     public function asString()
     {
         $values = [];
@@ -96,11 +77,7 @@ class UpdateStatement extends WhereStatement   implements UpdateStatementInterfa
         $query = 'UPDATE ' . $this->table;
         $query .= ' SET ' . implode(', ', $values);
 
-        if ($this->whereContainer->has()) {
-            $query .= $this->whereContainer->asString();
-        }
-
-        $this->parameters = array_merge($this->parameters, $this->whereContainer->getParameters());
+        $query .= parent::asString();
 
         return $query;
     }

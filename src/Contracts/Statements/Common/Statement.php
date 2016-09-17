@@ -26,4 +26,12 @@ interface Statement
      * @return string
      */
     public function asString();
+
+
+    /**
+     * Execute the query and return the statement
+     *
+     * @return \PDOStatement
+     */
+    public function execute();
 }

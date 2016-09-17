@@ -11,6 +11,14 @@ namespace OlajosCs\QueryBuilder\MySQL;
 class UpdateTest extends MySQL
 {
     /**
+     * @inheritDoc
+     */
+    protected function setUp()
+    {
+        $this->seed();
+    }
+
+    /**
      * Test a basic update statement as string
      *
      * @covers \OlajosCs\QueryBuilder\MySQL\Connection::update()
@@ -96,7 +104,7 @@ class UpdateTest extends MySQL
             ->execute();
 
         $this->assertInstanceOf(\PDOStatement::class, $statement);
-        $this->assertEquals(1, $statement->rowCount());
+        $this->assertEquals(2, $statement->rowCount());
 
         $result = $connection
             ->select()
