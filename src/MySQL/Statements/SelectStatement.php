@@ -177,6 +177,19 @@ class SelectStatement implements SelectStatementInterface, Query
     /**
      * @inheritdoc
      */
+    public function whereBetween($field, $min, $max)
+    {
+        $this->whereContainer->add(
+            new WhereElement($field, Operator::BETWEEN, [$min, $max])
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     public function join($tableRight, $fieldRight, $operator, $fieldLeft, $tableLeft = null)
     {
         $this->joinContainer->add(
@@ -188,19 +201,6 @@ class SelectStatement implements SelectStatementInterface, Query
                 $fieldRight,
                 JoinElement::TYPE_INNER
             )
-        );
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function whereBetween($field, $min, $max)
-    {
-        $this->whereContainer->add(
-            new WhereElement($field, Operator::BETWEEN, [$min, $max])
         );
 
         return $this;
@@ -270,7 +270,7 @@ class SelectStatement implements SelectStatementInterface, Query
     {
         $this->parameters = [];
 
-        $query = 'SELECT ' . implode(',', $this->fields) . ' ';
+        $query = 'SELECT ' . implode(', ', $this->fields) . ' ';
         $query .= 'FROM ' . $this->table;
 
         if ($this->joinContainer->has()) {
