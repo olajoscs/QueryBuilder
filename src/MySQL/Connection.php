@@ -27,13 +27,14 @@ class Connection extends \PDO implements \OlajosCs\QueryBuilder\Contracts\Connec
 
 
     /**
-     * Return an empty update statement
-     *
-     * @return Statements\UpdateStatement
+     * @inheritdoc
      */
-    public function update()
+    public function update($table)
     {
-        return new Statements\UpdateStatement();
+        $statement = new Statements\UpdateStatement($this);
+        $statement->setTable($table);
+
+        return $statement;
     }
 
 

@@ -35,8 +35,9 @@ class ConnectionTest extends MySQL
         $select->setFields('*');
         $this->assertEquals($connection->select(), $select);
 
-        $update = new UpdateStatement();
-        $this->assertEquals($connection->update(), $update);
+        $update = new UpdateStatement($connection);
+        $update->setTable('strings');
+        $this->assertEquals($connection->update('strings'), $update);
 
         $delete = new DeleteStatement();
         $this->assertEquals($connection->delete(), $delete);

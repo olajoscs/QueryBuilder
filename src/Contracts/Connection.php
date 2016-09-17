@@ -25,11 +25,9 @@ interface Connection
 
 
     /**
-     * Create an update statement
-     *
-     * @return Statements\UpdateStatement
+     * @inheritdoc
      */
-    public function update();
+    public function update($table);
 
 
     /**
