@@ -15,11 +15,7 @@ use OlajosCs\QueryBuilder\MySQL\Statements;
 class Connection extends \PDO implements \OlajosCs\QueryBuilder\Contracts\Connection
 {
     /**
-     * Return an empty select statement
-     *
-     * @param string[]|string $fields
-     *
-     * @return Statements\SelectStatement
+     * @inheritdoc
      */
     public function select($fields = [])
     {

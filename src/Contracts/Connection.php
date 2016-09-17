@@ -15,11 +15,13 @@ use OlajosCs\QueryBuilder\Exceptions\RowNotFoundException;
 interface Connection
 {
     /**
-     * Create a select statement
+     * Return an empty select statement
+     *
+     * @param string[]|string $fields
      *
      * @return Statements\SelectStatement
      */
-    public function select();
+    public function select($fields = []);
 
 
     /**
