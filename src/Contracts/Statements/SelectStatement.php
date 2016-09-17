@@ -2,7 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\Contracts\Statements;
 
-use OlajosCs\QueryBuilder\Contracts\Connection;
+use OlajosCs\QueryBuilder\Contracts\Statements\Common\WhereStatement;
 use OlajosCs\QueryBuilder\Exceptions\FieldNotFoundException;
 use OlajosCs\QueryBuilder\Exceptions\MultipleRowFoundException;
 use OlajosCs\QueryBuilder\Exceptions\RowNotFoundException;
@@ -12,16 +12,8 @@ use OlajosCs\QueryBuilder\Exceptions\RowNotFoundException;
  *
  * Defines a select statement
  */
-interface SelectStatement
+interface SelectStatement extends WhereStatement
 {
-    /**
-     * SelectStatement constructor.
-     *
-     * @param Connection $connection
-     */
-    public function __construct(Connection $connection);
-
-
     /**
      * Set the fields to get in the query
      *
@@ -40,64 +32,6 @@ interface SelectStatement
      * @return SelectStatement
      */
     public function from($table);
-
-
-    /**
-     * Set a where condition
-     *
-     * @param string $field
-     * @param string $operator One of the Operator constants
-     * @param mixed  $value
-     *
-     * @return SelectStatement
-     */
-    public function where($field, $operator, $value);
-
-
-    /**
-     * Set a where condition with or glue
-     *
-     * @param string $field
-     * @param string $operator
-     * @param mixed  $value
-     *
-     * @return SelectStatement
-     */
-    public function whereOr($field, $operator, $value);
-
-
-    /**
-     * Set a where in condition
-     *
-     * @param string $field
-     * @param array  $values
-     *
-     * @return SelectStatement
-     */
-    public function whereIn($field, array $values);
-
-
-    /**
-     * Set a where not in condition
-     *
-     * @param string $field
-     * @param array  $values
-     *
-     * @return SelectStatement
-     */
-    public function whereNotIn($field, array $values);
-
-
-    /**
-     * Set a where between condition
-     *
-     * @param string $field
-     * @param mixed  $min
-     * @param mixed  $max
-     *
-     * @return SelectStatement
-     */
-    public function whereBetween($field, $min, $max);
 
 
     /**
@@ -247,12 +181,4 @@ interface SelectStatement
      * @return array[]
      */
     public function getClassesWithKey($class, array $constructorParameters = [], $keyField);
-
-
-    /**
-     * Returns the query as a string
-     *
-     * @return string
-     */
-    public function asString();
 }

@@ -2,7 +2,6 @@
 
 namespace OlajosCs\QueryBuilder\Contracts;
 
-use OlajosCs\QueryBuilder\Contracts\Statements;
 use OlajosCs\QueryBuilder\Exceptions\FieldNotFoundException;
 use OlajosCs\QueryBuilder\Exceptions\MultipleRowFoundException;
 use OlajosCs\QueryBuilder\Exceptions\RowNotFoundException;

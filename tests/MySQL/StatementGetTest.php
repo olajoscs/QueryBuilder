@@ -32,6 +32,8 @@ class StatementGetTest extends MySQL
      * Test the default get method of the connection class
      *
      * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::get()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\Statement::__construct()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::__construct()
      *
      * @return void
      */

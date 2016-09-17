@@ -3,28 +3,24 @@
 namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
 use OlajosCs\QueryBuilder\Contracts\Connection;
-use OlajosCs\QueryBuilder\Contracts\Query;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
 use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByContainer as GroupByContainerInterface;
 use OlajosCs\QueryBuilder\Contracts\Clauses\JoinContainer as JoinContainerInterface;
 use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByContainer as OrderByContainerInterface;
-use OlajosCs\QueryBuilder\Contracts\Clauses\WhereContainer as WhereContainerInterface;
 use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\JoinContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\OrderByContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement;
-use OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer;
-use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
-use OlajosCs\QueryBuilder\Operator;
+use OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement;
 
 /**
  * Class SelectStatement
  *
  * Defines a select statement
  */
-class SelectStatement implements SelectStatementInterface, Query
+class SelectStatement extends WhereStatement  implements SelectStatementInterface
 {
     /**
      * @var string[] The name of the fields to get in the query
@@ -42,16 +38,6 @@ class SelectStatement implements SelectStatementInterface, Query
     protected $offset;
 
     /**
-     * @var string The name of the table
-     */
-    protected $table;
-
-    /**
-     * @var WhereContainerInterface
-     */
-    protected $whereContainer;
-
-    /**
      * @var JoinContainerInterface
      */
     protected $joinContainer;
@@ -67,11 +53,6 @@ class SelectStatement implements SelectStatementInterface, Query
     protected $groupByContainer;
 
     /**
-     * @var \PDO
-     */
-    protected $connection;
-
-    /**
      * @var array The binding parameters for the query
      */
     private $parameters;
@@ -84,8 +65,8 @@ class SelectStatement implements SelectStatementInterface, Query
      */
     public function __construct(Connection $connection)
     {
-        $this->connection       = $connection;
-        $this->whereContainer   = new WhereContainer();
+        parent::__construct($connection);
+
         $this->joinContainer    = new JoinContainer();
         $this->orderByContainer = new OrderByContainer();
         $this->groupByContainer = new GroupByContainer();
@@ -117,71 +98,6 @@ class SelectStatement implements SelectStatementInterface, Query
     public function from($table)
     {
         $this->table = $table;
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function where($field, $operator, $value)
-    {
-        $this->whereContainer->add(
-            new WhereElement($field, $operator, $value, WhereElement::GLUE_AND)
-        );
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function whereOr($field, $operator, $value)
-    {
-        $this->whereContainer->add(
-            new WhereElement($field, $operator, $value, WhereElement::GLUE_OR)
-        );
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function whereIn($field, array $values)
-    {
-        $this->whereContainer->add(
-            new WhereElement($field, Operator::IN, $values)
-        );
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function whereNotIn($field, array $values)
-    {
-        $this->whereContainer->add(
-            new WhereElement($field, Operator::NOTIN, $values)
-        );
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function whereBetween($field, $min, $max)
-    {
-        $this->whereContainer->add(
-            new WhereElement($field, Operator::BETWEEN, [$min, $max])
-        );
 
         return $this;
     }
