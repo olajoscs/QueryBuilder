@@ -158,7 +158,7 @@ interface SelectStatement extends WhereStatement
      *
      * @return array
      */
-    public function getList($field);
+    public function getList($field = null);
 
 
     /**
