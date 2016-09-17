@@ -39,13 +39,16 @@ class Connection extends \PDO implements \OlajosCs\QueryBuilder\Contracts\Connec
 
 
     /**
-     * Return an empty insert statement
-     *
-     * @return Statements\InsertStatement
+     * @inheritdoc
      */
-    public function insert()
+    public function insert(array $values = [])
     {
-        return new Statements\InsertStatement();
+        $statement = new Statements\InsertStatement($this);
+        if (!empty($values)) {
+            $statement->values($values);
+        }
+
+        return $statement;
     }
 
 

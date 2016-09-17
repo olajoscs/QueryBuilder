@@ -32,9 +32,11 @@ interface Connection
     /**
      * Create an insert statement
      *
+     * @param array $values The values to insert as an associative array
+     *
      * @return Statements\InsertStatement
      */
-    public function insert();
+    public function insert(array $values = []);
 
 
     /**

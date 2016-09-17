@@ -42,7 +42,7 @@ class ConnectionTest extends MySQL
         $delete = new DeleteStatement($connection);
         $this->assertEquals($connection->delete(), $delete);
 
-        $insert = new InsertStatement();
+        $insert = new InsertStatement($connection);
         $this->assertEquals($connection->insert(), $insert);
     }
 }
