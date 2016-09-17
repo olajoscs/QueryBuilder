@@ -74,8 +74,11 @@ class UpdateStatement extends WhereStatement   implements UpdateStatementInterfa
             $values[] = $field . ' = ' . $name;
         }
 
-        $query = 'UPDATE ' . $this->table;
-        $query .= ' SET ' . implode(', ', $values);
+        $query = sprintf(
+            'UPDATE %s SET %s',
+            $this->table,
+            implode(', ', $values)
+        );
 
         $query .= parent::asString();
 

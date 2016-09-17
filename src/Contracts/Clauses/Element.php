@@ -12,7 +12,7 @@ interface Element
     /**
      * Return the clause as a string
      *
-     * @return mixed
+     * @return string
      */
     public function asString();
 }

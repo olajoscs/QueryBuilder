@@ -12,7 +12,7 @@ use OlajosCs\QueryBuilder\Contracts\Clauses\JoinContainer as JoinContainerInterf
 class JoinContainer extends Container implements JoinContainerInterface
 {
     /**
-     * @var JoinContainer[]
+     * @var JoinElement[]
      */
     protected $list = [];
 

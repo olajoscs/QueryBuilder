@@ -83,6 +83,9 @@ class JoinElement implements JoinElementInterface
     }
 
 
+    /**
+     * @inheritdoc
+     */
     public function asString()
     {
         return sprintf(

@@ -28,7 +28,10 @@ class DeleteStatement extends WhereStatement implements DeleteStatementInterface
      */
     public function asString()
     {
-        $query = 'DELETE FROM ' . $this->table;
+        $query = sprintf(
+            'DELETE FROM %s',
+            $this->table
+        );
 
         $query .= parent::asString();
 

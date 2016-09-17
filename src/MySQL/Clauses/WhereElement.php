@@ -152,9 +152,7 @@ class WhereElement implements WhereElementInterface
 
 
     /**
-     * Return the where clause as string
-     *
-     * @return string
+     * @inheritdoc
      */
     public function asString()
     {

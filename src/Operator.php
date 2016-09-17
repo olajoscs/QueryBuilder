@@ -2,7 +2,6 @@
 
 namespace OlajosCs\QueryBuilder;
 
-
 /**
  * Class Operator
  *

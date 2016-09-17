@@ -84,9 +84,7 @@ class InsertStatement extends Statement implements InsertStatementInterface
     public function asString()
     {
         $query = sprintf(
-            'INSERT INTO %s
-             (%s)
-             VALUES (%s)',
+            'INSERT INTO %s (%s) VALUES (%s)',
             $this->table,
             implode(', ', array_keys($this->names)),
             implode(', ', $this->names)

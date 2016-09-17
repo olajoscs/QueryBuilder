@@ -181,8 +181,11 @@ class SelectStatement extends WhereStatement  implements SelectStatementInterfac
     {
         $this->parameters = [];
 
-        $query = 'SELECT ' . implode(', ', $this->fields) . ' ';
-        $query .= 'FROM ' . $this->table;
+        $query = sprintf(
+            'SELECT %s FROM %s',
+            implode(', ', $this->fields),
+            $this->table
+        );
 
         if ($this->joinContainer->has()) {
             $query .= $this->joinContainer->asString();
