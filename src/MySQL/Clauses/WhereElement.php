@@ -50,11 +50,11 @@ class WhereElement implements WhereElementInterface
     /**
      * @var array The array operators
      */
-    protected static $arrayOperators = array(
+    protected static $arrayOperators = [
         Operator::IN,
         Operator::NOTIN,
-        Operator::BETWEEN
-    );
+        Operator::BETWEEN,
+    ];
 
     /**
      * @var array Paraméter nevek a query-be
@@ -106,10 +106,10 @@ class WhereElement implements WhereElementInterface
     private function addValue($value)
     {
         $name                = self::$valueCount++;
-        $name                = ':where' . $name;
+        $name                = 'where' . $name;
         $this->values[$name] = $value;
 
-        return $name;
+        return ':' . $name;
     }
 
 

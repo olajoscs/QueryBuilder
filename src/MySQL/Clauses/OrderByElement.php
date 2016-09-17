@@ -12,26 +12,6 @@ use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByElement as OrderByElementInte
 class OrderByElement implements OrderByElementInterface
 {
     /**
-     * Defines the nulls last order
-     */
-    const NULLS_LAST = 'nl';
-
-    /**
-     * Defines the nulls first order
-     */
-    const NULLS_FIRST = 'nf';
-
-    /**
-     * Ascending order
-     */
-    const ORDER_ASC = 'ASC';
-
-    /**
-     * Descending order
-     */
-    const ORDER_DESC = 'DESC';
-
-    /**
      * @var string The name of the field to order
      */
     private $field;

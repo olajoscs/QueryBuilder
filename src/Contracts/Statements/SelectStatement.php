@@ -3,6 +3,9 @@
 namespace OlajosCs\QueryBuilder\Contracts\Statements;
 
 use OlajosCs\QueryBuilder\Contracts\Connection;
+use OlajosCs\QueryBuilder\Exceptions\FieldNotFoundException;
+use OlajosCs\QueryBuilder\Exceptions\MultipleRowFoundException;
+use OlajosCs\QueryBuilder\Exceptions\RowNotFoundException;
 
 /**
  * Interface SelectStatement
@@ -151,6 +154,99 @@ interface SelectStatement
      * @return SelectStatement
      */
     public function offset($offset);
+
+
+    /**
+     * Execute the query and return the statement
+     *
+     * @return \PDOStatement
+     */
+    public function execute();
+
+
+    /**
+     * Return the result of the query as array of stdClasses
+     *
+     * @return object[]
+     */
+    public function get();
+
+
+    /**
+     * Return the result of the query as array of explicit classes
+     *
+     * @param string $class
+     * @param array  $constructorParameters
+     *
+     * @return array
+     */
+    public function getAsClasses($class, array $constructorParameters = []);
+
+
+    /**
+     * Return the first row from a query as an stdClass
+     *
+     * @return object
+     * @throws RowNotFoundException
+     * @throws MultipleRowFoundException
+     */
+    public function getOne();
+
+
+    /**
+     * Return the first row from a query as an explicit class
+     *
+     * @param string $class
+     * @param array  $constructorParameters
+     *
+     * @return mixed
+     * @throws RowNotFoundException
+     * @throws MultipleRowFoundException
+     */
+    public function getOneClass($class, array $constructorParameters = []);
+
+
+    /**
+     * Return one field of the first row from a query
+     *
+     * @param string $field
+     *
+     * @return string
+     * @throws FieldNotFoundException
+     */
+    public function getOneField($field = null);
+
+
+    /**
+     * Return an array of the given field
+     *
+     * @param string $field
+     *
+     * @return array
+     */
+    public function getList($field);
+
+
+    /**
+     * Return the result of the query as an array of stdClasses which has the key by the $keyField value
+     *
+     * @param string $keyField
+     *
+     * @return object[]
+     */
+    public function getWithKey($keyField);
+
+
+    /**
+     * Return the result of the query as an array of explicit classes which has the key by the $keyField value
+     *
+     * @param string $class
+     * @param array  $constructorParameters
+     * @param string $keyField
+     *
+     * @return array[]
+     */
+    public function getClassesWithKey($class, array $constructorParameters = [], $keyField);
 
 
     /**

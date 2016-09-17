@@ -10,7 +10,7 @@ use OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement;
  *
  * Testing the order by clauses
  */
-class OrderByText extends MySQL
+class SelectOrderByText extends MySQL
 {
     /**
      * Test a single order by cluase

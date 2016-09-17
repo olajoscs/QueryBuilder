@@ -10,7 +10,7 @@ use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByElement;
  *
  * Test mysql group by clauses
  */
-class GroupByTest extends MySQL
+class SelectGroupByTest extends MySQL
 {
     /**
      * Test a single group by element

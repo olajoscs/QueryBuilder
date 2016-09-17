@@ -11,7 +11,7 @@ use OlajosCs\QueryBuilder\Operator;
  *
  * Tests Join clause
  */
-class JoinTest extends MySQL
+class SelectJoinTest extends MySQL
 {
     /**
      * Tests join clause in a full select query

@@ -11,7 +11,7 @@ use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
  *
  * Testing where clauses of the query builder
  */
-class WhereTest extends MySQL
+class SelectWhereTest extends MySQL
 {
     /**
      * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::__construct()
@@ -30,14 +30,14 @@ class WhereTest extends MySQL
         $where1 = new WhereElement('id', '>', 1);
         $this->assertEquals('id', $where1->getField());
         $this->assertEquals('>', $where1->getOperator());
-        $this->assertEquals([':where0' => 1], $where1->getValues());
+        $this->assertEquals(['where0' => 1], $where1->getValues());
         $this->assertEquals(WhereElement::GLUE_AND, $where1->getGlue());
         $this->assertEquals('id > :where0', $where1->asString());
 
         $where2 = new WhereElement('id', '=', 2, WhereElement::GLUE_OR);
         $this->assertEquals('id', $where2->getField());
         $this->assertEquals('=', $where2->getOperator());
-        $this->assertEquals([':where1' => 2], $where2->getValues());
+        $this->assertEquals(['where1' => 2], $where2->getValues());
         $this->assertEquals(WhereElement::GLUE_OR, $where2->getGlue());
         $this->assertEquals('id = :where1', $where2->asString());
     }
@@ -65,8 +65,8 @@ class WhereTest extends MySQL
         $this->assertEquals(' WHERE id > :where2 OR id = :where3', $whereContainer->asString());
         $this->assertEquals(
             [
-                ':where2' => 1,
-                ':where3' => 2,
+                'where2' => 1,
+                'where3' => 2,
             ],
             $whereContainer->getParameters()
         );

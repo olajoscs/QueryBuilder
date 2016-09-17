@@ -305,6 +305,101 @@ class SelectStatement implements SelectStatementInterface, Query
     }
 
 
+    /**
+     * @inheritDoc
+     */
+    public function execute()
+    {
+        return $this->connection->execute($this->asString(), $this->parameters);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function get()
+    {
+        return $this->connection->get($this->asString(), $this->parameters);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getAsClasses($class, array $constructorParameters = [])
+    {
+        return $this->connection->getAsClasses($this->asString(), $this->parameters, $class, $constructorParameters);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getOne()
+    {
+        return $this->connection->getOne($this->asString(), $this->parameters);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getOneClass($class, array $constructorParameters = [])
+    {
+        return $this->connection->getOneClass($this->asString(), $this->parameters, $class, $constructorParameters);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getOneField($field = null)
+    {
+        if ($field === null) {
+            $field = reset($this->fields);
+        }
+
+        return $this->connection->getOneField($this->asString(), $this->parameters, $field);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getList($field = null)
+    {
+        if ($field === null) {
+            $field = reset($this->fields);
+        }
+
+        return $this->connection->getList($this->asString(), $this->parameters, $field);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getWithKey($keyField)
+    {
+        return $this->connection->getWithKey($this->asString(), $this->parameters, $keyField);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getClassesWithKey($class, array $constructorParameters = [], $keyField)
+    {
+        return $this->connection->getClassesWithKey(
+            $this->asString(),
+            $this->parameters,
+            $class,
+            $constructorParameters,
+            $keyField
+        );
+    }
+
+
     public function __toString()
     {
         return $this->asString();
