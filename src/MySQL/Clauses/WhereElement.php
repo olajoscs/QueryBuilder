@@ -57,6 +57,14 @@ class WhereElement implements WhereElementInterface
     ];
 
     /**
+     * @var array The operators, which does not need any bindig value
+     */
+    protected static $nullValueOperators = [
+        Operator::IS_NULL,
+        Operator::IS_NOT_NULL,
+    ];
+
+    /**
      * @var array Paraméter nevek a query-be
      */
     private $names = [];
@@ -75,13 +83,16 @@ class WhereElement implements WhereElementInterface
         $this->field    = $field;
         $this->operator = $operator;
 
-        if (is_array($value)) {
-            foreach ($value as $item) {
-                $this->names[] = $this->addValue($item);
+        if (!\in_array($operator, self::$nullValueOperators)) {
+            if (\is_array($value)) {
+                foreach ($value as $item) {
+                    $this->names[] = $this->addValue($item);
+                }
+            } else {
+                $this->names[] = $this->addValue($value);
             }
-        } else {
-            $this->names[] = $this->addValue($value);
         }
+
 
         $this->glue = $glue;
     }
@@ -141,7 +152,7 @@ class WhereElement implements WhereElementInterface
 
 
     /**
-     * Returns that the where clause has an operator which handles array values
+     * Return that the where clause has an operator which handles array values
      *
      * @return bool
      */
@@ -152,25 +163,46 @@ class WhereElement implements WhereElementInterface
 
 
     /**
+     * Return that the where clause has an operator which does not need any binding value or not
+     *
+     * @return bool
+     */
+    private function hasNullValueOperator()
+    {
+        return in_array($this->getOperator(), self::$nullValueOperators);
+    }
+
+
+    /**
      * @inheritdoc
      */
     public function asString()
     {
-        if ($this->hasArrayOperator()) {
-            if ($this->operator === Operator::BETWEEN) {
-                $name = $this->names[0] . ' AND ' . $this->names[1];
-            } else {
-                $name = '(' . implode(',', $this->names) . ')';
-            }
-        } else {
-            $name = $this->names[0];
-        }
+        if ($this->hasNullValueOperator()) {
+            $this->values = [];
 
-        return sprintf(
-            '%s %s %s',
-            $this->getField(),
-            $this->getOperator(),
-            $name
-        );
+            return sprintf(
+                '%s %s',
+                $this->getField(),
+                $this->getOperator()
+            );
+        } else {
+            if ($this->hasArrayOperator()) {
+                if ($this->operator === Operator::BETWEEN) {
+                    $name = $this->names[0] . ' AND ' . $this->names[1];
+                } else {
+                    $name = '(' . implode(',', $this->names) . ')';
+                }
+            } else {
+                $name = $this->names[0];
+            }
+
+            return sprintf(
+                '%s %s %s',
+                $this->getField(),
+                $this->getOperator(),
+                $name
+            );
+        }
     }
 }

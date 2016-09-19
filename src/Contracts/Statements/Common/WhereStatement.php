@@ -65,4 +65,44 @@ interface WhereStatement extends Statement
      * @return static
      */
     public function whereBetween($field, $min, $max);
+
+
+    /**
+     * Set a where field is null condition
+     *
+     * @param string $field
+     *
+     * @return static
+     */
+    public function whereNull($field);
+
+
+    /**
+     * Set a where field is not null condition
+     *
+     * @param string $field
+     *
+     * @return static
+     */
+    public function whereNotNull($field);
+
+
+    /**
+     * Set a where field is null condition with "or" glue
+     *
+     * @param string $field
+     *
+     * @return static
+     */
+    public function whereNullOr($field);
+
+
+    /**
+     * Set a where field is not null condition with "or" glue
+     *
+     * @param string $field
+     *
+     * @return static
+     */
+    public function whereNotNullOr($field);
 }

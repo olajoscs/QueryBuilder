@@ -204,4 +204,45 @@ class SelectWhereTest extends MySQL
         $container->add($where);
         $container->asString();
     }
+
+
+    /**
+     * Test the where field is null clause
+     *
+     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::__construct()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::hasNullValueOperator()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::asString()
+     *
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::whereNull()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::whereNotNull()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::whereNullOr()
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::whereNotNullOr()
+     *
+     * @return void
+     */
+    public function testIsNull()
+    {
+        $connection = $this->getConnection();
+
+        $statement = $connection->select()
+            ->from('strings')
+            ->whereNull('languageId');
+        $string = 'SELECT * FROM strings WHERE languageId IS NULL';
+        $this->assertEquals($string, $statement->asString());
+
+        $statement = $connection->select()
+            ->from('strings')
+            ->whereNotNull('languageId');
+        $string = 'SELECT * FROM strings WHERE languageId IS NOT NULL';
+        $this->assertEquals($string, $statement->asString());
+
+        $statement = $connection->select()
+            ->from('strings')
+            ->whereNull('a')
+            ->whereNotNull('b')
+            ->whereNullOr('c')
+            ->whereNotNullOr('d');
+        $string = 'SELECT * FROM strings WHERE a IS NULL AND b IS NOT NULL OR c IS NULL OR d IS NOT NULL';
+        $this->assertEquals($string, $statement->asString());
+    }
 }

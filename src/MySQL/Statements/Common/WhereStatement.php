@@ -104,6 +104,58 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     /**
      * @inheritDoc
      */
+    public function whereNull($field)
+    {
+        $this->whereContainer->add(
+            new WhereElement($field, Operator::IS_NULL, null)
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function whereNotNull($field)
+    {
+        $this->whereContainer->add(
+            new WhereElement($field, Operator::IS_NOT_NULL, null)
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function whereNullOr($field)
+    {
+        $this->whereContainer->add(
+            new WhereElement($field, Operator::IS_NULL, null, WhereElement::GLUE_OR)
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function whereNotNullOr($field)
+    {
+        $this->whereContainer->add(
+            new WhereElement($field, Operator::IS_NOT_NULL, null, WhereElement::GLUE_OR)
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
     public function execute()
     {
         return $this->connection->execute($this->asString(), $this->parameters);
