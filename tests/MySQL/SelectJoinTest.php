@@ -35,6 +35,44 @@ class SelectJoinTest extends MySQL
         $this->assertEquals($string, $query->asString());
     }
 
+    /**
+     * Test left join result
+     *
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::joinLeft()
+     */
+    public function testLeftJoin()
+    {
+        $connection = $this->getConnection();
+
+        $query = $connection
+            ->select('id')
+            ->from('strings')
+            ->joinLeft('languages', 'id', Operator::EQ, 'languageId');
+
+        $string = 'SELECT id FROM strings LEFT JOIN languages ON strings.languageId = languages.id';
+
+        $this->assertEquals($string, $query->asString());
+    }
+
+    /**
+     * Test right join result
+     *
+     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::joinRight()
+     */
+    public function testRightJoin()
+    {
+        $connection = $this->getConnection();
+
+        $query = $connection
+            ->select('id')
+            ->from('strings')
+            ->joinRight('languages', 'id', Operator::EQ, 'languageId');
+
+        $string = 'SELECT id FROM strings RIGHT JOIN languages ON strings.languageId = languages.id';
+
+        $this->assertEquals($string, $query->asString());
+    }
+
 
     /**
      * Test an individual join caluse

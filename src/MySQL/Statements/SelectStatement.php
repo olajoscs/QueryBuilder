@@ -119,6 +119,46 @@ class SelectStatement extends WhereStatement  implements SelectStatementInterfac
 
 
     /**
+     * @inheritDoc
+     */
+    public function joinLeft($tableRight, $fieldRight, $operator, $fieldLeft, $tableLeft = null)
+    {
+        $this->joinContainer->add(
+            new JoinElement(
+                $tableLeft ?: $this->table,
+                $fieldLeft,
+                $operator,
+                $tableRight,
+                $fieldRight,
+                JoinElement::TYPE_LEFT
+            )
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function joinRight($tableRight, $fieldRight, $operator, $fieldLeft, $tableLeft = null)
+    {
+        $this->joinContainer->add(
+            new JoinElement(
+                $tableLeft ?: $this->table,
+                $fieldLeft,
+                $operator,
+                $tableRight,
+                $fieldRight,
+                JoinElement::TYPE_RIGHT
+            )
+        );
+
+        return $this;
+    }
+
+
+    /**
      * @inheritdoc
      */
     public function orderBy($field, $order = null, $nullsPosition = null)

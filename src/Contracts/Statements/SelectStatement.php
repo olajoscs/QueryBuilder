@@ -49,6 +49,34 @@ interface SelectStatement extends WhereStatement
 
 
     /**
+     * Left join an other table to the query
+     *
+     * @param string $tableRight The table to join
+     * @param string $fieldRight The field in the right table to join
+     * @param string $operator   The operator
+     * @param string $fieldLeft  The field in the left table
+     * @param string $tableLeft  The left table name
+     *
+     * @return SelectStatement
+     */
+    public function joinLeft($tableRight, $fieldRight, $operator, $fieldLeft, $tableLeft = null);
+
+
+    /**
+     * Right join an other table to the query
+     *
+     * @param string $tableRight The table to join
+     * @param string $fieldRight The field in the right table to join
+     * @param string $operator   The operator
+     * @param string $fieldLeft  The field in the left table
+     * @param string $tableLeft  The left table name
+     *
+     * @return SelectStatement
+     */
+    public function joinRight($tableRight, $fieldRight, $operator, $fieldLeft, $tableLeft = null);
+
+
+    /**
      * Create an order by clause to the container
      *
      * @param string $field         Name of the field to order by

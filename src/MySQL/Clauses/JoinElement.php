@@ -17,11 +17,6 @@ class JoinElement implements JoinElementInterface
     const TYPE_INNER = 'INNER';
 
     /**
-     * Outer Join type
-     */
-    const TYPE_OUTER = 'OUTER';
-
-    /**
      * Left Join type
      */
     const TYPE_LEFT = 'LEFT';
