@@ -153,5 +153,4 @@ class JoinElement implements JoinElementInterface
     {
         return $this->type;
     }
-
 }

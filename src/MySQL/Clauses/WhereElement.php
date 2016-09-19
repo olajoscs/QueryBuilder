@@ -173,5 +173,4 @@ class WhereElement implements WhereElementInterface
             $name
         );
     }
-
 }

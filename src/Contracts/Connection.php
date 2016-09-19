@@ -161,5 +161,4 @@ interface Connection
      * @return \PDOStatement
      */
     public function execute($query, array $parameters = []);
-
 }

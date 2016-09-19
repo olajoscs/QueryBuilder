@@ -37,5 +37,4 @@ class DeleteStatement extends WhereStatement implements DeleteStatementInterface
 
         return $query;
     }
-
 }

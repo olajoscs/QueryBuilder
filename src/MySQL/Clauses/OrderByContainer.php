@@ -31,5 +31,4 @@ class OrderByContainer extends Container implements OrderByContainerInterface
 
         return sprintf(' ORDER BY %s', implode(', ', $strings));
     }
-
 }

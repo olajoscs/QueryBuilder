@@ -84,5 +84,4 @@ class UpdateStatement extends WhereStatement   implements UpdateStatementInterfa
 
         return $query;
     }
-
 }

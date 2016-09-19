@@ -44,5 +44,4 @@ class GroupByElement implements GroupByElementInterface
     {
         return $this->field;
     }
-
 }
