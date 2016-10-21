@@ -15,9 +15,9 @@ use OlajosCs\QueryBuilder\Operator;
 abstract class WhereElement implements WhereElementInterface
 {
     /**
-     * @var int Counter of the parameters. Static to be able to iterate between multiple where clauses
+     * @var WhereContainer Counter of the parameters
      */
-    protected static $valueCount = 0;
+    protected $whereContainer;
 
     /**
      * @var array The array operators
@@ -65,23 +65,25 @@ abstract class WhereElement implements WhereElementInterface
     /**
      * WhereElement constructor.
      *
-     * @param string $field
-     * @param string $operator
-     * @param mixed  $value
-     * @param string $glue
+     * @param WhereContainer $whereContainer
+     * @param string         $field
+     * @param string         $operator
+     * @param mixed          $value
+     * @param string         $glue
      */
-    public function __construct($field, $operator, $value, $glue = self::GLUE_AND)
+    public function __construct(WhereContainer $whereContainer, $field, $operator, $value, $glue = self::GLUE_AND)
     {
-        $this->field    = $field;
-        $this->operator = $operator;
+        $this->whereContainer = $whereContainer;
+        $this->field          = $field;
+        $this->operator       = $operator;
 
         if (!\in_array($operator, self::$nullValueOperators)) {
-            if (\is_array($value)) {
-                foreach ($value as $item) {
-                    $this->names[] = $this->addValue($item);
-                }
-            } else {
-                $this->names[] = $this->addValue($value);
+            if (!\is_array($value)) {
+                $value = [$value];
+            }
+
+            foreach ($value as $item) {
+                $this->names[] = $this->addValue($item);
             }
         }
 
@@ -99,8 +101,7 @@ abstract class WhereElement implements WhereElementInterface
      */
     protected function addValue($value)
     {
-        $name                = self::$valueCount++;
-        $name                = 'where' . $name;
+        $name                = 'where' . $this->whereContainer->getBindingCount();
         $this->values[$name] = $value;
 
         return ':' . $name;

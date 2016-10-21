@@ -23,6 +23,11 @@ abstract class WhereContainer extends Container implements WhereContainerInterfa
      */
     protected $list = [];
 
+    /**
+     * @var int Counter of the parameters
+     */
+    protected $bindingCount = 0;
+
 
     /**
      * @inheritdoc
@@ -30,5 +35,14 @@ abstract class WhereContainer extends Container implements WhereContainerInterfa
     public function getParameters()
     {
         return $this->parameters;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function getBindingCount()
+    {
+        return $this->bindingCount++;
     }
 }

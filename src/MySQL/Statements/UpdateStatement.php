@@ -54,6 +54,6 @@ class UpdateStatement extends UpdateStatementCommon implements UpdateStatementIn
      */
     protected function createWhereElement($field, $operator, $value, $glue = WhereElement::GLUE_AND)
     {
-        return new WhereElement($field, $operator, $value, $glue);
+        return new WhereElement($this->whereContainer, $field, $operator, $value, $glue);
     }
 }

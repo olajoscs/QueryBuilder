@@ -10,5 +10,10 @@ namespace OlajosCs\QueryBuilder\Contracts\Clauses;
  */
 interface WhereContainer extends ContainerWithBinding
 {
-
+    /**
+     * Return the binding counter, then increment it
+     *
+     * @return int
+     */
+    public function getBindingCount();
 }

@@ -19,19 +19,19 @@ class SelectWhereTest extends MySQL
      */
     public function testWhereClause()
     {
-        $where1 = new WhereElement('id', '>', 1);
+        $where1 = new WhereElement(new WhereContainer(), 'id', '>', 1);
         $this->assertEquals('id', $where1->getField());
         $this->assertEquals('>', $where1->getOperator());
         $this->assertEquals(['where0' => 1], $where1->getValues());
         $this->assertEquals(WhereElement::GLUE_AND, $where1->getGlue());
         $this->assertEquals('id > :where0', $where1->asString());
 
-        $where2 = new WhereElement('id', '=', 2, WhereElement::GLUE_OR);
+        $where2 = new WhereElement(new WhereContainer(), 'id', '=', 2, WhereElement::GLUE_OR);
         $this->assertEquals('id', $where2->getField());
         $this->assertEquals('=', $where2->getOperator());
-        $this->assertEquals(['where1' => 2], $where2->getValues());
+        $this->assertEquals(['where0' => 2], $where2->getValues());
         $this->assertEquals(WhereElement::GLUE_OR, $where2->getGlue());
-        $this->assertEquals('id = :where1', $where2->asString());
+        $this->assertEquals('id = :where0', $where2->asString());
     }
 
 
@@ -41,19 +41,20 @@ class SelectWhereTest extends MySQL
      */
     public function testWhereContainer()
     {
-        $where1 = new WhereElement('id', '>', 1);
-        $where2 = new WhereElement('id', '=', 2, WhereElement::GLUE_OR);
+        $whereContainer = new WhereContainer();
+        $where1 = new WhereElement($whereContainer, 'id', '>', 1);
+        $where2 = new WhereElement($whereContainer, 'id', '=', 2, WhereElement::GLUE_OR);
 
         $whereContainer = new WhereContainer();
         $whereContainer->add($where1);
         $whereContainer->add($where2);
 
         $this->assertEquals([$where1, $where2], $whereContainer->get());
-        $this->assertEquals(' WHERE id > :where2 OR id = :where3', $whereContainer->asString());
+        $this->assertEquals(' WHERE id > :where0 OR id = :where1', $whereContainer->asString());
         $this->assertEquals(
             [
-                'where2' => 1,
-                'where3' => 2,
+                'where0' => 1,
+                'where1' => 2,
             ],
             $whereContainer->getParameters()
         );
@@ -70,7 +71,7 @@ class SelectWhereTest extends MySQL
     {
         $connection = $this->getConnection();
 
-        $string = 'SELECT * FROM strings WHERE id > :where4';
+        $string = 'SELECT * FROM strings WHERE id > :where0';
         $query = $connection
             ->select()
             ->from('strings')
@@ -94,7 +95,7 @@ class SelectWhereTest extends MySQL
             ->from('strings')
             ->whereOr('id', '=', 1)
             ->whereOr('id', '=', 2);
-        $string = 'SELECT id FROM strings WHERE id = :where5 OR id = :where6';
+        $string = 'SELECT id FROM strings WHERE id = :where0 OR id = :where1';
 
         $this->assertEquals($string, $query->asString());
     }
@@ -115,7 +116,7 @@ class SelectWhereTest extends MySQL
             ->from('strings')
             ->whereIn('id', [1, 2, 3, 4]);
 
-        $string = 'SELECT id FROM strings WHERE id IN (:where7,:where8,:where9,:where10)';
+        $string = 'SELECT id FROM strings WHERE id IN (:where0,:where1,:where2,:where3)';
 
         $this->assertEquals($string, $query->asString());
     }
@@ -136,7 +137,7 @@ class SelectWhereTest extends MySQL
             ->from('strings')
             ->whereNotIn('id', [1, 2, 3, 4]);
 
-        $string = 'SELECT id FROM strings WHERE id NOT IN (:where11,:where12,:where13,:where14)';
+        $string = 'SELECT id FROM strings WHERE id NOT IN (:where0,:where1,:where2,:where3)';
 
         $this->assertEquals($string, $query->asString());
     }
@@ -157,7 +158,7 @@ class SelectWhereTest extends MySQL
             ->from('strings')
             ->whereBetween('id', 1, 8);
 
-        $string = 'SELECT id FROM strings WHERE id BETWEEN :where15 AND :where16';
+        $string = 'SELECT id FROM strings WHERE id BETWEEN :where0 AND :where1';
 
         $this->assertEquals($string, $query->asString());
     }
@@ -173,8 +174,8 @@ class SelectWhereTest extends MySQL
     {
         $this->expectException(InvalidGlueException::class);
 
-        $where = new WhereElement('id', '=', 2, 'xor');
         $container = new WhereContainer();
+        $where = new WhereElement($container, 'id', '=', 2, 'xor');
 
         $container->add($where);
         $container->asString();
