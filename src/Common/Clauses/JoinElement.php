@@ -8,7 +8,8 @@ use OlajosCs\QueryBuilder\Contracts\Clauses\JoinElement as JoinElementInterface;
 /**
  * Class JoinElement
  *
- *
+ * Database independent join model
+ * Contains only the logic to build the model
  */
 abstract class JoinElement implements JoinElementInterface
 {

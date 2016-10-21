@@ -18,7 +18,7 @@ class GroupByContainer extends GroupByContainerCommon implements GroupByContaine
     public function asString()
     {
         $strings = array_map(
-            function (GroupByElement $element) {
+            function(GroupByElement $element) {
                 return $element->asString();
             },
             $this->get()

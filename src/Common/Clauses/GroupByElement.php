@@ -8,7 +8,8 @@ use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByElement as GroupByElementInte
 /**
  * Class GroupByElement
  *
- *
+ * Database indepednent GroupByElement model
+ * Contains only the logic to build the model
  */
 abstract class GroupByElement implements GroupByElementInterface
 {

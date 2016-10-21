@@ -16,24 +16,6 @@ class DeleteStatement extends DeleteStatementCommon
     /**
      * @inheritDoc
      */
-    protected function createWhereContainer()
-    {
-        return new WhereContainer();
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    protected function createWhereElement($field, $operator, $value, $glue = WhereElement::GLUE_AND)
-    {
-        return new WhereElement($field, $operator, $value, $glue);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
     public function asString()
     {
         $query = sprintf(
@@ -47,5 +29,23 @@ class DeleteStatement extends DeleteStatementCommon
         }
 
         return $query;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function createWhereContainer()
+    {
+        return new WhereContainer();
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function createWhereElement($field, $operator, $value, $glue = WhereElement::GLUE_AND)
+    {
+        return new WhereElement($field, $operator, $value, $glue);
     }
 }

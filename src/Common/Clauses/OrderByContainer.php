@@ -8,7 +8,8 @@ use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByContainer as OrderByContainer
 /**
  * Class OrderByContainer
  *
- *
+ * Database independent OrderByContainer
+ * Contains only the logic to build the model
  */
 abstract class OrderByContainer extends Container implements OrderByContainerInterface
 {

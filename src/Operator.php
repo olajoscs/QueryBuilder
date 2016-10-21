@@ -28,7 +28,7 @@ abstract class Operator
     const ANY = 'ANY';
 
     const BETWEEN = 'BETWEEN';
-    
+
     const IS_NULL = 'IS NULL';
 
     const IS_NOT_NULL = 'IS NOT NULL';

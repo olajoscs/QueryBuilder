@@ -5,7 +5,6 @@ namespace OlajosCs\QueryBuilder\Common\Statements\Common;
 use OlajosCs\QueryBuilder\Contracts\Connection;
 use OlajosCs\QueryBuilder\Contracts\Statements\Common\Statement as StatementInterface;
 
-
 /**
  * Class Statement
  *

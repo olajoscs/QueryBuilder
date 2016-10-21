@@ -97,8 +97,8 @@ abstract class SelectStatement extends WhereStatement implements SelectStatement
     /**
      * Create and return an OrderByElement
      *
-     * @param string $field Name of the field to order by
-     * @param string $order Type of the order (one of the OrderByElement::ORDER_ constants)
+     * @param string $field         Name of the field to order by
+     * @param string $order         Type of the order (one of the OrderByElement::ORDER_ constants)
      * @param string $nullsPosition Position of the null values (one of the OrderByElement::NULLS_ constans)
      *
      * @return OrderByElement
@@ -125,7 +125,7 @@ abstract class SelectStatement extends WhereStatement implements SelectStatement
     {
         parent::__construct($connection);
 
-        $this->joinContainer = $this->createJoinContainer();
+        $this->joinContainer    = $this->createJoinContainer();
         $this->orderByContainer = $this->createOrderByContainer();
         $this->groupByContainer = $this->createGroupByContainer();
     }

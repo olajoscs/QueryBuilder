@@ -8,7 +8,8 @@ use OlajosCs\QueryBuilder\Contracts\Clauses\WhereContainer as WhereContainerInte
 /**
  * Class WhereContainer
  *
- *
+ * Database independent WhereContainer object
+ * Contains only the logic to build the model
  */
 abstract class WhereContainer extends Container implements WhereContainerInterface
 {

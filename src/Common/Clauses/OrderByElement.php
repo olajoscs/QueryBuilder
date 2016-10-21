@@ -4,11 +4,11 @@ namespace OlajosCs\QueryBuilder\Common\Clauses;
 
 use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByElement as OrderByElementInterface;
 
-
 /**
  * Class OrderByElement
  *
- *
+ * Database independent OrderByElement model
+ * Contains only the logic to build the model
  */
 abstract class OrderByElement implements OrderByElementInterface
 {

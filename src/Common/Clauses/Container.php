@@ -5,6 +5,13 @@ namespace OlajosCs\QueryBuilder\Common\Clauses;
 use OlajosCs\QueryBuilder\Contracts\Clauses\Container as ContainerInterface;
 use OlajosCs\QueryBuilder\Contracts\Clauses\Element;
 
+/**
+ * Class Container
+ *
+ * Database independent abstract container class.
+ * Contains only the logic to build the model.
+ * Parent of all the container objects.
+ */
 abstract class Container implements ContainerInterface
 {
     /**

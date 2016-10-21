@@ -8,7 +8,8 @@ use OlajosCs\QueryBuilder\Contracts\Clauses\JoinContainer as JoinContainerInterf
 /**
  * Class JoinContainer
  *
- *
+ * Database independent JoinContainer model
+ * Contains only the logic to build the model
  */
 abstract class JoinContainer extends Container implements JoinContainerInterface
 {

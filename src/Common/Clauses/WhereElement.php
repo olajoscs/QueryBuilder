@@ -9,7 +9,8 @@ use OlajosCs\QueryBuilder\Operator;
 /**
  * Class WhereElement
  *
- *
+ * Database independent WhereElement
+ * Contains only the logic to build the model
  */
 abstract class WhereElement implements WhereElementInterface
 {

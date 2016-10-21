@@ -49,7 +49,7 @@ abstract class InsertStatement extends Statement implements InsertStatementInter
      */
     public function values(array $values)
     {
-        $this->names = [];
+        $this->names      = [];
         $this->parameters = [];
 
         foreach ($values as $field => $value) {
@@ -73,7 +73,7 @@ abstract class InsertStatement extends Statement implements InsertStatementInter
     {
         $name = ':' . $field;
 
-        $this->names[$field] = $name;
+        $this->names[$field]      = $name;
         $this->parameters[$field] = $value;
     }
 }

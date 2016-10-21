@@ -18,7 +18,7 @@ class OrderByContainer extends OrderByContainerCommon implements OrderByContaine
     public function asString()
     {
         $strings = array_map(
-            function (OrderByElement $element) {
+            function(OrderByElement $element) {
                 return $element->asString();
             },
             $this->get()

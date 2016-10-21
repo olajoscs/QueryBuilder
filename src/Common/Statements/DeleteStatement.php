@@ -11,13 +11,13 @@ use OlajosCs\QueryBuilder\Contracts\Statements\DeleteStatement as DeleteStatemen
  */
 abstract class DeleteStatement extends WhereStatement implements DeleteStatementInterface
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function from($table)
-	{
-		$this->table = $table;
+    /**
+     * @inheritDoc
+     */
+    public function from($table)
+    {
+        $this->table = $table;
 
         return $this;
-	}
+    }
 }
