@@ -2,6 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
+use OlajosCs\QueryBuilder\Common\Clauses\WhereContainer as WhereContainerCommon;
 use OlajosCs\QueryBuilder\Contracts\Clauses\WhereContainer as WhereContainerInterface;
 use OlajosCs\QueryBuilder\Exceptions\InvalidGlueException;
 
@@ -10,27 +11,16 @@ use OlajosCs\QueryBuilder\Exceptions\InvalidGlueException;
  *
  * Defines a where container for the query builder
  */
-class WhereContainer extends Container implements WhereContainerInterface
+class WhereContainer extends WhereContainerCommon implements WhereContainerInterface
 {
-    /**
-     * @var array The list of the binding parameters
-     */
-    private $parameters = [];
-
-    /**
-     * @var WhereElement[]
-     */
-    protected $list = [];
-
-
     /**
      * @inheritdoc
      * @throws InvalidGlueException
      */
     public function asString()
     {
-        $and   = array();
-        $or    = array();
+        $and   = [];
+        $or    = [];
         $query = ' WHERE ';
 
         foreach ($this->list as $clause) {
@@ -61,14 +51,5 @@ class WhereContainer extends Container implements WhereContainerInterface
         }
 
         return $query;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function getParameters()
-    {
-        return $this->parameters;
     }
 }

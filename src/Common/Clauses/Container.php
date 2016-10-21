@@ -1,6 +1,6 @@
 <?php
 
-namespace OlajosCs\QueryBuilder\MySQL\Clauses;
+namespace OlajosCs\QueryBuilder\Common\Clauses;
 
 use OlajosCs\QueryBuilder\Contracts\Clauses\Container as ContainerInterface;
 use OlajosCs\QueryBuilder\Contracts\Clauses\Element;
@@ -11,6 +11,7 @@ abstract class Container implements ContainerInterface
      * @var Element[]
      */
     protected $list = [];
+
 
     /**
      * Add an element to the container
@@ -28,17 +29,6 @@ abstract class Container implements ContainerInterface
 
 
     /**
-     * Return the elements of the container
-     *
-     * @return Element[]
-     */
-    public function get()
-    {
-        return $this->list;
-    }
-
-
-    /**
      * Return whether the container has elemnents or not
      *
      * @return bool
@@ -46,5 +36,16 @@ abstract class Container implements ContainerInterface
     public function has()
     {
         return !empty($this->get());
+    }
+
+
+    /**
+     * Return the elements of the container
+     *
+     * @return Element[]
+     */
+    public function get()
+    {
+        return $this->list;
     }
 }

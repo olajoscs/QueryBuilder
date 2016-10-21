@@ -2,6 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
+use OlajosCs\QueryBuilder\Common\Clauses\OrderByContainer as OrderByContainerCommon;
 use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByContainer as OrderByContainerInterface;
 
 /**
@@ -9,14 +10,8 @@ use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByContainer as OrderByContainer
  *
  * Contains all the order by clauses for a query
  */
-class OrderByContainer extends Container implements OrderByContainerInterface
+class OrderByContainer extends OrderByContainerCommon implements OrderByContainerInterface
 {
-    /**
-     * @var OrderByElement[]
-     */
-    protected $list = [];
-
-
     /**
      * @inheritdoc
      */

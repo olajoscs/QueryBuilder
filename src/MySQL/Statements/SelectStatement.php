@@ -2,218 +2,24 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
-use OlajosCs\QueryBuilder\Contracts\Connection;
+use OlajosCs\QueryBuilder\Common\Statements\SelectStatement as SelectStatementCommon;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
-use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByContainer as GroupByContainerInterface;
-use OlajosCs\QueryBuilder\Contracts\Clauses\JoinContainer as JoinContainerInterface;
-use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByContainer as OrderByContainerInterface;
 use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\JoinContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\OrderByContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement;
-use OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement;
+use OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer;
+use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
 
 /**
  * Class SelectStatement
  *
- * Defines a select statement
+ * MySQL specific select statement
  */
-class SelectStatement extends WhereStatement  implements SelectStatementInterface
+class SelectStatement extends SelectStatementCommon implements SelectStatementInterface
 {
-    /**
-     * @var string[] The name of the fields to get in the query
-     */
-    protected $fields;
-
-    /**
-     * @var int The limit for the query
-     */
-    protected $limit;
-
-    /**
-     * @var int The offset for the query
-     */
-    protected $offset;
-
-    /**
-     * @var JoinContainerInterface
-     */
-    protected $joinContainer;
-
-    /**
-     * @var OrderByContainerInterface
-     */
-    protected $orderByContainer;
-
-    /**
-     * @var GroupByContainerInterface
-     */
-    protected $groupByContainer;
-
-
-    /**
-     * SelectStatement constructor.
-     *
-     * @param Connection $connection
-     */
-    public function __construct(Connection $connection)
-    {
-        parent::__construct($connection);
-
-        $this->joinContainer    = new JoinContainer();
-        $this->orderByContainer = new OrderByContainer();
-        $this->groupByContainer = new GroupByContainer();
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function setFields($fields)
-    {
-        if (empty($fields)) {
-            $fields = ['*'];
-        }
-
-        if (!is_array($fields)) {
-            $fields = [$fields];
-        }
-
-        $this->fields = $fields;
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function from($table)
-    {
-        $this->table = $table;
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function join($tableRight, $fieldRight, $operator, $fieldLeft, $tableLeft = null)
-    {
-        $this->joinContainer->add(
-            new JoinElement(
-                $tableLeft ?: $this->table,
-                $fieldLeft,
-                $operator,
-                $tableRight,
-                $fieldRight,
-                JoinElement::TYPE_INNER
-            )
-        );
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    public function joinLeft($tableRight, $fieldRight, $operator, $fieldLeft, $tableLeft = null)
-    {
-        $this->joinContainer->add(
-            new JoinElement(
-                $tableLeft ?: $this->table,
-                $fieldLeft,
-                $operator,
-                $tableRight,
-                $fieldRight,
-                JoinElement::TYPE_LEFT
-            )
-        );
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    public function joinRight($tableRight, $fieldRight, $operator, $fieldLeft, $tableLeft = null)
-    {
-        $this->joinContainer->add(
-            new JoinElement(
-                $tableLeft ?: $this->table,
-                $fieldLeft,
-                $operator,
-                $tableRight,
-                $fieldRight,
-                JoinElement::TYPE_RIGHT
-            )
-        );
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function orderBy($field, $order = null, $nullsPosition = null)
-    {
-        $this->orderByContainer->add(
-            new OrderByElement($field, $order, $nullsPosition)
-        );
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function groupBy($field)
-    {
-        $this->groupByContainer->add(
-            new GroupByElement($field)
-        );
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function limit($limit)
-    {
-        if (!is_int($limit)) {
-            throw new \InvalidArgumentException(sprintf('Limit must be int, %s given', $limit));
-        }
-
-        $this->limit = $limit;
-
-        return $this;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function offset($offset)
-    {
-        if (!is_int($offset)) {
-            throw new \InvalidArgumentException(sprintf('Offset must be int, %s given', $offset));
-        }
-
-        $this->offset = $offset;
-
-        return $this;
-    }
-
-
     /**
      * @inheritdoc
      */
@@ -231,7 +37,9 @@ class SelectStatement extends WhereStatement  implements SelectStatementInterfac
             $query .= $this->joinContainer->asString();
         }
 
-        $query .= parent::asString();
+        if ($this->whereContainer->has()) {
+            $query .= $this->whereContainer->asString();
+        }
 
         if ($this->orderByContainer->has()) {
             $query .= $this->orderByContainer->asString();
@@ -256,91 +64,71 @@ class SelectStatement extends WhereStatement  implements SelectStatementInterfac
     /**
      * @inheritDoc
      */
-    public function get()
+    protected function createJoinContainer()
     {
-        return $this->connection->get($this->asString(), $this->parameters);
+        return new JoinContainer();
     }
 
 
     /**
      * @inheritDoc
      */
-    public function getAsClasses($class, array $constructorParameters = [])
+    protected function createGroupByContainer()
     {
-        return $this->connection->getAsClasses($this->asString(), $this->parameters, $class, $constructorParameters);
+        return new GroupByContainer();
     }
 
 
     /**
      * @inheritDoc
      */
-    public function getOne()
+    protected function createOrderByContainer()
     {
-        return $this->connection->getOne($this->asString(), $this->parameters);
+        return new OrderByContainer();
     }
 
 
     /**
      * @inheritDoc
      */
-    public function getOneClass($class, array $constructorParameters = [])
+    protected function createJoinElement($tableLeft, $fieldLeft, $operator, $tableRight, $fieldRight, $type)
     {
-        return $this->connection->getOneClass($this->asString(), $this->parameters, $class, $constructorParameters);
+        return new JoinElement($tableLeft, $fieldLeft, $operator, $tableRight, $fieldRight, $type);
     }
 
 
     /**
      * @inheritDoc
      */
-    public function getOneField($field = null)
+    protected function createOrderByElement($field, $order = null, $nullsPosition = null)
     {
-        if ($field === null) {
-            $field = reset($this->fields);
-        }
-
-        return $this->connection->getOneField($this->asString(), $this->parameters, $field);
+        return new OrderByElement($field, $order, $nullsPosition);
     }
 
 
     /**
      * @inheritDoc
      */
-    public function getList($field = null)
+    protected function createGroupByElement($field)
     {
-        if ($field === null) {
-            $field = reset($this->fields);
-        }
-
-        return $this->connection->getList($this->asString(), $this->parameters, $field);
+        return new GroupByElement($field);
     }
 
 
     /**
      * @inheritDoc
      */
-    public function getWithKey($keyField)
+    protected function createWhereContainer()
     {
-        return $this->connection->getWithKey($this->asString(), $this->parameters, $keyField);
+        return new WhereContainer();
     }
 
 
     /**
      * @inheritDoc
      */
-    public function getClassesWithKey($class, array $constructorParameters = [], $keyField)
+    protected function createWhereElement($field, $operator, $value, $glue = WhereElement::GLUE_AND)
     {
-        return $this->connection->getClassesWithKey(
-            $this->asString(),
-            $this->parameters,
-            $class,
-            $constructorParameters,
-            $keyField
-        );
-    }
-
-
-    public function __toString()
-    {
-        return $this->asString();
+        return new WhereElement($field, $operator, $value, $glue);
     }
 }

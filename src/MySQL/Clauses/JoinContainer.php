@@ -2,6 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
+use OlajosCs\QueryBuilder\Common\Clauses\JoinContainer as JoinContainerCommon;
 use OlajosCs\QueryBuilder\Contracts\Clauses\JoinContainer as JoinContainerInterface;
 
 /**
@@ -9,13 +10,8 @@ use OlajosCs\QueryBuilder\Contracts\Clauses\JoinContainer as JoinContainerInterf
  *
  * Defines the join container for mysql
  */
-class JoinContainer extends Container implements JoinContainerInterface
+class JoinContainer extends JoinContainerCommon implements JoinContainerInterface
 {
-    /**
-     * @var JoinElement[]
-     */
-    protected $list = [];
-
     /**
      * Return the join of clauses as a string
      *

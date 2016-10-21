@@ -10,6 +10,22 @@ namespace OlajosCs\QueryBuilder\Contracts\Clauses;
 interface JoinElement extends Element
 {
     /**
+     * Inner Join type
+     */
+    const TYPE_INNER = 'INNER';
+
+    /**
+     * Left Join type
+     */
+    const TYPE_LEFT = 'LEFT';
+
+    /**
+     * Right Join type
+     */
+    const TYPE_RIGHT = 'RIGHT';
+
+
+    /**
      * Returns the name of the table on the left
      *
      * @return string

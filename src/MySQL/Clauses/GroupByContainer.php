@@ -2,6 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
+use OlajosCs\QueryBuilder\Common\Clauses\GroupByContainer as GroupByContainerCommon;
 use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByContainer as GroupByContainerInterface;
 
 /**
@@ -9,14 +10,8 @@ use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByContainer as GroupByContainer
  *
  * Defines a group by element to the query
  */
-class GroupByContainer extends Container implements GroupByContainerInterface
+class GroupByContainer extends GroupByContainerCommon implements GroupByContainerInterface
 {
-    /**
-     * @var GroupByElement[]
-     */
-    protected $list = [];
-
-
     /**
      * @inheritdoc
      */

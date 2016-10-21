@@ -1,24 +1,23 @@
 <?php
 
-namespace OlajosCs\QueryBuilder\MySQL\Statements\Common;
+namespace OlajosCs\QueryBuilder\Common\Statements\Common;
 
-use OlajosCs\QueryBuilder\Contracts\Clauses\WhereContainer as WhereContainerInterface;
+use OlajosCs\QueryBuilder\Contracts\Clauses\WhereContainer;
+use OlajosCs\QueryBuilder\Contracts\Clauses\WhereElement;
 use OlajosCs\QueryBuilder\Contracts\Connection;
 use OlajosCs\QueryBuilder\Contracts\Statements\Common\WhereStatement as WhereStatementInterface;
-use OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer;
-use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
 use OlajosCs\QueryBuilder\Operator;
 
 
 /**
  * Class WhereStatement
  *
- * Parent of all the statements which can have where clauses
+ * Database independent WhereStatement
  */
 abstract class WhereStatement extends Statement implements WhereStatementInterface
 {
     /**
-     * @var WhereContainerInterface
+     * @var WhereContainer
      */
     protected $whereContainer;
 
@@ -28,11 +27,37 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     protected $parameters = [];
 
 
+    /**
+     * Create and return and empty database specific WhereContainer object
+     *
+     * @return WhereContainer
+     */
+    abstract protected function createWhereContainer();
+
+
+    /**
+     * Create and return a database specific WhereElement object
+     *
+     * @param string $field
+     * @param string $operator
+     * @param mixed  $value
+     * @param string $glue
+     *
+     * @return WhereElement
+     */
+    abstract protected function createWhereElement($field, $operator, $value, $glue = WhereElement::GLUE_AND);
+
+
+    /**
+     * Create a new WhereStatement object
+     *
+     * @param Connection $connection
+     */
     public function __construct(Connection $connection)
     {
         parent::__construct($connection);
 
-        $this->whereContainer = new WhereContainer();
+        $this->whereContainer = $this->createWhereContainer();
     }
 
 
@@ -42,7 +67,7 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     public function where($field, $operator, $value)
     {
         $this->whereContainer->add(
-            new WhereElement($field, $operator, $value, WhereElement::GLUE_AND)
+            $this->createWhereElement($field, $operator, $value, WhereElement::GLUE_AND)
         );
 
         return $this;
@@ -55,7 +80,7 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     public function whereOr($field, $operator, $value)
     {
         $this->whereContainer->add(
-            new WhereElement($field, $operator, $value, WhereElement::GLUE_OR)
+            $this->createWhereElement($field, $operator, $value, WhereElement::GLUE_OR)
         );
 
         return $this;
@@ -68,7 +93,7 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     public function whereIn($field, array $values)
     {
         $this->whereContainer->add(
-            new WhereElement($field, Operator::IN, $values)
+            $this->createWhereElement($field, Operator::IN, $values)
         );
 
         return $this;
@@ -81,7 +106,7 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     public function whereNotIn($field, array $values)
     {
         $this->whereContainer->add(
-            new WhereElement($field, Operator::NOTIN, $values)
+            $this->createWhereElement($field, Operator::NOTIN, $values)
         );
 
         return $this;
@@ -94,7 +119,7 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     public function whereBetween($field, $min, $max)
     {
         $this->whereContainer->add(
-            new WhereElement($field, Operator::BETWEEN, [$min, $max])
+            $this->createWhereElement($field, Operator::BETWEEN, [$min, $max])
         );
 
         return $this;
@@ -107,7 +132,7 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     public function whereNull($field)
     {
         $this->whereContainer->add(
-            new WhereElement($field, Operator::IS_NULL, null)
+            $this->createWhereElement($field, Operator::IS_NULL, null)
         );
 
         return $this;
@@ -120,7 +145,7 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     public function whereNotNull($field)
     {
         $this->whereContainer->add(
-            new WhereElement($field, Operator::IS_NOT_NULL, null)
+            $this->createWhereElement($field, Operator::IS_NOT_NULL, null)
         );
 
         return $this;
@@ -133,7 +158,7 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     public function whereNullOr($field)
     {
         $this->whereContainer->add(
-            new WhereElement($field, Operator::IS_NULL, null, WhereElement::GLUE_OR)
+            $this->createWhereElement($field, Operator::IS_NULL, null, WhereElement::GLUE_OR)
         );
 
         return $this;
@@ -146,7 +171,7 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     public function whereNotNullOr($field)
     {
         $this->whereContainer->add(
-            new WhereElement($field, Operator::IS_NOT_NULL, null, WhereElement::GLUE_OR)
+            $this->createWhereElement($field, Operator::IS_NOT_NULL, null, WhereElement::GLUE_OR)
         );
 
         return $this;
@@ -159,24 +184,5 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     public function execute()
     {
         return $this->connection->execute($this->asString(), $this->parameters);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    public function asString()
-    {
-        $query = '';
-        if ($this->whereContainer->has()) {
-            $query = $this->whereContainer->asString();
-
-            $this->parameters = array_merge(
-                $this->parameters,
-                $this->whereContainer->getParameters()
-            );
-        }
-
-        return $query;
     }
 }

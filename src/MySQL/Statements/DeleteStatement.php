@@ -2,24 +2,33 @@
 
 namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
-use OlajosCs\QueryBuilder\Contracts\Statements\DeleteStatement as DeleteStatementInterface;
-use OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement;
+use OlajosCs\QueryBuilder\Common\Statements\DeleteStatement as DeleteStatementCommon;
+use OlajosCs\QueryBuilder\Common\Statements\DeleteStatement as DeleteStatementTrait;
+use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
+use OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer;
 
 /**
  * Class DeleteStatement
  *
  * Defines a delete statement
  */
-class DeleteStatement extends WhereStatement implements DeleteStatementInterface
+class DeleteStatement extends DeleteStatementCommon
 {
     /**
      * @inheritDoc
      */
-    public function from($table)
+    protected function createWhereContainer()
     {
-        $this->table = $table;
+        return new WhereContainer();
+	}
 
-        return $this;
+
+    /**
+     * @inheritDoc
+     */
+    protected function createWhereElement($field, $operator, $value, $glue = WhereElement::GLUE_AND)
+    {
+        return new WhereContainer($field, $operator, $value, $glue);
     }
 
 
@@ -33,7 +42,9 @@ class DeleteStatement extends WhereStatement implements DeleteStatementInterface
             $this->table
         );
 
-        $query .= parent::asString();
+        if ($this->whereContainer->has()) {
+            $query .= $this->whereContainer->asString();
+        }
 
         return $query;
     }

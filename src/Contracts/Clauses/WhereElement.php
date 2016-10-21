@@ -10,6 +10,17 @@ namespace OlajosCs\QueryBuilder\Contracts\Clauses;
 interface WhereElement extends ElementWithBinding
 {
     /**
+     * AND glue between clauses
+     */
+    const GLUE_AND = 'AND';
+
+    /**
+     * OR glue between clauses
+     */
+    const GLUE_OR = 'OR';
+
+
+    /**
      * Return the field name to check
      *
      * @return string
