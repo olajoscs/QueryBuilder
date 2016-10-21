@@ -14,19 +14,8 @@ use OlajosCs\QueryBuilder\Exceptions\RowNotFoundException;
 class ConnectionGetTest extends MySQL
 {
     /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
-    }
-
-
-    /**
      * Test the default get method of the connection class
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::get()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::execute()
      *
      * @return void
      */
@@ -64,9 +53,6 @@ class ConnectionGetTest extends MySQL
     /**
      * Test the get as class method
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::getAsClasses()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::execute()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::bindParameters()
      *
      * @return void
      */
@@ -109,10 +95,6 @@ class ConnectionGetTest extends MySQL
     /**
      * Test when we would like to get only one stdClass
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::getOne()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::execute()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::bindParameters()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::readOne()
      *
      * @return void
      */
@@ -140,10 +122,6 @@ class ConnectionGetTest extends MySQL
     /**
      * Test when more rows found for query then MultipleRowFoundException is thrown
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::getOne()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::execute()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::bindParameters()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::readOne()
      *
      * @return void
      */
@@ -165,10 +143,6 @@ class ConnectionGetTest extends MySQL
     /**
      * Test when no rows found for query then RowNotFoundException is thrown
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::getOne()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::execute()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::bindParameters()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::readOne()
      *
      * @return void
      */
@@ -191,10 +165,6 @@ class ConnectionGetTest extends MySQL
     /**
      * Test when we would like to get only one explicit class
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::getOneClass()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::execute()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::bindParameters()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::readOne()
      *
      * @return void
      */
@@ -219,10 +189,6 @@ class ConnectionGetTest extends MySQL
     /**
      * Test when the result must be only one field
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::getOneField()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::execute()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::bindParameters()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::readOne()
      *
      * @return void
      */
@@ -257,7 +223,6 @@ class ConnectionGetTest extends MySQL
     /**
      * Test when you need an array of the given field
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::getList()
      *
      * @return void
      */
@@ -298,8 +263,6 @@ class ConnectionGetTest extends MySQL
     /**
      * Test when you need an array of stdClasses with a special key
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::getWithKey()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::processWithKey()
      *
      * @return void
      */
@@ -349,8 +312,6 @@ class ConnectionGetTest extends MySQL
     /**
      * Test when you need an array of explicit classes with a special key
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::getClassesWithKey()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::processWithKey()
      *
      * @return void
      */
@@ -396,7 +357,6 @@ class ConnectionGetTest extends MySQL
     /**
      * Test the executing custom query, if the result statement is needed
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::execute()
      *
      * @return void
      */
@@ -414,7 +374,6 @@ class ConnectionGetTest extends MySQL
     /**
      * Test the executing custom query, if the result statement is needed
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::bindParameters()
      *
      * @return void
      */
@@ -474,5 +433,14 @@ class ConnectionGetTest extends MySQL
         );
 
         $this->assertEquals(SampleObject::create('4', '1', 'eeee'), $result);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function setUp()
+    {
+        $this->seed();
     }
 }

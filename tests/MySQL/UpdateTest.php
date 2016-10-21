@@ -11,22 +11,8 @@ namespace OlajosCs\QueryBuilder\MySQL;
 class UpdateTest extends MySQL
 {
     /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
-    }
-
-    /**
      * Test a basic update statement as string
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::update()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::__construct()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::setTable()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::set()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::addValue()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::asString()
      *
      * @return void
      */
@@ -45,9 +31,6 @@ class UpdateTest extends MySQL
      * Test an update statement with where condition
      * Test that only the row which fits the condition is updated
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::where()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::execute()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::asString()
      *
      * @return void
      */
@@ -86,9 +69,6 @@ class UpdateTest extends MySQL
     /**
      * Test an update statement with whereOr condition
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::whereOr()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::execute()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::asString()
      *
      * @return void
      */
@@ -120,9 +100,6 @@ class UpdateTest extends MySQL
     /**
      * Test an update statement with whereOr condition
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::whereIn()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::execute()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::asString()
      *
      * @return void
      */
@@ -133,7 +110,7 @@ class UpdateTest extends MySQL
         $statement = $connection
             ->update('querybuilder_tests')
             ->set(['field' => 'qwer'])
-            ->whereIn('id', [1,2,3,4])
+            ->whereIn('id', [1, 2, 3, 4])
             ->execute();
 
         $this->assertInstanceOf(\PDOStatement::class, $statement);
@@ -175,9 +152,6 @@ class UpdateTest extends MySQL
     /**
      * Test an update statement with whereOr condition
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::whereNotIn()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::execute()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::asString()
      *
      * @return void
      */
@@ -188,7 +162,7 @@ class UpdateTest extends MySQL
         $statement = $connection
             ->update('querybuilder_tests')
             ->set(['field' => 'wert'])
-            ->whereNotIn('id', [5,6,7,8,9])
+            ->whereNotIn('id', [5, 6, 7, 8, 9])
             ->execute();
 
         $this->assertInstanceOf(\PDOStatement::class, $statement);
@@ -197,7 +171,7 @@ class UpdateTest extends MySQL
         $result = $connection
             ->select()
             ->from('querybuilder_tests')
-            ->whereNotIn('id', [5,6,7,8,9])
+            ->whereNotIn('id', [5, 6, 7, 8, 9])
             ->get();
 
         $expected = [
@@ -235,9 +209,6 @@ class UpdateTest extends MySQL
     /**
      * Test an update statement with whereOr condition
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::whereBetween()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::execute()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement::asString()
      *
      * @return void
      */
@@ -279,5 +250,14 @@ class UpdateTest extends MySQL
         ];
 
         $this->assertEquals($expected, $result);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function setUp()
+    {
+        $this->seed();
     }
 }

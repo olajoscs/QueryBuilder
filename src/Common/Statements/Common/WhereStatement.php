@@ -19,7 +19,7 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     /**
      * @var WhereContainer
      */
-    protected $whereContainer;
+    public $whereContainer;
 
     /**
      * @var array The binding parameters for the query

@@ -14,14 +14,6 @@ use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
 class SelectWhereTest extends MySQL
 {
     /**
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::__construct()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::getField()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::getOperator()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::getGlue()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::getValues()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::asString()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::addValue()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::hasArrayOperator()
      *
      * @return void
      */
@@ -44,11 +36,6 @@ class SelectWhereTest extends MySQL
 
 
     /**
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::getParameters()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::add()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::get()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::has()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::asString()
      *
      * @return void
      */
@@ -76,8 +63,6 @@ class SelectWhereTest extends MySQL
     /**
      * Test where conditions
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::where()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::asString()
      *
      * @return void
      */
@@ -97,7 +82,6 @@ class SelectWhereTest extends MySQL
     /**
      * Test where conditions with or
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::whereOr()
      *
      * @return void
      */
@@ -119,10 +103,6 @@ class SelectWhereTest extends MySQL
     /**
      * Tests where in condition
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::whereIn()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::hasArrayOperator()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::__construct()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::asString()
      *
      * @return void
      */
@@ -144,7 +124,6 @@ class SelectWhereTest extends MySQL
     /**
      * Tests where in condition
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::whereNotIn()
      *
      * @return void
      */
@@ -166,9 +145,6 @@ class SelectWhereTest extends MySQL
     /**
      * Tests where between condition
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::whereBetween()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::asString()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::asString()
      *
      * @return void
      */
@@ -190,7 +166,6 @@ class SelectWhereTest extends MySQL
     /**
      * Test that in case of nok glue exception is thrown
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer::asString()
      *
      * @return void
      */
@@ -209,14 +184,7 @@ class SelectWhereTest extends MySQL
     /**
      * Test the where field is null clause
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::__construct()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::hasNullValueOperator()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement::asString()
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::whereNull()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::whereNotNull()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::whereNullOr()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::whereNotNullOr()
      *
      * @return void
      */

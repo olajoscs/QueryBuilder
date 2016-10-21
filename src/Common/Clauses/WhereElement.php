@@ -17,6 +17,7 @@ abstract class WhereElement implements WhereElementInterface
      * @var int Counter of the parameters. Static to be able to iterate between multiple where clauses
      */
     protected static $valueCount = 0;
+
     /**
      * @var array The array operators
      */
@@ -25,6 +26,7 @@ abstract class WhereElement implements WhereElementInterface
         Operator::NOTIN,
         Operator::BETWEEN,
     ];
+
     /**
      * @var array The operators, which does not need any bindig value
      */
@@ -32,22 +34,27 @@ abstract class WhereElement implements WhereElementInterface
         Operator::IS_NULL,
         Operator::IS_NOT_NULL,
     ];
+
     /**
      * @var string The name of the field to check
      */
     protected $field;
+
     /**
      * @var string The operator of the comparison
      */
     protected $operator;
+
     /**
      * @var string The glue before the clause
      */
     protected $glue;
+
     /**
      * @var array The values which have to be given to binding array
      */
     protected $values;
+
     /**
      * @var array Paraméter nevek a query-be
      */

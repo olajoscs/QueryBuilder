@@ -12,17 +12,16 @@ use OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement;
  * Class MysqlTest
  *
  * Tests for the Mysql Connection Class
- * @covers \OlajosCs\QueryBuilder\MySQL\Connection
  */
 class ConnectionTest extends MySQL
 {
     /**
      * Test Connection object
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::select()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::insert()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::update()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::delete()
+
+
+
+
      */
     public function testConnection()
     {

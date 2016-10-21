@@ -15,13 +15,6 @@ class SelectOrderByText extends MySQL
     /**
      * Test a single order by cluase
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement::__construct()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement::getField()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement::getOrder()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement::setOrder()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement::getNullsPosition()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement::setNullsPosition()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement::asString()
      *
      * @return void
      */
@@ -44,10 +37,6 @@ class SelectOrderByText extends MySQL
     /**
      * Test an order by container with order by clauses
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByContainer::add()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByContainer::get()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByContainer::has()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByContainer::asString()
      *
      * @return void
      */
@@ -76,8 +65,6 @@ class SelectOrderByText extends MySQL
     /**
      * Test the order by clause of the select statement
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::orderBy()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::asString()
      *
      * @return void
      */
@@ -99,8 +86,6 @@ class SelectOrderByText extends MySQL
     /**
      * Test when parameter is nok then exception is thrown
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement::__construct()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement::setNullsPosition()
      *
      * @return void
      */
@@ -119,8 +104,6 @@ class SelectOrderByText extends MySQL
     /**
      * Test when parameter is nok then exception is thrown
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement::__construct()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement::setOrder()
      *
      * @return void
      */
@@ -132,6 +115,6 @@ class SelectOrderByText extends MySQL
         $connection
             ->select('id')
             ->from('strings')
-            ->orderBy('id','dasc');
+            ->orderBy('id', 'dasc');
     }
 }

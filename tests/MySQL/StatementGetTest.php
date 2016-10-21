@@ -14,21 +14,8 @@ use OlajosCs\QueryBuilder\Exceptions\FieldNotFoundException;
 class StatementGetTest extends MySQL
 {
     /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
-    }
-
-
-    /**
      * Test the default get method of the connection class
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::get()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\Statement::__construct()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::__construct()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::asString()
      *
      * @return void
      */
@@ -67,7 +54,6 @@ class StatementGetTest extends MySQL
     /**
      * Test the get as class method
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::getAsClasses()
      *
      * @return void
      */
@@ -108,8 +94,6 @@ class StatementGetTest extends MySQL
     /**
      * Test when we would like to get only one stdClass
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::getOne()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::asString()
      *
      * @return void
      */
@@ -135,8 +119,6 @@ class StatementGetTest extends MySQL
     /**
      * Test when we would like to get only one explicit class
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::getOneClass()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::asString()
      *
      * @return void
      */
@@ -157,8 +139,6 @@ class StatementGetTest extends MySQL
     /**
      * Test when the result must be only one field
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::getOneField()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::asString()
      *
      * @return void
      */
@@ -185,8 +165,6 @@ class StatementGetTest extends MySQL
     /**
      * Test when you need an array of the given field
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::getList()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::asString()
      *
      * @return void
      */
@@ -218,8 +196,6 @@ class StatementGetTest extends MySQL
     /**
      * Test when you need an array of stdClasses with a special key
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::getWithKey()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::asString()
      *
      * @return void
      */
@@ -259,8 +235,6 @@ class StatementGetTest extends MySQL
     /**
      * Test when you need an array of explicit classes with a special key
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::getClassesWithKey()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::asString()
      *
      * @return void
      */
@@ -292,7 +266,6 @@ class StatementGetTest extends MySQL
     /**
      * Test the executing custom query, if the result statement is needed
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::execute()
      *
      * @return void
      */
@@ -311,20 +284,8 @@ class StatementGetTest extends MySQL
     /**
      * Test a bit difficultier query
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::from()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::join()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::where()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::orderBy()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::limit()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::offset()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::get()
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::get()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::execute()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::bindParameters()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Connection::select()
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\Common\WhereStatement::asString()
      *
      * @return void
      */
@@ -362,5 +323,14 @@ class StatementGetTest extends MySQL
 
         $this->assertEquals($expected, $result);
 
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function setUp()
+    {
+        $this->seed();
     }
 }

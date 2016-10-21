@@ -16,8 +16,6 @@ class SelectJoinTest extends MySQL
     /**
      * Tests join clause in a full select query
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::join()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::asString()
      *
      * @return void
      */
@@ -35,10 +33,11 @@ class SelectJoinTest extends MySQL
         $this->assertEquals($string, $query->asString());
     }
 
+
     /**
      * Test left join result
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::joinLeft()
+
      */
     public function testLeftJoin()
     {
@@ -54,10 +53,11 @@ class SelectJoinTest extends MySQL
         $this->assertEquals($string, $query->asString());
     }
 
+
     /**
      * Test right join result
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::joinRight()
+
      */
     public function testRightJoin()
     {
@@ -77,14 +77,6 @@ class SelectJoinTest extends MySQL
     /**
      * Test an individual join caluse
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement::__construct()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement::getTableLeft()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement::getTableRight()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement::getOperator()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement::getFieldLeft()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement::getFieldRight()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement::getType()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement::asString()
      *
      * @return void
      */
@@ -106,10 +98,6 @@ class SelectJoinTest extends MySQL
     /**
      * Test an individual join container
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\JoinContainer::has()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\JoinContainer::get()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\JoinContainer::add()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\JoinContainer::asString()
      *
      * @return void
      */

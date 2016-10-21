@@ -33,6 +33,7 @@ class UpdateStatement extends UpdateStatementCommon implements UpdateStatementIn
 
         if ($this->whereContainer->has()) {
             $query .= $this->whereContainer->asString();
+            $this->parameters += $this->whereContainer->getParameters();
         }
 
         return $query;

@@ -2,7 +2,6 @@
 
 namespace OlajosCs\QueryBuilder\MySQL;
 
-
 /**
  * Class DeleteTest
  *
@@ -10,15 +9,6 @@ namespace OlajosCs\QueryBuilder\MySQL;
  */
 class DeleteTest extends MySQL
 {
-    /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
-    }
-
-
     /**
      * Test the deletion of rows
      *
@@ -43,5 +33,14 @@ class DeleteTest extends MySQL
             ->get();
 
         $this->assertEquals([], $result);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function setUp()
+    {
+        $this->seed();
     }
 }

@@ -16,7 +16,7 @@ interface WhereStatement extends Statement
      * @param string $operator One of the Operator constants
      * @param mixed  $value
      *
-     * @return static
+     * @return WhereStatement
      */
     public function where($field, $operator, $value);
 
@@ -28,7 +28,7 @@ interface WhereStatement extends Statement
      * @param string $operator
      * @param mixed  $value
      *
-     * @return static
+     * @return WhereStatement
      */
     public function whereOr($field, $operator, $value);
 
@@ -39,7 +39,7 @@ interface WhereStatement extends Statement
      * @param string $field
      * @param array  $values
      *
-     * @return static
+     * @return WhereStatement
      */
     public function whereIn($field, array $values);
 
@@ -50,7 +50,7 @@ interface WhereStatement extends Statement
      * @param string $field
      * @param array  $values
      *
-     * @return static
+     * @return WhereStatement
      */
     public function whereNotIn($field, array $values);
 
@@ -62,7 +62,7 @@ interface WhereStatement extends Statement
      * @param mixed  $min
      * @param mixed  $max
      *
-     * @return static
+     * @return WhereStatement
      */
     public function whereBetween($field, $min, $max);
 
@@ -72,7 +72,7 @@ interface WhereStatement extends Statement
      *
      * @param string $field
      *
-     * @return static
+     * @return WhereStatement
      */
     public function whereNull($field);
 
@@ -82,7 +82,7 @@ interface WhereStatement extends Statement
      *
      * @param string $field
      *
-     * @return static
+     * @return WhereStatement
      */
     public function whereNotNull($field);
 
@@ -92,7 +92,7 @@ interface WhereStatement extends Statement
      *
      * @param string $field
      *
-     * @return static
+     * @return WhereStatement
      */
     public function whereNullOr($field);
 
@@ -102,7 +102,7 @@ interface WhereStatement extends Statement
      *
      * @param string $field
      *
-     * @return static
+     * @return WhereStatement
      */
     public function whereNotNullOr($field);
 }

@@ -39,6 +39,7 @@ class SelectStatement extends SelectStatementCommon implements SelectStatementIn
 
         if ($this->whereContainer->has()) {
             $query .= $this->whereContainer->asString();
+            $this->parameters += $this->whereContainer->getParameters();
         }
 
         if ($this->orderByContainer->has()) {

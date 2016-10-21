@@ -5,17 +5,6 @@ namespace OlajosCs\QueryBuilder\MySQL;
 abstract class MySQL extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Return a connection based on the config file
-     *
-     * @return Connection
-     */
-    protected function getConnection()
-    {
-        return ConnectionInstance::get();
-    }
-
-
-    /**
      * Seed the database with dummy data
      *
      * @return void
@@ -80,9 +69,20 @@ abstract class MySQL extends \PHPUnit_Framework_TestCase
 
 
     /**
+     * Return a connection based on the config file
      *
+     * @return Connection
+     */
+    protected function getConnection()
+    {
+        return ConnectionInstance::get();
+    }
+
+
+    /**
+     * Generate dummy objects for database seeding
      *
-     * @return array
+     * @return \stdClass[]
      */
     protected function getObjects()
     {
@@ -95,7 +95,7 @@ abstract class MySQL extends \PHPUnit_Framework_TestCase
             $return[] = (object)[
                 'id' . $i    => $i,
                 'lang' . $i  => $lang,
-                'field' . $i => str_repeat($letters[$i], 4)
+                'field' . $i => str_repeat($letters[$i], 4),
             ];
         }
 

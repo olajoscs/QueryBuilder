@@ -15,9 +15,6 @@ class SelectGroupByTest extends MySQL
     /**
      * Test a single group by element
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\GroupByElement::__construct()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\GroupByElement::getField()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\GroupByElement::asString()
      *
      * @return void
      */
@@ -33,10 +30,6 @@ class SelectGroupByTest extends MySQL
     /**
      * Test a group by container
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\GroupByContainer::add()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\GroupByContainer::get()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\GroupByContainer::has
-     * @covers \OlajosCs\QueryBuilder\MySQL\Clauses\GroupByContainer::asString()
      *
      * @return void
      */
@@ -63,8 +56,6 @@ class SelectGroupByTest extends MySQL
     /**
      * Test group by in select statement
      *
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::groupBy()
-     * @covers \OlajosCs\QueryBuilder\MySQL\Statements\SelectStatement::asString()
      *
      * @return void
      */

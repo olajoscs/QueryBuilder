@@ -3,9 +3,8 @@
 namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
 use OlajosCs\QueryBuilder\Common\Statements\DeleteStatement as DeleteStatementCommon;
-use OlajosCs\QueryBuilder\Common\Statements\DeleteStatement as DeleteStatementTrait;
-use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer;
+use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
 
 /**
  * Class DeleteStatement
@@ -20,7 +19,7 @@ class DeleteStatement extends DeleteStatementCommon
     protected function createWhereContainer()
     {
         return new WhereContainer();
-	}
+    }
 
 
     /**
@@ -28,7 +27,7 @@ class DeleteStatement extends DeleteStatementCommon
      */
     protected function createWhereElement($field, $operator, $value, $glue = WhereElement::GLUE_AND)
     {
-        return new WhereContainer($field, $operator, $value, $glue);
+        return new WhereElement($field, $operator, $value, $glue);
     }
 
 
@@ -44,6 +43,7 @@ class DeleteStatement extends DeleteStatementCommon
 
         if ($this->whereContainer->has()) {
             $query .= $this->whereContainer->asString();
+            $this->parameters += $this->whereContainer->getParameters();
         }
 
         return $query;

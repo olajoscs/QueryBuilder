@@ -11,15 +11,6 @@ namespace OlajosCs\QueryBuilder\MySQL;
 class InsertTest extends MySQL
 {
     /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
-    }
-
-
-    /**
      * Test insert statements then check the results
      *
      * @return void
@@ -67,6 +58,15 @@ class InsertTest extends MySQL
             ->getOneField('counter');
 
         $this->assertEquals(12, $result);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function setUp()
+    {
+        $this->seed();
     }
 
 }
