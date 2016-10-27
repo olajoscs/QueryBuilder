@@ -2,8 +2,8 @@
 
 namespace OlajosCs\QueryBuilder\Common;
 
-use OlajosCs\QueryBuilder\Common\Statements\InsertStatement;
 use OlajosCs\QueryBuilder\Contracts\Connection as ConnectionInterface;
+use OlajosCs\QueryBuilder\Contracts\Statements\InsertStatement;
 use OlajosCs\QueryBuilder\Contracts\Statements\DeleteStatement;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement;
 use OlajosCs\QueryBuilder\Contracts\Statements\UpdateStatement;
