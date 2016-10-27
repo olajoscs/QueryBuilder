@@ -14,6 +14,7 @@ use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
 class SelectWhereTest extends MySQL
 {
     /**
+     * Test a basic where clause
      *
      * @return void
      */
@@ -36,6 +37,7 @@ class SelectWhereTest extends MySQL
 
 
     /**
+     * Test a Where container
      *
      * @return void
      */
@@ -45,7 +47,6 @@ class SelectWhereTest extends MySQL
         $where1 = new WhereElement($whereContainer, 'id', '>', 1);
         $where2 = new WhereElement($whereContainer, 'id', '=', 2, WhereElement::GLUE_OR);
 
-        $whereContainer = new WhereContainer();
         $whereContainer->add($where1);
         $whereContainer->add($where2);
 
@@ -64,7 +65,6 @@ class SelectWhereTest extends MySQL
     /**
      * Test where conditions
      *
-     *
      * @return void
      */
     public function testWhere()
@@ -82,7 +82,6 @@ class SelectWhereTest extends MySQL
 
     /**
      * Test where conditions with or
-     *
      *
      * @return void
      */
@@ -104,7 +103,6 @@ class SelectWhereTest extends MySQL
     /**
      * Tests where in condition
      *
-     *
      * @return void
      */
     public function testWhereIn()
@@ -124,7 +122,6 @@ class SelectWhereTest extends MySQL
 
     /**
      * Tests where in condition
-     *
      *
      * @return void
      */
@@ -146,7 +143,6 @@ class SelectWhereTest extends MySQL
     /**
      * Tests where between condition
      *
-     *
      * @return void
      */
     public function testWhereBetween()
@@ -167,7 +163,6 @@ class SelectWhereTest extends MySQL
     /**
      * Test that in case of nok glue exception is thrown
      *
-     *
      * @return void
      */
     public function testInvalidGlue()
@@ -184,8 +179,6 @@ class SelectWhereTest extends MySQL
 
     /**
      * Test the where field is null clause
-     *
-     *
      *
      * @return void
      */

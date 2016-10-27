@@ -18,10 +18,7 @@ class ConnectionTest extends MySQL
     /**
      * Test Connection object
      *
-
-
-
-
+     * @return void
      */
     public function testConnection()
     {

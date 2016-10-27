@@ -16,7 +16,6 @@ class SelectJoinTest extends MySQL
     /**
      * Tests join clause in a full select query
      *
-     *
      * @return void
      */
     public function testInnerJoin()
@@ -37,7 +36,7 @@ class SelectJoinTest extends MySQL
     /**
      * Test left join result
      *
-
+     * @return void
      */
     public function testLeftJoin()
     {
@@ -57,7 +56,7 @@ class SelectJoinTest extends MySQL
     /**
      * Test right join result
      *
-
+     * @return void
      */
     public function testRightJoin()
     {
@@ -76,7 +75,6 @@ class SelectJoinTest extends MySQL
 
     /**
      * Test an individual join caluse
-     *
      *
      * @return void
      */
@@ -97,7 +95,6 @@ class SelectJoinTest extends MySQL
 
     /**
      * Test an individual join container
-     *
      *
      * @return void
      */

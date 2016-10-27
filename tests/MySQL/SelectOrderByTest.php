@@ -15,7 +15,6 @@ class SelectOrderByText extends MySQL
     /**
      * Test a single order by cluase
      *
-     *
      * @return void
      */
     public function testOrderBy()
@@ -36,7 +35,6 @@ class SelectOrderByText extends MySQL
 
     /**
      * Test an order by container with order by clauses
-     *
      *
      * @return void
      */
@@ -65,7 +63,6 @@ class SelectOrderByText extends MySQL
     /**
      * Test the order by clause of the select statement
      *
-     *
      * @return void
      */
     public function testOrderByInSelect()
@@ -86,7 +83,6 @@ class SelectOrderByText extends MySQL
     /**
      * Test when parameter is nok then exception is thrown
      *
-     *
      * @return void
      */
     public function testInvalidNullsPosition()
@@ -103,7 +99,6 @@ class SelectOrderByText extends MySQL
 
     /**
      * Test when parameter is nok then exception is thrown
-     *
      *
      * @return void
      */

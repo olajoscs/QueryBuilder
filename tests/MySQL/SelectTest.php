@@ -12,7 +12,6 @@ class SelectTest extends MySQL
     /**
      * Testing selcect from and asString
      *
-     *
      * @return void
      */
     public function testSelect()
@@ -47,7 +46,6 @@ class SelectTest extends MySQL
     /**
      * Test if invalid limit is given, exception is thrown
      *
-     *
      * @return void
      */
     public function testInvalidLimit()
@@ -61,7 +59,6 @@ class SelectTest extends MySQL
 
     /**
      * Test if invalid offset is given, exception is thrown
-     *
      *
      * @return void
      */

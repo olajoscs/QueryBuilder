@@ -4,13 +4,10 @@ namespace OlajosCs\QueryBuilder\Common\Statements;
 
 use OlajosCs\QueryBuilder\Common\Statements\Common\WhereStatement;
 use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByContainer;
-use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByContainer as GroupByContainerInterface;
 use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByElement;
 use OlajosCs\QueryBuilder\Contracts\Clauses\JoinContainer;
-use OlajosCs\QueryBuilder\Contracts\Clauses\JoinContainer as JoinContainerInterface;
 use OlajosCs\QueryBuilder\Contracts\Clauses\JoinElement;
 use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByContainer;
-use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByContainer as OrderByContainerInterface;
 use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByElement;
 use OlajosCs\QueryBuilder\Contracts\Connection;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
@@ -40,17 +37,17 @@ abstract class SelectStatement extends WhereStatement implements SelectStatement
     protected $offset;
 
     /**
-     * @var JoinContainerInterface
+     * @var JoinContainer
      */
     protected $joinContainer;
 
     /**
-     * @var OrderByContainerInterface
+     * @var OrderByContainer
      */
     protected $orderByContainer;
 
     /**
-     * @var GroupByContainerInterface
+     * @var GroupByContainer
      */
     protected $groupByContainer;
 

@@ -13,7 +13,6 @@ class UpdateTest extends MySQL
     /**
      * Test a basic update statement as string
      *
-     *
      * @return void
      */
     public function testUpdateClause()
@@ -30,7 +29,6 @@ class UpdateTest extends MySQL
     /**
      * Test an update statement with where condition
      * Test that only the row which fits the condition is updated
-     *
      *
      * @return void
      */
@@ -69,7 +67,6 @@ class UpdateTest extends MySQL
     /**
      * Test an update statement with whereOr condition
      *
-     *
      * @return void
      */
     public function testUpdateWhereOr()
@@ -99,7 +96,6 @@ class UpdateTest extends MySQL
 
     /**
      * Test an update statement with whereOr condition
-     *
      *
      * @return void
      */
@@ -151,7 +147,6 @@ class UpdateTest extends MySQL
 
     /**
      * Test an update statement with whereOr condition
-     *
      *
      * @return void
      */
@@ -208,7 +203,6 @@ class UpdateTest extends MySQL
 
     /**
      * Test an update statement with whereOr condition
-     *
      *
      * @return void
      */

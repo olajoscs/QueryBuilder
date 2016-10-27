@@ -15,7 +15,6 @@ class SelectGroupByTest extends MySQL
     /**
      * Test a single group by element
      *
-     *
      * @return void
      */
     public function testGroupBy()
@@ -29,7 +28,6 @@ class SelectGroupByTest extends MySQL
 
     /**
      * Test a group by container
-     *
      *
      * @return void
      */
@@ -55,7 +53,6 @@ class SelectGroupByTest extends MySQL
 
     /**
      * Test group by in select statement
-     *
      *
      * @return void
      */

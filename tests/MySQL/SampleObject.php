@@ -6,7 +6,7 @@ namespace OlajosCs\QueryBuilder\MySQL;
 /**
  * Class SampleObject
  *
- *
+ * A small object to test the query builder
  */
 class SampleObject
 {
@@ -20,6 +20,15 @@ class SampleObject
     }
 
 
+    /**
+     * Create a test object
+     *
+     * @param int    $id
+     * @param int    $languageId
+     * @param string $field
+     *
+     * @return SampleObject
+     */
     public static function create($id, $languageId, $field)
     {
         $object = new SampleObject();

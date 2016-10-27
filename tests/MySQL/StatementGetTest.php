@@ -16,7 +16,6 @@ class StatementGetTest extends MySQL
     /**
      * Test the default get method of the connection class
      *
-     *
      * @return void
      */
     public function testGet()
@@ -53,7 +52,6 @@ class StatementGetTest extends MySQL
 
     /**
      * Test the get as class method
-     *
      *
      * @return void
      */
@@ -94,7 +92,6 @@ class StatementGetTest extends MySQL
     /**
      * Test when we would like to get only one stdClass
      *
-     *
      * @return void
      */
     public function testGetOne()
@@ -119,7 +116,6 @@ class StatementGetTest extends MySQL
     /**
      * Test when we would like to get only one explicit class
      *
-     *
      * @return void
      */
     public function testGetOneClass()
@@ -138,7 +134,6 @@ class StatementGetTest extends MySQL
 
     /**
      * Test when the result must be only one field
-     *
      *
      * @return void
      */
@@ -164,7 +159,6 @@ class StatementGetTest extends MySQL
 
     /**
      * Test when you need an array of the given field
-     *
      *
      * @return void
      */
@@ -195,7 +189,6 @@ class StatementGetTest extends MySQL
 
     /**
      * Test when you need an array of stdClasses with a special key
-     *
      *
      * @return void
      */
@@ -235,7 +228,6 @@ class StatementGetTest extends MySQL
     /**
      * Test when you need an array of explicit classes with a special key
      *
-     *
      * @return void
      */
     public function testGetClassesWithKey()
@@ -266,7 +258,6 @@ class StatementGetTest extends MySQL
     /**
      * Test the executing custom query, if the result statement is needed
      *
-     *
      * @return void
      */
     public function testExecute()
@@ -283,9 +274,6 @@ class StatementGetTest extends MySQL
 
     /**
      * Test a bit difficultier query
-     *
-     *
-     *
      *
      * @return void
      */
