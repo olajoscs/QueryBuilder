@@ -2,7 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\Common\Clauses;
 
-use OlajosCs\QueryBuilder\Contracts\Clauses\WhereContainer;
+use OlajosCs\QueryBuilder\Contracts\Clauses\WhereContainer as WhereContainerInterface;
 use OlajosCs\QueryBuilder\Contracts\Clauses\WhereElement as WhereElementInterface;
 use OlajosCs\QueryBuilder\Operator;
 
@@ -16,7 +16,7 @@ use OlajosCs\QueryBuilder\Operator;
 abstract class WhereElement implements WhereElementInterface
 {
     /**
-     * @var WhereContainer Counter of the parameters
+     * @var WhereContainerInterface Counter of the parameters
      */
     protected $whereContainer;
 
@@ -66,13 +66,13 @@ abstract class WhereElement implements WhereElementInterface
     /**
      * WhereElement constructor.
      *
-     * @param WhereContainer $whereContainer
-     * @param string         $field
-     * @param string         $operator
-     * @param mixed          $value
-     * @param string         $glue
+     * @param WhereContainerInterface $whereContainer
+     * @param string                  $field
+     * @param string                  $operator
+     * @param mixed                   $value
+     * @param string                  $glue
      */
-    public function __construct(WhereContainer $whereContainer, $field, $operator, $value, $glue = self::GLUE_AND)
+    public function __construct(WhereContainerInterface $whereContainer, $field, $operator, $value, $glue = self::GLUE_AND)
     {
         $this->whereContainer = $whereContainer;
         $this->field          = $field;
