@@ -2,6 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\Common\Clauses;
 
+use OlajosCs\QueryBuilder\Contracts\Clauses\WhereContainer;
 use OlajosCs\QueryBuilder\Contracts\Clauses\WhereElement as WhereElementInterface;
 use OlajosCs\QueryBuilder\Operator;
 

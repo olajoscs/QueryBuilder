@@ -164,12 +164,14 @@ abstract class SelectStatement extends WhereStatement implements SelectStatement
     public function join($tableRight, $fieldRight, $operator, $fieldLeft, $tableLeft = null)
     {
         $this->joinContainer->add(
-            $this->createJoinElement($tableLeft ?: $this->table,
-                                     $fieldLeft,
-                                     $operator,
-                                     $tableRight,
-                                     $fieldRight,
-                                     JoinElement::TYPE_INNER)
+            $this->createJoinElement(
+                $tableLeft ?: $this->table,
+                $fieldLeft,
+                $operator,
+                $tableRight,
+                $fieldRight,
+                JoinElement::TYPE_INNER
+            )
         );
 
         return $this;
