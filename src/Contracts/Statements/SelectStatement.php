@@ -201,4 +201,67 @@ interface SelectStatement extends WhereStatement
      * @return array[]
      */
     public function getClassesWithKey($class, array $constructorParameters = [], $keyField);
+
+
+    /**
+     * @inheritdoc
+     * @return SelectStatement
+     */
+    public function where($field, $operator, $value);
+
+
+    /**
+     * @inheritdoc
+     * @return SelectStatement
+     */
+    public function whereOr($field, $operator, $value);
+
+
+    /**
+     * @inheritdoc
+     * @return SelectStatement
+     */
+    public function whereIn($field, array $values);
+
+
+    /**
+     * @inheritdoc
+     * @return SelectStatement
+     */
+    public function whereNotIn($field, array $values);
+
+
+    /**
+     * @inheritdoc
+     * @return SelectStatement
+     */
+    public function whereBetween($field, $min, $max);
+
+
+    /**
+     * @inheritdoc
+     * @return SelectStatement
+     */
+    public function whereNull($field);
+
+
+    /**
+     * @inheritdoc
+     * @return SelectStatement
+     */
+    public function whereNotNull($field);
+
+
+    /**
+     * @inheritdoc
+     * @return SelectStatement
+     */
+    public function whereNullOr($field);
+
+
+    /**
+     * @inheritdoc
+     * @return SelectStatement
+     */
+    public function whereNotNullOr($field);
 }

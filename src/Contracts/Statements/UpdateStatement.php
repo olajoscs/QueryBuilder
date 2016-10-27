@@ -30,4 +30,67 @@ interface UpdateStatement extends WhereStatement
      * @return UpdateStatement
      */
     public function setTable($table);
+
+
+    /**
+     * @inheritdoc
+     * @return UpdateStatement
+     */
+    public function where($field, $operator, $value);
+
+
+    /**
+     * @inheritdoc
+     * @return UpdateStatement
+     */
+    public function whereOr($field, $operator, $value);
+
+
+    /**
+     * @inheritdoc
+     * @return UpdateStatement
+     */
+    public function whereIn($field, array $values);
+
+
+    /**
+     * @inheritdoc
+     * @return UpdateStatement
+     */
+    public function whereNotIn($field, array $values);
+
+
+    /**
+     * @inheritdoc
+     * @return UpdateStatement
+     */
+    public function whereBetween($field, $min, $max);
+
+
+    /**
+     * @inheritdoc
+     * @return UpdateStatement
+     */
+    public function whereNull($field);
+
+
+    /**
+     * @inheritdoc
+     * @return UpdateStatement
+     */
+    public function whereNotNull($field);
+
+
+    /**
+     * @inheritdoc
+     * @return UpdateStatement
+     */
+    public function whereNullOr($field);
+
+
+    /**
+     * @inheritdoc
+     * @return UpdateStatement
+     */
+    public function whereNotNullOr($field);
 }
