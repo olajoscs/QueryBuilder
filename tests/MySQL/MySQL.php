@@ -75,7 +75,7 @@ abstract class MySQL extends \PHPUnit_Framework_TestCase
      */
     protected function getConnection()
     {
-        return ConnectionInstance::get();
+        return ConnectionFactory::get('mysql');
     }
 
 
