@@ -1,10 +1,10 @@
 <?php
 
-namespace OlajosCs\QueryBuilder\MySQL;
+namespace OlajosCs\QueryBuilder\PostgreSQL;
 
 use OlajosCs\QueryBuilder\ConnectionFactory;
 
-abstract class MySQL extends \PHPUnit_Framework_TestCase
+abstract class PostgreSQL extends \PHPUnit_Framework_TestCase
 {
     /**
      * Seed the database with dummy data
@@ -17,16 +17,16 @@ abstract class MySQL extends \PHPUnit_Framework_TestCase
 
         $connection->prepare(
             'CREATE TABLE IF NOT EXISTS querybuilder_test_languages (
-                  id INT,
-                  code VARCHAR(2)
+                  "id" INT,
+                  "code" VARCHAR(2)
             )'
         )->execute();
 
         $connection->prepare(
             'CREATE TABLE IF NOT EXISTS querybuilder_tests (
-                id INT,
-                languageId INT,
-                field VARCHAR(5)
+                "id" INT,
+                "languageId" INT,
+                "field" VARCHAR(5)
             )'
         )->execute();
 
@@ -35,7 +35,7 @@ abstract class MySQL extends \PHPUnit_Framework_TestCase
 
         $statement = $connection->prepare(
             'INSERT INTO querybuilder_test_languages (
-                id, code
+                "id", "code"
             ) VALUES 
             (:id1, :code1), 
             (:id2, :code2)'
@@ -49,7 +49,7 @@ abstract class MySQL extends \PHPUnit_Framework_TestCase
         $statement->execute();
 
         $sql = 'INSERT INTO querybuilder_tests (
-                id, languageId, field
+                "id", "languageId", "field"
             ) VALUES';
 
         $binding = [];
@@ -77,7 +77,7 @@ abstract class MySQL extends \PHPUnit_Framework_TestCase
      */
     protected function getConnection()
     {
-        return ConnectionFactory::get('mysql');
+        return ConnectionFactory::get('pgsql');
     }
 
 

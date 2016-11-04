@@ -2,6 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\Contracts;
 
+use OlajosCs\QueryBuilder\Contracts\Statements\UpdateStatement;
 use OlajosCs\QueryBuilder\Exceptions\FieldNotFoundException;
 use OlajosCs\QueryBuilder\Exceptions\MultipleRowFoundException;
 use OlajosCs\QueryBuilder\Exceptions\RowNotFoundException;
@@ -24,7 +25,11 @@ interface Connection
 
 
     /**
-     * @inheritdoc
+     * Create an update statement
+     *
+     * @param string $table
+     *
+     * @return UpdateStatement
      */
     public function update($table);
 

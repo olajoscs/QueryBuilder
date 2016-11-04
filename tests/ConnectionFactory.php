@@ -1,6 +1,8 @@
 <?php
 
-namespace OlajosCs\QueryBuilder\MySQL;
+namespace OlajosCs\QueryBuilder;
+
+use OlajosCs\QueryBuilder\MySQL\Connection;
 
 /**
  * Class ConnectionFactory
@@ -32,13 +34,20 @@ class ConnectionFactory
         if (!isset(self::$instances[$type])) {
 
             if (self::$config === null) {
-                self::$config = require_once(__DIR__ . '/../../config/config.php');
+                self::$config = require_once(__DIR__ . '/../config/config.php');
             }
 
             $config = self::$config[$type];
+            $class = $config['class'];
 
-            self::$instances[$type] = new Connection(
-                $config['type'] . ':host=' . $config['host'] . ';dbname=' . $config['database'] . ';charset=' . $config['charset'],
+            $dsn = "{$config['type']}:host={$config['host']};dbname={$config['database']};";
+
+            if (isset($config['charset'])) {
+                $dsn .= 'charset=' . $config['charset'];
+            }
+
+            self::$instances[$type] = new $class(
+                $dsn,
                 $config['user'],
                 $config['password'],
                 $config['options']
