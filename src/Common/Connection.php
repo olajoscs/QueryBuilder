@@ -305,4 +305,29 @@ abstract class Connection extends \PDO implements ConnectionInterface
 
         return $result;
     }
+
+
+    /**
+     * Run the callable in a transaction. In case of failure changes are rollbacked.
+     *
+     * @param callable $callable A callable function with no parameters
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function transaction(callable $callable)
+    {
+        $this->beginTransaction();
+
+        try {
+            $result = $callable();
+        } catch (\Exception $e) {
+            $this->rollBack();
+            throw $e;
+        }
+
+        $this->commit();
+
+        return $result;
+    }
 }
