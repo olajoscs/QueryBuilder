@@ -17,7 +17,14 @@ class OrderByElement extends OrderByElementCommon implements OrderByElementInter
      */
     public function asString()
     {
-        if ($this->nullsPosition === self::NULLS_LAST) {
+        if ($this->nullsPosition === null) {
+            $this->nullsPosition = $this->order === self::ORDER_ASC ? self::NULLS_LAST : self::NULLS_FIRST;
+        }
+
+        if (
+            ($this->order === self::ORDER_DESC && $this->nullsPosition === self::NULLS_LAST) ||
+            ($this->order === self::ORDER_ASC && $this->nullsPosition === self::NULLS_FIRST)
+        ) {
             $this->field         = '-' . $this->field;
             $this->order         = self::ORDER_ASC ? self::ORDER_DESC : self::ORDER_ASC;
             $this->nullsPosition = self::NULLS_FIRST;

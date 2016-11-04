@@ -22,7 +22,7 @@ class SelectOrderByText extends MySQL
         $orderBy = new OrderByElement('strings');
         $this->assertEquals('strings', $orderBy->getField());
         $this->assertEquals(OrderByElement::ORDER_ASC, $orderBy->getOrder());
-        $this->assertEquals(OrderByElement::NULLS_FIRST, $orderBy->getNullsPosition());
+        $this->assertEquals(null, $orderBy->getNullsPosition());
         $this->assertEquals('strings ASC', $orderBy->asString());
 
         $orderBy = new OrderByElement('id', OrderByElement::ORDER_DESC, OrderByElement::NULLS_LAST);

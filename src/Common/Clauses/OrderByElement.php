@@ -25,7 +25,7 @@ abstract class OrderByElement implements OrderByElementInterface
     /**
      * @var string The position of null fields
      */
-    protected $nullsPosition = self::NULLS_FIRST;
+    protected $nullsPosition;
 
 
     /**
