@@ -28,7 +28,8 @@ class TransactionTest extends PostgreSQL
             $connection->transaction(function() use ($connection) {
                 $connection
                     ->insert()
-                    ->into('querybuilder_tests')->values(
+                    ->into('querybuilder_tests')
+                    ->values(
                         [
                             'id'         => 1234,
                             'languageId' => 1,
@@ -71,7 +72,8 @@ class TransactionTest extends PostgreSQL
         $connection->transaction(function() use ($connection) {
             $connection
                 ->insert()
-                ->into('querybuilder_tests')->values(
+                ->into('querybuilder_tests')
+                ->values(
                     [
                         'id'         => 1234,
                         'languageId' => 1,
