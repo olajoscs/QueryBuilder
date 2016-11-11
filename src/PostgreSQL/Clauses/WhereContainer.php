@@ -18,17 +18,17 @@ class WhereContainer extends WhereContainerCommon
      */
     public function asString()
     {
-        $and   = [];
-        $or    = [];
+        $andList   = [];
+        $orList    = [];
         $query = ' WHERE ';
 
         foreach ($this->list as $clause) {
             switch ($clause->getGlue()) {
                 case WhereElement::GLUE_AND:
-                    $and[] = $clause->asString();
+                    $andList[] = $clause->asString();
                     break;
                 case WhereElement::GLUE_OR:
-                    $or[] = $clause->asString();
+                    $orList[] = $clause->asString();
                     break;
                 default:
                     throw new InvalidGlueException('Invalid glue to where: ' . $clause->getGlue());
@@ -37,16 +37,16 @@ class WhereContainer extends WhereContainerCommon
             $this->parameters = array_merge($this->parameters, $clause->getValues());
         }
 
-        if (!empty($and)) {
-            $query .= implode(' ' . WhereElement::GLUE_AND . ' ', $and);
+        if (!empty($andList)) {
+            $query .= implode(' ' . WhereElement::GLUE_AND . ' ', $andList);
         }
 
-        if (!empty($or)) {
-            if (!empty($and)) {
+        if (!empty($orList)) {
+            if (!empty($andList)) {
                 $query .= ' ' . WhereElement::GLUE_OR . ' ';
             }
 
-            $query .= implode(' ' . WhereElement::GLUE_OR . ' ', $or);
+            $query .= implode(' ' . WhereElement::GLUE_OR . ' ', $orList);
         }
 
         return $query;

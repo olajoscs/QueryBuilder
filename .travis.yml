@@ -3,13 +3,11 @@ php:
   - '5.6'
   - '7.0'
   - '7.1'
-  - hhvm
 services:
   - mysql
   - postgresql
 before_script:
   - composer self-update
-  - composer remove phpmd/phpmd
   - composer install --prefer-source --no-interaction
   - cp config/config.sample.php config/config.php
   - mysql -e 'create database sample_database;'
