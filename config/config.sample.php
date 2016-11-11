@@ -8,8 +8,8 @@ return [
         'type'     => 'mysql',
         'host'     => 'localhost',
         'database' => 'sample_database',
-        'user'     => 'sample_user',
-        'password' => 'sample_password',
+        'user'     => 'travis',
+        'password' => '',
         'charset'  => 'utf8',
         'options'  => [
             PDO::ATTR_PERSISTENT         => true,
@@ -23,8 +23,8 @@ return [
         'type'     => 'pgsql',
         'host'     => 'localhost',
         'database' => 'sample_database',
-        'user'     => 'sample_user',
-        'password' => 'sample_password',
+        'user'     => 'travis',
+        'password' => '',
         'options'  => [
             PDO::ATTR_PERSISTENT         => true,
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
