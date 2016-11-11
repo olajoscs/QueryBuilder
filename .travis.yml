@@ -10,6 +10,7 @@ services:
   - postgresql
 before_script:
   - composer self-update
+  - composer remove phpmd/phpmd
   - composer install --prefer-source --no-interaction
   - cp config/config.sample.php config/config.php
   - mysql -e 'create database sample_database;'
