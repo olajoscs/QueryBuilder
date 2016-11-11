@@ -8,7 +8,7 @@ namespace OlajosCs\QueryBuilder\Exceptions;
  *
  * Exception for finding more rows than 1 in the result of a one-row-query
  */
-class MultipleRowFoundException extends \PDOException
+class MultipleRowFoundException extends QueryBuilderException
 {
 
 }

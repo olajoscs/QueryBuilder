@@ -7,7 +7,7 @@ namespace OlajosCs\QueryBuilder\Exceptions;
  *
  * Exception when a field is not found in the result of a query
  */
-class FieldNotFoundException extends \Exception
+class FieldNotFoundException extends QueryBuilderException
 {
 
 }
