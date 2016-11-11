@@ -3,8 +3,6 @@
 namespace OlajosCs\QueryBuilder\Common;
 
 use OlajosCs\QueryBuilder\Contracts\Connection as ConnectionInterface;
-use OlajosCs\QueryBuilder\Contracts\Expression;
-use OlajosCs\QueryBuilder\Contracts\RawExpression;
 use OlajosCs\QueryBuilder\Contracts\Statements\InsertStatement;
 use OlajosCs\QueryBuilder\Contracts\Statements\DeleteStatement;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement;

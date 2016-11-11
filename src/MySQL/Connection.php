@@ -3,7 +3,6 @@
 namespace OlajosCs\QueryBuilder\MySQL;
 
 use OlajosCs\QueryBuilder\Common\Connection as ConnectionCommon;
-use OlajosCs\QueryBuilder\Contracts\Connection as ConnectionInterface;
 use OlajosCs\QueryBuilder\MySQL\Statements;
 
 /**
@@ -11,7 +10,7 @@ use OlajosCs\QueryBuilder\MySQL\Statements;
  *
  * Defines a Mysql Connection based on PDO
  */
-class Connection extends ConnectionCommon implements ConnectionInterface
+class Connection extends ConnectionCommon
 {
     /**
      * @inheritDoc

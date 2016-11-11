@@ -3,14 +3,13 @@
 namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
 use OlajosCs\QueryBuilder\Common\Clauses\JoinElement as JoinElementCommon;
-use OlajosCs\QueryBuilder\Contracts\Clauses\JoinElement as JoinElementInterface;
 
 /**
  * Class JoinElement
  *
  * Define a join element
  */
-class JoinElement extends JoinElementCommon implements JoinElementInterface
+class JoinElement extends JoinElementCommon
 {
     /**
      * @inheritdoc

@@ -3,7 +3,6 @@
 namespace OlajosCs\QueryBuilder\MySQL\Clauses;
 
 use OlajosCs\QueryBuilder\Common\Clauses\WhereElement as WhereElementCommon;
-use OlajosCs\QueryBuilder\Contracts\Clauses\WhereElement as WhereElementInterface;
 use OlajosCs\QueryBuilder\Operator;
 
 /**
@@ -11,7 +10,7 @@ use OlajosCs\QueryBuilder\Operator;
  *
  * Represents a where statement
  */
-class WhereElement extends WhereElementCommon implements WhereElementInterface
+class WhereElement extends WhereElementCommon
 {
     /**
      * @inheritdoc

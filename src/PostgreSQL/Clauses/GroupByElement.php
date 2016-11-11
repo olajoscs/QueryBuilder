@@ -3,7 +3,6 @@
 namespace OlajosCs\QueryBuilder\PostgreSQL\Clauses;
 
 use OlajosCs\QueryBuilder\Common\Clauses\GroupByElement as GroupByElementCommon;
-use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByElement as GroupByElementInterface;
 use OlajosCs\QueryBuilder\PostgreSQL\NameNormalizer;
 
 /**
@@ -11,7 +10,7 @@ use OlajosCs\QueryBuilder\PostgreSQL\NameNormalizer;
  *
  * Defines a group by element to the query
  */
-class GroupByElement extends GroupByElementCommon implements GroupByElementInterface
+class GroupByElement extends GroupByElementCommon
 {
     use NameNormalizer;
 

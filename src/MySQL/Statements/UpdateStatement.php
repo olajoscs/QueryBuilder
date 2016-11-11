@@ -4,7 +4,6 @@ namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
 use OlajosCs\QueryBuilder\Common\Statements\UpdateStatement as UpdateStatementCommon;
 use OlajosCs\QueryBuilder\Contracts\RawExpression;
-use OlajosCs\QueryBuilder\Contracts\Statements\UpdateStatement as UpdateStatementInterface;
 use OlajosCs\QueryBuilder\MySQL\Clauses\RawWhereElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
@@ -15,7 +14,7 @@ use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
  *
  * Defines an update statement
  */
-class UpdateStatement extends UpdateStatementCommon implements UpdateStatementInterface
+class UpdateStatement extends UpdateStatementCommon
 {
     /**
      * @inheritDoc

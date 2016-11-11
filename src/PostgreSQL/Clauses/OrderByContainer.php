@@ -3,14 +3,13 @@
 namespace OlajosCs\QueryBuilder\PostgreSQL\Clauses;
 
 use OlajosCs\QueryBuilder\Common\Clauses\OrderByContainer as OrderByContainerCommon;
-use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByContainer as OrderByContainerInterface;
 
 /**
  * Class OrderByContainer
  *
  * Contains all the order by clauses for a query
  */
-class OrderByContainer extends OrderByContainerCommon implements OrderByContainerInterface
+class OrderByContainer extends OrderByContainerCommon
 {
     /**
      * @inheritdoc

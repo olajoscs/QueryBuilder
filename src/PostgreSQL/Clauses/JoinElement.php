@@ -3,7 +3,6 @@
 namespace OlajosCs\QueryBuilder\PostgreSQL\Clauses;
 
 use OlajosCs\QueryBuilder\Common\Clauses\JoinElement as JoinElementCommon;
-use OlajosCs\QueryBuilder\Contracts\Clauses\JoinElement as JoinElementInterface;
 use OlajosCs\QueryBuilder\PostgreSQL\NameNormalizer;
 
 /**
@@ -11,7 +10,7 @@ use OlajosCs\QueryBuilder\PostgreSQL\NameNormalizer;
  *
  * Define a join element
  */
-class JoinElement extends JoinElementCommon implements JoinElementInterface
+class JoinElement extends JoinElementCommon
 {
     use NameNormalizer;
 

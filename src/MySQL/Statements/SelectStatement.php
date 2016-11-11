@@ -4,7 +4,6 @@ namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
 use OlajosCs\QueryBuilder\Common\Statements\SelectStatement as SelectStatementCommon;
 use OlajosCs\QueryBuilder\Contracts\RawExpression;
-use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
 use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\JoinContainer;
@@ -20,7 +19,7 @@ use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
  *
  * MySQL specific select statement
  */
-class SelectStatement extends SelectStatementCommon implements SelectStatementInterface
+class SelectStatement extends SelectStatementCommon
 {
     /**
      * @inheritdoc

@@ -4,7 +4,6 @@ namespace OlajosCs\QueryBuilder\PostgreSQL\Statements;
 
 use OlajosCs\QueryBuilder\Common\Statements\UpdateStatement as UpdateStatementCommon;
 use OlajosCs\QueryBuilder\Contracts\RawExpression;
-use OlajosCs\QueryBuilder\Contracts\Statements\UpdateStatement as UpdateStatementInterface;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\RawWhereElement;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\WhereContainer;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\WhereElement;
@@ -15,7 +14,7 @@ use OlajosCs\QueryBuilder\PostgreSQL\NameNormalizer;
  *
  * Defines an update statement
  */
-class UpdateStatement extends UpdateStatementCommon implements UpdateStatementInterface
+class UpdateStatement extends UpdateStatementCommon
 {
     use NameNormalizer;
 

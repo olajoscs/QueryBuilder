@@ -4,7 +4,6 @@ namespace OlajosCs\QueryBuilder\PostgreSQL\Statements;
 
 use OlajosCs\QueryBuilder\Common\Statements\SelectStatement as SelectStatementCommon;
 use OlajosCs\QueryBuilder\Contracts\RawExpression;
-use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\GroupByContainer;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\GroupByElement;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\JoinContainer;
@@ -21,7 +20,7 @@ use OlajosCs\QueryBuilder\PostgreSQL\NameNormalizer;
  *
  * PostgreSQL specific select statement
  */
-class SelectStatement extends SelectStatementCommon implements SelectStatementInterface
+class SelectStatement extends SelectStatementCommon
 {
     use NameNormalizer;
 

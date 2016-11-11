@@ -3,7 +3,6 @@
 namespace OlajosCs\QueryBuilder\PostgreSQL\Clauses;
 
 use OlajosCs\QueryBuilder\Common\Clauses\WhereElement as WhereElementCommon;
-use OlajosCs\QueryBuilder\Contracts\Clauses\WhereElement as WhereElementInterface;
 use OlajosCs\QueryBuilder\Operator;
 use OlajosCs\QueryBuilder\PostgreSQL\NameNormalizer;
 
@@ -12,7 +11,7 @@ use OlajosCs\QueryBuilder\PostgreSQL\NameNormalizer;
  *
  * Represents a where statement
  */
-class WhereElement extends WhereElementCommon implements WhereElementInterface
+class WhereElement extends WhereElementCommon
 {
     use NameNormalizer;
 

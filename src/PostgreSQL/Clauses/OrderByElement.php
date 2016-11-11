@@ -3,7 +3,6 @@
 namespace OlajosCs\QueryBuilder\PostgreSQL\Clauses;
 
 use OlajosCs\QueryBuilder\Common\Clauses\OrderByElement as OrderByElementCommon;
-use OlajosCs\QueryBuilder\Contracts\Clauses\OrderByElement as OrderByElementInterface;
 use OlajosCs\QueryBuilder\PostgreSQL\NameNormalizer;
 
 /**
@@ -11,7 +10,7 @@ use OlajosCs\QueryBuilder\PostgreSQL\NameNormalizer;
  *
  * Defines an element in the order by clause
  */
-class OrderByElement extends OrderByElementCommon implements OrderByElementInterface
+class OrderByElement extends OrderByElementCommon
 {
     use NameNormalizer;
 

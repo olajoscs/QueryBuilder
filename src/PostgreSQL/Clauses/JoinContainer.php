@@ -3,14 +3,13 @@
 namespace OlajosCs\QueryBuilder\PostgreSQL\Clauses;
 
 use OlajosCs\QueryBuilder\Common\Clauses\JoinContainer as JoinContainerCommon;
-use OlajosCs\QueryBuilder\Contracts\Clauses\JoinContainer as JoinContainerInterface;
 
 /**
  * Class JoinContainer
  *
  * Defines the join container for mysql
  */
-class JoinContainer extends JoinContainerCommon implements JoinContainerInterface
+class JoinContainer extends JoinContainerCommon
 {
     /**
      * Return the join of clauses as a string
