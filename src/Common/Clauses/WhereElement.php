@@ -58,7 +58,7 @@ abstract class WhereElement implements WhereElementInterface
     protected $values;
 
     /**
-     * @var array Paraméter nevek a query-be
+     * @var array Name of the parameters for the query
      */
     protected $names = [];
 

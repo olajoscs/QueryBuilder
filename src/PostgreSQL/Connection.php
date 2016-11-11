@@ -3,7 +3,6 @@
 namespace OlajosCs\QueryBuilder\PostgreSQL;
 
 use OlajosCs\QueryBuilder\Common\Connection as ConnectionCommon;
-use OlajosCs\QueryBuilder\Contracts\Connection as ConnectionInterface;
 use OlajosCs\QueryBuilder\PostgreSQL\Statements;
 
 /**
@@ -11,7 +10,7 @@ use OlajosCs\QueryBuilder\PostgreSQL\Statements;
  *
  * Defines a PostgreSQL Connection based on PDO
  */
-class Connection extends ConnectionCommon implements ConnectionInterface
+class Connection extends ConnectionCommon
 {
     /**
      * @inheritDoc
@@ -46,5 +45,14 @@ class Connection extends ConnectionCommon implements ConnectionInterface
     protected function createInsertStatement()
     {
         return new Statements\InsertStatement($this);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function createRawExpression($expression)
+    {
+        return new RawExpression($expression);
     }
 }

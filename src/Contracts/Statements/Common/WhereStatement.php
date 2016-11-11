@@ -2,6 +2,8 @@
 
 namespace OlajosCs\QueryBuilder\Contracts\Statements\Common;
 
+use OlajosCs\QueryBuilder\Contracts\RawExpression;
+
 /**
  * Interface WhereStatement
  *
@@ -105,4 +107,15 @@ interface WhereStatement extends Statement
      * @return WhereStatement
      */
     public function whereNotNullOr($field);
+
+
+    /**
+     * Set a where expression
+     *
+     * @param RawExpression $expression
+     * @param array         $bindings
+     *
+     * @return WhereStatement
+     */
+    public function whereRaw(RawExpression $expression, array $bindings = []);
 }

@@ -2,6 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\Contracts\Statements;
 
+use OlajosCs\QueryBuilder\Contracts\RawExpression;
 use OlajosCs\QueryBuilder\Contracts\Statements\Common\WhereStatement;
 use OlajosCs\QueryBuilder\Exceptions\FieldNotFoundException;
 use OlajosCs\QueryBuilder\Exceptions\MultipleRowFoundException;
@@ -17,7 +18,7 @@ interface SelectStatement extends WhereStatement
     /**
      * Set the fields to get in the query
      *
-     * @param string[]|string $fields
+     * @param string[]|string|RawExpression $fields
      *
      * @return SelectStatement
      */
@@ -264,4 +265,11 @@ interface SelectStatement extends WhereStatement
      * @return SelectStatement
      */
     public function whereNotNullOr($field);
+
+
+    /**
+     * @inheritdoc
+     * @return SelectStatement
+     */
+    public function whereRaw(RawExpression $expression, array $bindings = []);
 }

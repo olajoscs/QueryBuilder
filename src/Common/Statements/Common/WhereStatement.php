@@ -2,9 +2,11 @@
 
 namespace OlajosCs\QueryBuilder\Common\Statements\Common;
 
+use OlajosCs\QueryBuilder\Common\Clauses\RawWhereElement;
 use OlajosCs\QueryBuilder\Contracts\Clauses\WhereContainer;
 use OlajosCs\QueryBuilder\Contracts\Clauses\WhereElement;
 use OlajosCs\QueryBuilder\Contracts\Connection;
+use OlajosCs\QueryBuilder\Contracts\RawExpression;
 use OlajosCs\QueryBuilder\Contracts\Statements\Common\WhereStatement as WhereStatementInterface;
 use OlajosCs\QueryBuilder\Operator;
 
@@ -46,6 +48,17 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
      * @return WhereElement
      */
     abstract protected function createWhereElement($field, $operator, $value, $glue = WhereElement::GLUE_AND);
+
+
+    /**
+     * Create and return a database specific RawWhereElement object
+     *
+     * @param RawExpression $expression
+     * @param array         $bindings
+     *
+     * @return RawWhereElement
+     */
+    abstract protected function createRawWhereElement(RawExpression $expression, array $bindings = []);
 
 
     /**
@@ -172,6 +185,19 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
     {
         $this->whereContainer->add(
             $this->createWhereElement($field, Operator::IS_NOT_NULL, null, WhereElement::GLUE_OR)
+        );
+
+        return $this;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function whereRaw(RawExpression $expression, array $bindings = [])
+    {
+        $this->whereContainer->add(
+            $this->createRawWhereElement($expression, $bindings)
         );
 
         return $this;

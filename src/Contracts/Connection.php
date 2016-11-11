@@ -17,7 +17,7 @@ interface Connection
     /**
      * Return an empty select statement
      *
-     * @param string[]|string $fields
+     * @param string[]|string|RawExpression $fields
      *
      * @return Statements\SelectStatement
      */
@@ -166,4 +166,14 @@ interface Connection
      * @return \PDOStatement
      */
     public function execute($query, array $parameters = []);
+
+
+    /**
+     * Return a new database specific RawExpression object with the expression in the parameter
+     *
+     * @param string $expression
+     *
+     * @return RawExpression
+     */
+    public function createRawExpression($expression);
 }

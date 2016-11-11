@@ -47,4 +47,13 @@ class Connection extends ConnectionCommon implements ConnectionInterface
     {
         return new Statements\InsertStatement($this);
     }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function createRawExpression($expression)
+    {
+        return new RawExpression($expression);
+    }
 }

@@ -3,6 +3,7 @@
 namespace OlajosCs\QueryBuilder\PostgreSQL\Statements;
 
 use OlajosCs\QueryBuilder\Common\Statements\SelectStatement as SelectStatementCommon;
+use OlajosCs\QueryBuilder\Contracts\RawExpression;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\GroupByContainer;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\GroupByElement;
@@ -10,6 +11,7 @@ use OlajosCs\QueryBuilder\PostgreSQL\Clauses\JoinContainer;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\JoinElement;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\OrderByContainer;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\OrderByElement;
+use OlajosCs\QueryBuilder\PostgreSQL\Clauses\RawWhereElement;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\WhereContainer;
 use OlajosCs\QueryBuilder\PostgreSQL\Clauses\WhereElement;
 use OlajosCs\QueryBuilder\PostgreSQL\NameNormalizer;
@@ -142,5 +144,14 @@ class SelectStatement extends SelectStatementCommon implements SelectStatementIn
     protected function createWhereElement($field, $operator, $value, $glue = WhereElement::GLUE_AND)
     {
         return new WhereElement($this->whereContainer, $field, $operator, $value, $glue);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function createRawWhereElement(RawExpression $expression, array $bindings = [])
+    {
+        return new RawWhereElement($this->whereContainer, $expression, $bindings);
     }
 }

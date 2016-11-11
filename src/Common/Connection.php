@@ -3,6 +3,8 @@
 namespace OlajosCs\QueryBuilder\Common;
 
 use OlajosCs\QueryBuilder\Contracts\Connection as ConnectionInterface;
+use OlajosCs\QueryBuilder\Contracts\Expression;
+use OlajosCs\QueryBuilder\Contracts\RawExpression;
 use OlajosCs\QueryBuilder\Contracts\Statements\InsertStatement;
 use OlajosCs\QueryBuilder\Contracts\Statements\DeleteStatement;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement;
@@ -236,7 +238,7 @@ abstract class Connection extends \PDO implements ConnectionInterface
                 case is_bool($value):
                     $type = static::PARAM_BOOL;
                     break;
-                case is_null($value):
+                case $value === null:
                     $type = static::PARAM_NULL;
                     break;
                 case $value instanceof \DateTimeInterface:

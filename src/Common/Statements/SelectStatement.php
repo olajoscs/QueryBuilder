@@ -22,7 +22,7 @@ use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatemen
 abstract class SelectStatement extends WhereStatement implements SelectStatementInterface
 {
     /**
-     * @var string[] The name of the fields to get in the query
+     * @var array The name of the fields to get in the query
      */
     protected $fields;
 
@@ -360,6 +360,11 @@ abstract class SelectStatement extends WhereStatement implements SelectStatement
     }
 
 
+    /**
+     * Return the select statement as a string
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->asString();

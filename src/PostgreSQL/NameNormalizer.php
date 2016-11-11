@@ -2,6 +2,7 @@
 
 namespace OlajosCs\QueryBuilder\PostgreSQL;
 
+use OlajosCs\QueryBuilder\Contracts\RawExpression as RawExpressionInterface;
 
 /**
  * Trait NameNormalizer
@@ -11,12 +12,6 @@ namespace OlajosCs\QueryBuilder\PostgreSQL;
 trait NameNormalizer
 {
     /**
-     * @var array
-     */
-    private $specCharacters = ['*', '(', ')', ' '];
-
-
-    /**
      * Normalize the name for PGSQL
      * Quotes are put around all the words, which are divided with dot, as PG is case sensitive
      *
@@ -24,12 +19,16 @@ trait NameNormalizer
      * schemeName.tableName.fieldName => "schemeName"."tableName"."fieldName"
      * </code>
      *
-     * @param string $name
+     * @param string|RawExpression $name
      *
      * @return string
      */
     public function normalize($name)
     {
+        if ($name instanceof RawExpressionInterface) {
+            return $name->asString();
+        }
+
         return implode(
             '.',
             array_map(

@@ -3,6 +3,7 @@
 namespace OlajosCs\QueryBuilder\MySQL\Statements;
 
 use OlajosCs\QueryBuilder\Common\Statements\SelectStatement as SelectStatementCommon;
+use OlajosCs\QueryBuilder\Contracts\RawExpression;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatementInterface;
 use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\GroupByElement;
@@ -10,6 +11,7 @@ use OlajosCs\QueryBuilder\MySQL\Clauses\JoinContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\JoinElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\OrderByContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement;
+use OlajosCs\QueryBuilder\MySQL\Clauses\RawWhereElement;
 use OlajosCs\QueryBuilder\MySQL\Clauses\WhereContainer;
 use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
 
@@ -131,5 +133,14 @@ class SelectStatement extends SelectStatementCommon implements SelectStatementIn
     protected function createWhereElement($field, $operator, $value, $glue = WhereElement::GLUE_AND)
     {
         return new WhereElement($this->whereContainer, $field, $operator, $value, $glue);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function createRawWhereElement(RawExpression $expression, array $bindings = [])
+    {
+        return new RawWhereElement($this->whereContainer, $expression, $bindings);
     }
 }
