@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/olajoscs/QueryBuilder.svg?branch=master)](https://travis-ci.org/olajoscs/QueryBuilder)
+[![Latest Stable Version](https://poser.pugx.org/olajoscs/querybuilder/v/stable)](https://packagist.org/packages/olajoscs/querybuilder)
 # QueryBuilder
 A simple query builder for relational databases, currently with MySQL and PostgreSQL support. 100% of the code is unit tested.
 
