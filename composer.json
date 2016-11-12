@@ -1,6 +1,8 @@
 {
   "name": "olajoscs/querybuilder",
+  "description": "A basic query builder for relational databases.",
   "minimum-stability": "stable",
+  "homepage": "https://github.com/olajoscs/QueryBuilder",
   "license": "MIT",
   "autoload": {
     "psr-4": {
@@ -19,6 +21,7 @@
     }
   ],
   "require": {
+    "php": ">=5.5.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.3.0"
