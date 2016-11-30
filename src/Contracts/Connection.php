@@ -127,6 +127,7 @@ interface Connection
      * @param string $field
      *
      * @return array
+     * @throws FieldNotFoundException
      */
     public function getList($query, array $parameters = [], $field);
 
@@ -139,6 +140,7 @@ interface Connection
      * @param string $keyField
      *
      * @return object[]
+     * @throws FieldNotFoundException
      */
     public function getWithKey($query, array $parameters = [], $keyField);
 
@@ -152,7 +154,8 @@ interface Connection
      * @param array  $constructorParameters
      * @param string $keyField
      *
-     * @return array[]
+     * @return array
+     * @throws FieldNotFoundException
      */
     public function getClassesWithKey($query, array $parameters = [], $class, array $constructorParameters = [], $keyField);
 

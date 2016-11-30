@@ -47,9 +47,11 @@ class ConnectionFactory
             }
 
             self::$instances[$type] = new $class(
-                $dsn,
+                $config['type'],
+                $config['host'],
                 $config['user'],
                 $config['password'],
+                $config['database'],
                 $config['options']
             );
         }
