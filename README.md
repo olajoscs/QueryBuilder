@@ -14,7 +14,7 @@ The constructor is the same as the one in the PDO class.
 
 ```php
   $myDIContainer->singleton('connection', function() {
-    return new OlajosCs\QueryBuilder\MySQL\Connection($dsn, $username, $passwd, $options)
+    return new OlajosCs\QueryBuilder\MySQL\Connection($type, $host, $username, $password, $database, $options)
   });
 ```
 
