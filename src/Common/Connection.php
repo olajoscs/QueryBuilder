@@ -16,8 +16,14 @@ use OlajosCs\QueryBuilder\Exceptions\RowNotFoundException;
  *
  * Database independent behavior of the connection object
  */
-abstract class Connection extends \PDO implements ConnectionInterface
+abstract class Connection implements ConnectionInterface
 {
+    /**
+     * @var \PDO
+     */
+    private $pdo;
+
+
     /**
      * Return a new empty select statement
      *
@@ -48,6 +54,14 @@ abstract class Connection extends \PDO implements ConnectionInterface
      * @return InsertStatement
      */
     abstract protected function createInsertStatement();
+
+
+    public function __construct($type, $host, $username, $password, $database, $options)
+    {
+        $dsn = "{$type}:host={$host};dbname={$database};";
+
+        $this->pdo = new \PDO($dsn, $username, $password, $options);
+    }
 
 
     /**
@@ -98,7 +112,7 @@ abstract class Connection extends \PDO implements ConnectionInterface
     {
         $statement = $this->execute($query, $parameters);
 
-        return $statement->fetchAll(static::FETCH_OBJ);
+        return $statement->fetchAll(\PDO::FETCH_OBJ);
     }
 
 
@@ -109,7 +123,7 @@ abstract class Connection extends \PDO implements ConnectionInterface
     {
         $statement = $this->execute($query, $parameters);
 
-        return $statement->fetchAll(static::FETCH_CLASS, $class, $constructorParameters);
+        return $statement->fetchAll(\PDO::FETCH_CLASS, $class, $constructorParameters);
     }
 
 
@@ -120,7 +134,7 @@ abstract class Connection extends \PDO implements ConnectionInterface
     {
         $statement = $this->readOne($query, $parameters);
 
-        return $statement->fetch(static::FETCH_OBJ);
+        return $statement->fetch(\PDO::FETCH_OBJ);
     }
 
 
@@ -131,7 +145,7 @@ abstract class Connection extends \PDO implements ConnectionInterface
     {
         $statement = $this->readOne($query, $parameters);
 
-        $statement->setFetchMode(static::FETCH_CLASS, $class);
+        $statement->setFetchMode(\PDO::FETCH_CLASS, $class);
 
         return $statement->fetch();
     }
@@ -201,7 +215,7 @@ abstract class Connection extends \PDO implements ConnectionInterface
      */
     public function execute($query, array $parameters = [])
     {
-        $statement = $this->prepare($query);
+        $statement = $this->pdo->prepare($query);
 
         if (!empty($parameters)) {
             foreach ($parameters as $key => $value) {
@@ -231,20 +245,20 @@ abstract class Connection extends \PDO implements ConnectionInterface
         foreach ($parameters as $key => $value) {
             switch (true) {
                 case is_int($value):
-                    $type = static::PARAM_INT;
+                    $type = \PDO::PARAM_INT;
                     break;
                 case is_bool($value):
-                    $type = static::PARAM_BOOL;
+                    $type = \PDO::PARAM_BOOL;
                     break;
                 case $value === null:
-                    $type = static::PARAM_NULL;
+                    $type = \PDO::PARAM_NULL;
                     break;
                 case $value instanceof \DateTimeInterface:
-                    $type  = static::PARAM_STR;
+                    $type  = \PDO::PARAM_STR;
                     $value = $value->format('Y-m-d H:i:s.u');
                     break;
                 default:
-                    $type = static::PARAM_STR;
+                    $type = \PDO::PARAM_STR;
             }
 
             $statement->bindValue($key, $value, $type);
@@ -317,17 +331,28 @@ abstract class Connection extends \PDO implements ConnectionInterface
      */
     public function transaction(callable $callable)
     {
-        $this->beginTransaction();
+        $this->pdo->beginTransaction();
 
         try {
             $result = $callable();
         } catch (\Exception $e) {
-            $this->rollBack();
+            $this->pdo->rollBack();
             throw $e;
         }
 
-        $this->commit();
+        $this->pdo->commit();
 
         return $result;
+    }
+
+
+    /**
+     * Return the PDO instance
+     *
+     * @return \PDO
+     */
+    public function getPdo()
+    {
+        return $this->pdo;
     }
 }

@@ -15,14 +15,14 @@ abstract class MySQL extends \PHPUnit_Framework_TestCase
     {
         $connection = $this->getConnection();
 
-        $connection->prepare(
+        $connection->getPdo()->prepare(
             'CREATE TABLE IF NOT EXISTS querybuilder_test_languages (
                   id INT,
                   code VARCHAR(2)
             )'
         )->execute();
 
-        $connection->prepare(
+        $connection->getPdo()->prepare(
             'CREATE TABLE IF NOT EXISTS querybuilder_tests (
                 id INT,
                 languageId INT,
@@ -30,10 +30,10 @@ abstract class MySQL extends \PHPUnit_Framework_TestCase
             )'
         )->execute();
 
-        $connection->prepare('truncate table querybuilder_tests')->execute();
-        $connection->prepare('truncate table querybuilder_test_languages')->execute();
+        $connection->getPdo()->prepare('truncate table querybuilder_tests')->execute();
+        $connection->getPdo()->prepare('truncate table querybuilder_test_languages')->execute();
 
-        $statement = $connection->prepare(
+        $statement = $connection->getPdo()->prepare(
             'INSERT INTO querybuilder_test_languages (
                 id, code
             ) VALUES 
@@ -57,7 +57,7 @@ abstract class MySQL extends \PHPUnit_Framework_TestCase
             $binding[] = '(:id' . $i . ', :lang' . $i . ', :field' . $i . ')';
         }
 
-        $statement = $connection->prepare($sql . implode(',', $binding));
+        $statement = $connection->getPdo()->prepare($sql . implode(',', $binding));
 
         foreach ($this->getObjects() as $object) {
             foreach (get_object_vars($object) as $property => $value) {
