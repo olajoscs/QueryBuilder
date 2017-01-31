@@ -3,8 +3,8 @@
 namespace OlajosCs\QueryBuilder\Common;
 
 use OlajosCs\QueryBuilder\Contracts\Connection as ConnectionInterface;
-use OlajosCs\QueryBuilder\Contracts\Statements\InsertStatement;
 use OlajosCs\QueryBuilder\Contracts\Statements\DeleteStatement;
+use OlajosCs\QueryBuilder\Contracts\Statements\InsertStatement;
 use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement;
 use OlajosCs\QueryBuilder\Contracts\Statements\UpdateStatement;
 use OlajosCs\QueryBuilder\Exceptions\FieldNotFoundException;
@@ -56,9 +56,18 @@ abstract class Connection implements ConnectionInterface
     abstract protected function createInsertStatement();
 
 
-    public function __construct($type, $host, $username, $password, $database, $options)
+    /**
+     * Create a new Connection object
+     *
+     * @param string $host
+     * @param string $username
+     * @param string $password
+     * @param string $database
+     * @param array  $options
+     */
+    public function __construct($host, $username, $password, $database, array $options)
     {
-        $dsn = "{$type}:host={$host};dbname={$database};";
+        $dsn = "{$this->getDatabaseType()}:host={$host};dbname={$database};";
 
         $this->pdo = new \PDO($dsn, $username, $password, $options);
     }
@@ -355,4 +364,12 @@ abstract class Connection implements ConnectionInterface
     {
         return $this->pdo;
     }
+
+
+    /**
+     * Return the type of the database
+     *
+     * @return string
+     */
+    abstract protected function getDatabaseType();
 }

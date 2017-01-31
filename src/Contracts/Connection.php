@@ -58,7 +58,7 @@ interface Connection
      * @param string $query
      * @param array  $parameters
      *
-     * @return object[]
+     * @return \stdClass[]
      */
     public function get($query, array $parameters = []);
 
@@ -82,7 +82,7 @@ interface Connection
      * @param string $query
      * @param array  $parameters
      *
-     * @return object
+     * @return \stdClass
      * @throws RowNotFoundException
      * @throws MultipleRowFoundException
      */
@@ -139,7 +139,7 @@ interface Connection
      * @param array  $parameters
      * @param string $keyField
      *
-     * @return object[]
+     * @return \stdClass[]
      * @throws FieldNotFoundException
      */
     public function getWithKey($query, array $parameters = [], $keyField);
@@ -179,4 +179,23 @@ interface Connection
      * @return RawExpression
      */
     public function createRawExpression($expression);
+
+
+    /**
+     * Run the callable in a transaction. In case of failure changes are rollbacked.
+     *
+     * @param callable $callable A callable function with no parameters
+     *
+     * @return mixed The result of the callable
+     * @throws \Exception
+     */
+    public function transaction(callable $callable);
+
+
+    /**
+     * Return the PDO instance
+     *
+     * @return \PDO
+     */
+    public function getPdo();
 }

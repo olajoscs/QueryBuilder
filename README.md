@@ -122,14 +122,14 @@ This can be used in select and where methods.
 ```php
   // for MySQL
   $connection
-    ->select(new \OlajosCs\QueryBuilder\MySQL\RawExpression('count(1) as counter'))
+    ->select($connection->createRawExpression('count(1) as counter'))
     ->from('tests')
     ->getOneField('counter');
 
   $connection
     ->select() // empty means *
     ->from('tests')
-    ->where(new \OlajosCs\QueryBuilder\MySQL\RawExpression('select count....... = 1')
+    ->where($connection->createRawExpression('select count....... = 1')
     ->get();
 ```
 

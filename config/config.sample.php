@@ -5,7 +5,6 @@
  */
 return [
     'mysql' => [
-        'type'     => 'mysql',
         'host'     => 'localhost',
         'database' => 'sample_database',
         'user'     => 'travis',
@@ -20,7 +19,6 @@ return [
     ],
 
     'pgsql' => [
-        'type'     => 'pgsql',
         'host'     => 'localhost',
         'database' => 'sample_database',
         'user'     => 'travis',

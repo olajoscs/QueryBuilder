@@ -168,6 +168,9 @@ interface SelectStatement extends WhereStatement
      *
      * @return string
      * @throws FieldNotFoundException
+     * @throws RowNotFoundException
+     * @throws FieldNotFoundException
+     * @throws MultipleRowFoundException
      */
     public function getOneField($field = null);
 
@@ -178,6 +181,7 @@ interface SelectStatement extends WhereStatement
      * @param string $field
      *
      * @return array
+     * @throws FieldNotFoundException
      */
     public function getList($field = null);
 
@@ -187,7 +191,8 @@ interface SelectStatement extends WhereStatement
      *
      * @param string $keyField
      *
-     * @return object[]
+     * @return \stdClass[]
+     * @throws FieldNotFoundException
      */
     public function getWithKey($keyField);
 
@@ -199,7 +204,8 @@ interface SelectStatement extends WhereStatement
      * @param array  $constructorParameters
      * @param string $keyField
      *
-     * @return array[]
+     * @return array
+     * @throws FieldNotFoundException
      */
     public function getClassesWithKey($class, array $constructorParameters = [], $keyField);
 
