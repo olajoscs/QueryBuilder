@@ -176,14 +176,23 @@ class StatementGetTest extends MySQL
         ];
 
         $this->assertEquals($expected, $result);
+    }
 
+
+    /**
+     * Test when the required field is not found in the field of the rows
+     *
+     * @return void
+     */
+    public function testFieldNotFoundInGetList()
+    {
         $this->expectException(FieldNotFoundException::class);
 
         $this->getConnection()
             ->select('field')
             ->from('querybuilder_tests')
             ->where('id', '>', 7)
-            ->getList('id');
+            ->getList('hello');
     }
 
 
@@ -310,7 +319,51 @@ class StatementGetTest extends MySQL
         ];
 
         $this->assertEquals($expected, $result);
+    }
 
+
+    /**
+     * Test if empty array is returned if parameter array in WhereIn is empty
+     *
+     * @return void
+     */
+    public function testWhereInWithEmpty()
+    {
+        $connection = $this->getConnection();
+
+        $results = $connection
+            ->select('id')
+            ->from('querybuilder_tests')
+            ->whereIn('id', [])
+            ->get();
+
+        $this->assertEquals([], $results);
+    }
+
+
+    /**
+     * Test if all rows are returned if parameter array in WhereNotIn is empty
+     *
+     * @return void
+     */
+    public function testWhereNotInWithEmpty()
+    {
+        $connection = $this->getConnection();
+
+        $results = $connection
+            ->select('id')
+            ->from('querybuilder_tests')
+            ->whereNotIn('id', [])
+            ->get();
+
+        $real = count($results);
+
+        $all = $connection
+            ->select($connection->createRawExpression('count(1)'))
+            ->from('querybuilder_tests')
+            ->getOneField();
+
+        $this->assertEquals($real, (int)$all);
     }
 
 

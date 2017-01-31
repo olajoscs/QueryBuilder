@@ -167,6 +167,11 @@ abstract class Connection implements ConnectionInterface
     {
         $result = $this->getOne($query, $parameters);
 
+        if ($field === null) {
+            $array = (array)$result;
+            return reset($array);
+        }
+
         if (!isset($result->$field)) {
             throw new FieldNotFoundException($field . ' field not found in result of the query: ' . $query);
         }
@@ -315,6 +320,10 @@ abstract class Connection implements ConnectionInterface
      */
     private function processWithKey(array $rows, $keyField)
     {
+        if (empty($rows)) {
+            return [];
+        }
+
         $first = reset($rows);
 
         if (!isset($first->$keyField)) {

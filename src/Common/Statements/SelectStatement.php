@@ -315,10 +315,6 @@ abstract class SelectStatement extends WhereStatement implements SelectStatement
      */
     public function getOneField($field = null)
     {
-        if ($field === null) {
-            $field = reset($this->fields);
-        }
-
         return $this->connection->getOneField($this->asString(), $this->parameters, $field);
     }
 

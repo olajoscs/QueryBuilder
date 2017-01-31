@@ -55,7 +55,7 @@ abstract class WhereElement implements WhereElementInterface
     /**
      * @var array The values which have to be given to binding array
      */
-    protected $values;
+    protected $values = [];
 
     /**
      * @var array Name of the parameters for the query

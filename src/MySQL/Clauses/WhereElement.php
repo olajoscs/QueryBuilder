@@ -25,23 +25,31 @@ class WhereElement extends WhereElementCommon
                 $this->getField(),
                 $this->getOperator()
             );
-        } else {
-            if ($this->hasArrayOperator()) {
-                if ($this->operator === Operator::BETWEEN) {
-                    $name = $this->names[0] . ' AND ' . $this->names[1];
-                } else {
-                    $name = '(' . implode(',', $this->names) . ')';
-                }
-            } else {
-                $name = $this->names[0];
-            }
-
-            return sprintf(
-                '%s %s %s',
-                $this->getField(),
-                $this->getOperator(),
-                $name
-            );
         }
+
+        if ($this->hasArrayOperator()) {
+            if ($this->operator === Operator::BETWEEN) {
+                $name = $this->names[0] . ' AND ' . $this->names[1];
+            } else {
+                $name = '(' . implode(',', $this->names) . ')';
+            }
+        } else {
+            $name = $this->names[0];
+        }
+
+        if ($this->operator === Operator::IN && empty($this->values)) {
+            return 'false';
+        }
+
+        if ($this->operator === Operator::NOTIN && empty($this->values)) {
+            return 'true';
+        }
+
+        return sprintf(
+            '%s %s %s',
+            $this->getField(),
+            $this->getOperator(),
+            $name
+        );
     }
 }

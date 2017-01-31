@@ -19,4 +19,13 @@ class RawExpression extends RawExpressionCommon
     {
         return $this->expression;
     }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function __toString()
+    {
+        return $this->asString();
+    }
 }

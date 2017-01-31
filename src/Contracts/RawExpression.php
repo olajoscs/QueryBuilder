@@ -24,4 +24,12 @@ interface RawExpression
      * @return string
      */
     public function asString();
+
+
+    /**
+     * Return the raw expression as a string
+     *
+     * @return mixed
+     */
+    public function __toString();
 }
