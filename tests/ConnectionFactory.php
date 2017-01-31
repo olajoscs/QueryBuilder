@@ -40,14 +40,7 @@ class ConnectionFactory
             $config = self::$config[$type];
             $class = $config['class'];
 
-            $dsn = "{$config['type']}:host={$config['host']};dbname={$config['database']};";
-
-            if (isset($config['charset'])) {
-                $dsn .= 'charset=' . $config['charset'];
-            }
-
             self::$instances[$type] = new $class(
-                $config['type'],
                 $config['host'],
                 $config['user'],
                 $config['password'],
