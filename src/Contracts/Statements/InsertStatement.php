@@ -24,7 +24,7 @@ interface InsertStatement extends Statement
     /**
      * Set the values to insert as an associative array
      *
-     * @param array $values
+     * @param array $values Simple or 2 dimensional array. In case of multiple rows to insert, two-dimensional array is needed.
      *
      * @return InsertStatement
      */

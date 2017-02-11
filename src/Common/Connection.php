@@ -251,31 +251,37 @@ abstract class Connection implements ConnectionInterface
      *
      * @param \PDOStatement $statement
      * @param array         $parameters
+     * @param string        $prefix
      *
      * @return \PDOStatement
      */
-    protected function bindParameters(\PDOStatement $statement, array $parameters)
+    protected function bindParameters(\PDOStatement $statement, array $parameters, $prefix = '')
     {
         foreach ($parameters as $key => $value) {
-            switch (true) {
-                case is_int($value):
-                    $type = \PDO::PARAM_INT;
-                    break;
-                case is_bool($value):
-                    $type = \PDO::PARAM_BOOL;
-                    break;
-                case $value === null:
-                    $type = \PDO::PARAM_NULL;
-                    break;
-                case $value instanceof \DateTimeInterface:
-                    $type  = \PDO::PARAM_STR;
-                    $value = $value->format('Y-m-d H:i:s.u');
-                    break;
-                default:
-                    $type = \PDO::PARAM_STR;
-            }
+            // In case of multiple rows are given for insert statement
+            if (is_array($value)) {
+                $statement = $this->bindParameters($statement, $value, $prefix . $key);
+            } else {
+                switch (true) {
+                    case is_int($value):
+                        $type = \PDO::PARAM_INT;
+                        break;
+                    case is_bool($value):
+                        $type = \PDO::PARAM_BOOL;
+                        break;
+                    case $value === null:
+                        $type = \PDO::PARAM_NULL;
+                        break;
+                    case $value instanceof \DateTimeInterface:
+                        $type  = \PDO::PARAM_STR;
+                        $value = $value->format('Y-m-d H:i:s.u');
+                        break;
+                    default:
+                        $type = \PDO::PARAM_STR;
+                }
 
-            $statement->bindValue($key, $value, $type);
+                $statement->bindValue($prefix . $key, $value, $type);
+            }
         }
 
         return $statement;

@@ -14,12 +14,12 @@ use OlajosCs\QueryBuilder\Contracts\Statements\InsertStatement as InsertStatemen
 abstract class InsertStatement extends Statement implements InsertStatementInterface
 {
     /**
-     * @var array The binding parameters for the query
+     * @var array[] The binding parameters for the query. 2 dimensional array, as multiple rows can be added as well.
      */
     protected $parameters = [];
 
     /**
-     * @var array The array of the binding
+     * @var array[] The array of the binding. 2 dimensional array, as multiple rows can be added as well.
      */
     protected $names = [];
 
@@ -52,11 +52,21 @@ abstract class InsertStatement extends Statement implements InsertStatementInter
         $this->names      = [];
         $this->parameters = [];
 
-        foreach ($values as $field => $value) {
-            $this->addValue($field, $value);
+        $valueList = !is_array(reset($values)) ? [$values] : $values;
+
+        foreach ($valueList as $key => $values) {
+            $this->addValues($key, $values);
         }
 
         return $this;
+    }
+
+
+    private function addValues($arrayKey, array $values)
+    {
+        foreach ($values as $field => $value) {
+            $this->addValue($field, $value, $arrayKey);
+        }
     }
 
 
@@ -69,11 +79,11 @@ abstract class InsertStatement extends Statement implements InsertStatementInter
      *
      * @return void
      */
-    private function addValue($field, $value)
+    private function addValue($field, $value, $arrayKey)
     {
-        $name = ':' . $field;
+        $name = ':'. $arrayKey . $field;
 
-        $this->names[$field]      = $name;
-        $this->parameters[$field] = $value;
+        $this->names[$arrayKey][$field]      = $name;
+        $this->parameters[$arrayKey][$field] = $value;
     }
 }

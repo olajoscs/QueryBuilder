@@ -103,6 +103,25 @@ The query is executed only when the execute() method is called.
     ->execute();  
 ```
 
+Multiple rows for insert statement is also supported, these can be added in a 2 dimensional array.
+```php
+  $connection
+    ->insert(
+      [
+        [
+          'field1' => 1,
+          'field2' => 2
+        ],
+        [
+          'field1' => 3,
+          'field2' => 4
+        ],
+      ] 
+    )
+    ->into('table_name')
+    ->execute();
+```
+
 ## Basic delete syntax
 Delete syntax is similar as seen in SQL.
 

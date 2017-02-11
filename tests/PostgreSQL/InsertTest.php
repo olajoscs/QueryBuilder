@@ -66,6 +66,46 @@ class InsertTest extends PostgreSQL
 
 
     /**
+     * Test that multiple rows can be inserted in one statement
+     *
+     * @return void
+     */
+    public function testMultipleInserts()
+    {
+        $statement = $this->getConnection()
+            ->insert()
+            ->into('querybuilder_tests')
+            ->values(
+                [
+                    [
+                        'id'         => 10,
+                        'languageId' => 1,
+                        'field'      => 'mult1',
+                    ],
+                    [
+                        'id'         => 11,
+                        'languageId' => 1,
+                        'field'      => 'mult2',
+                    ],
+                ]
+            )
+            ->execute();
+
+        $this->assertInstanceOf(\PDOStatement::class, $statement);
+        $this->assertEquals(2, $statement->rowCount());
+
+        $result = $this->getConnection()->getOneField(
+            'SELECT count(1) AS counter
+            FROM querybuilder_tests',
+            [],
+            'counter'
+        );
+
+        $this->assertEquals(12, $result);
+    }
+
+
+    /**
      * @inheritDoc
      */
     protected function setUp()
