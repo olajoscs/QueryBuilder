@@ -368,6 +368,44 @@ class StatementGetTest extends PostgreSQL
 
 
     /**
+     * Test if empty list is returned when no rows found with the getList method
+     *
+     * @return void
+     */
+    public function testEmptyList()
+    {
+        $connection = $this->getConnection();
+
+        $results = $connection
+            ->select('id')
+            ->from('querybuilder_tests')
+            ->whereIn('id', [])
+            ->getList();
+
+        $this->assertEquals([], $results);
+    }
+
+
+    /**
+     * Test if empty list is returned when no rows found with the getList method
+     *
+     * @return void
+     */
+    public function testEmptyListWithKeys()
+    {
+        $connection = $this->getConnection();
+
+        $results = $connection
+            ->select('id')
+            ->from('querybuilder_tests')
+            ->whereIn('id', [])
+            ->getWithKey('id');
+
+        $this->assertEquals([], $results);
+    }
+
+
+    /**
      * @inheritDoc
      */
     protected function setUp()

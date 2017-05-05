@@ -187,6 +187,10 @@ abstract class Connection implements ConnectionInterface
     {
         $rows = $this->get($query, $parameters);
 
+        if (count($rows) === 0) {
+            return [];
+        }
+
         $first = reset($rows);
 
         if (!isset($first->$field)) {
