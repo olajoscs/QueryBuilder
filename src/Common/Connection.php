@@ -154,7 +154,7 @@ abstract class Connection implements ConnectionInterface
     {
         $statement = $this->readOne($query, $parameters);
 
-        $statement->setFetchMode(\PDO::FETCH_CLASS, $class);
+        $statement->setFetchMode(\PDO::FETCH_CLASS, $class, $constructorParameters);
 
         return $statement->fetch();
     }
