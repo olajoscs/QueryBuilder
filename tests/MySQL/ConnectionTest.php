@@ -13,7 +13,7 @@ use OlajosCs\QueryBuilder\MySQL\Statements\UpdateStatement;
  *
  * Tests for the Mysql Connection Class
  */
-class ConnectionTest extends MySQL
+class ConnectionTest extends MySQLTestCase
 {
     /**
      * Test Connection object
@@ -22,7 +22,7 @@ class ConnectionTest extends MySQL
      */
     public function testConnection()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $this->assertInstanceOf(ConnectionInterface::class, $connection);
         $this->assertInstanceOf(Connection::class, $connection);

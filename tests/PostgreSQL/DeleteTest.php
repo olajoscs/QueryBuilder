@@ -7,7 +7,7 @@ namespace OlajosCs\QueryBuilder\PostgreSQL;
  *
  * Test delete statement
  */
-class DeleteTest extends PostgreSQL
+class DeleteTest extends PostgreSQLTestCase
 {
     /**
      * Test the deletion with a where condition
@@ -16,7 +16,7 @@ class DeleteTest extends PostgreSQL
      */
     public function testDeleteWhere()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $countQuery = $connection
             ->select()
@@ -43,7 +43,7 @@ class DeleteTest extends PostgreSQL
      */
     public function testDelete()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $statement = $connection
             ->delete()
@@ -60,14 +60,5 @@ class DeleteTest extends PostgreSQL
             ->get();
 
         $this->assertEquals([], $result);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
     }
 }

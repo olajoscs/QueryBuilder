@@ -7,7 +7,7 @@ namespace OlajosCs\QueryBuilder\MySQL;
  *
  * Test delete statement
  */
-class DeleteTest extends MySQL
+class DeleteTest extends MySQLTestCase
 {
     /**
      * Test the deletion with a where condition
@@ -16,7 +16,7 @@ class DeleteTest extends MySQL
      */
     public function testDeleteWhere()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $countQuery = $connection
             ->select()
@@ -43,7 +43,7 @@ class DeleteTest extends MySQL
      */
     public function testDelete()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $statement = $connection
             ->delete()
@@ -60,14 +60,5 @@ class DeleteTest extends MySQL
             ->get();
 
         $this->assertEquals([], $result);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
     }
 }

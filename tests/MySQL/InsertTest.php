@@ -8,7 +8,7 @@ namespace OlajosCs\QueryBuilder\MySQL;
  *
  * Test insert statements
  */
-class InsertTest extends MySQL
+class InsertTest extends MySQLTestCase
 {
     /**
      * Test insert statements then check the results
@@ -17,7 +17,7 @@ class InsertTest extends MySQL
      */
     public function testInsert()
     {
-        $statement = $this->getConnection()
+        $statement = $this->getQueryBuilderConnection()
             ->insert()
             ->into('querybuilder_tests')
             ->values(
@@ -31,14 +31,14 @@ class InsertTest extends MySQL
         $this->assertInstanceOf(\PDOStatement::class, $statement);
         $this->assertEquals(1, $statement->rowCount());
 
-        $result = $this->getConnection()
+        $result = $this->getQueryBuilderConnection()
             ->select('count(1) as counter')
             ->from('querybuilder_tests')
             ->getOneField('counter');
 
         $this->assertEquals(11, $result);
 
-        $statement = $this->getConnection()
+        $statement = $this->getQueryBuilderConnection()
             ->insert(
                 [
                     'id'         => 11,
@@ -52,7 +52,7 @@ class InsertTest extends MySQL
         $this->assertInstanceOf(\PDOStatement::class, $statement);
         $this->assertEquals(1, $statement->rowCount());
 
-        $result = $this->getConnection()
+        $result = $this->getQueryBuilderConnection()
             ->select('count(1) as counter')
             ->from('querybuilder_tests')
             ->getOneField('counter');
@@ -68,7 +68,7 @@ class InsertTest extends MySQL
      */
     public function testMultipleInserts()
     {
-        $statement = $this->getConnection()
+        $statement = $this->getQueryBuilderConnection()
             ->insert()
             ->into('querybuilder_tests')
             ->values(
@@ -90,21 +90,12 @@ class InsertTest extends MySQL
         $this->assertInstanceOf(\PDOStatement::class, $statement);
         $this->assertEquals(2, $statement->rowCount());
 
-        $result = $this->getConnection()
+        $result = $this->getQueryBuilderConnection()
             ->select('count(1) as counter')
             ->from('querybuilder_tests')
             ->getOneField('counter');
 
         $this->assertEquals(12, $result);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
     }
 
 }

@@ -10,7 +10,7 @@ use OlajosCs\QueryBuilder\PostgreSQL\Clauses\GroupByElement;
  *
  * Test mysql group by clauses
  */
-class SelectGroupByTest extends PostgreSQL
+class SelectGroupByTest extends PostgreSQLTestCase
 {
     /**
      * Test a single group by element
@@ -58,7 +58,7 @@ class SelectGroupByTest extends PostgreSQL
      */
     public function testGroupByInSelect()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $query = $connection
             ->select('*')

@@ -8,7 +8,7 @@ namespace OlajosCs\QueryBuilder\PostgreSQL;
  *
  * Test update statment
  */
-class UpdateTest extends PostgreSQL
+class UpdateTest extends PostgreSQLTestCase
 {
     /**
      * Test a basic update statement as string
@@ -17,7 +17,7 @@ class UpdateTest extends PostgreSQL
      */
     public function testUpdateClause()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $query = $connection->update('strings')->set(['value' => 'asdf'])->asString();
         $expected = 'UPDATE "strings" SET "value" = :value';
@@ -34,7 +34,7 @@ class UpdateTest extends PostgreSQL
      */
     public function testUpdateWhere()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $statement = $connection
             ->update('querybuilder_tests')
@@ -71,7 +71,7 @@ class UpdateTest extends PostgreSQL
      */
     public function testUpdateWhereOr()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $statement = $connection
             ->update('querybuilder_tests')
@@ -101,7 +101,7 @@ class UpdateTest extends PostgreSQL
      */
     public function testUpdateWhereIn()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $statement = $connection
             ->update('querybuilder_tests')
@@ -152,7 +152,7 @@ class UpdateTest extends PostgreSQL
      */
     public function testUpdateWhereNotIn()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $statement = $connection
             ->update('querybuilder_tests')
@@ -208,7 +208,7 @@ class UpdateTest extends PostgreSQL
      */
     public function testUpdateWhereBetween()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $statement = $connection
             ->update('querybuilder_tests')
@@ -244,14 +244,5 @@ class UpdateTest extends PostgreSQL
         ];
 
         $this->assertEquals($expected, $result);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
     }
 }

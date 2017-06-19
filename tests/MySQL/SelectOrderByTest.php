@@ -10,7 +10,7 @@ use OlajosCs\QueryBuilder\MySQL\Clauses\OrderByElement;
  *
  * Testing the order by clauses
  */
-class SelectOrderByText extends MySQL
+class SelectOrderByText extends MySQLTestCase
 {
     /**
      * Test a single order by cluase
@@ -67,7 +67,7 @@ class SelectOrderByText extends MySQL
      */
     public function testOrderByInSelect()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $query = $connection
             ->select('*')
@@ -88,7 +88,7 @@ class SelectOrderByText extends MySQL
     public function testInvalidNullsPosition()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $connection
             ->select('id')
@@ -105,7 +105,7 @@ class SelectOrderByText extends MySQL
     public function testInvalidOrder()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $connection
             ->select('id')

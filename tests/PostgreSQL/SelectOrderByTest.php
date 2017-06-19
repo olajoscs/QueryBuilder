@@ -10,7 +10,7 @@ use OlajosCs\QueryBuilder\PostgreSQL\Clauses\OrderByElement;
  *
  * Testing the order by clauses
  */
-class SelectOrderByText extends PostgreSQL
+class SelectOrderByText extends PostgreSQLTestCase
 {
     /**
      * Test a single order by cluase
@@ -67,7 +67,7 @@ class SelectOrderByText extends PostgreSQL
      */
     public function testOrderByInSelect()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $query = $connection
             ->select('*')
@@ -88,7 +88,7 @@ class SelectOrderByText extends PostgreSQL
     public function testInvalidNullsPosition()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $connection
             ->select('id')
@@ -105,7 +105,7 @@ class SelectOrderByText extends PostgreSQL
     public function testInvalidOrder()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $connection
             ->select('id')

@@ -29,6 +29,7 @@ class WhereElement extends WhereElementCommon
                 $this->getOperator()
             );
         }
+
         if ($this->hasArrayOperator()) {
             if ($this->operator === Operator::BETWEEN) {
                 $name = $this->names[0] . ' AND ' . $this->names[1];

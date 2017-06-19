@@ -118,10 +118,6 @@ abstract class WhereStatement extends Statement implements WhereStatementInterfa
      */
     public function whereNotIn($field, array $values)
     {
-        if (empty($values)) {
-            return $this;
-        }
-
         $this->whereContainer->add(
             $this->createWhereElement($field, Operator::NOTIN, $values)
         );

@@ -13,7 +13,7 @@ use OlajosCs\QueryBuilder\PostgreSQL\Statements\UpdateStatement;
  *
  * Tests for the Mysql Connection Class
  */
-class ConnectionTest extends PostgreSQL
+class ConnectionTest extends PostgreSQLTestCase
 {
     /**
      * Test Connection object
@@ -22,7 +22,7 @@ class ConnectionTest extends PostgreSQL
      */
     public function testConnection()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $this->assertInstanceOf(ConnectionInterface::class, $connection);
         $this->assertInstanceOf(Connection::class, $connection);
