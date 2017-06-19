@@ -11,7 +11,7 @@ use OlajosCs\QueryBuilder\Operator;
  *
  * Tests Join clause
  */
-class SelectJoinTest extends MySQL
+class SelectJoinTest extends MySQLTestCase
 {
     /**
      * Tests join clause in a full select query
@@ -20,7 +20,7 @@ class SelectJoinTest extends MySQL
      */
     public function testInnerJoin()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $query = $connection
             ->select('id')
@@ -40,7 +40,7 @@ class SelectJoinTest extends MySQL
      */
     public function testLeftJoin()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $query = $connection
             ->select('id')
@@ -60,7 +60,7 @@ class SelectJoinTest extends MySQL
      */
     public function testRightJoin()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $query = $connection
             ->select('id')

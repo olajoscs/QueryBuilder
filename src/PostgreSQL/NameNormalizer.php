@@ -26,7 +26,7 @@ trait NameNormalizer
     public function normalize($name)
     {
         if ($name instanceof RawExpressionInterface) {
-            return $name->asString();
+            return (string)$name;
         }
 
         return implode(

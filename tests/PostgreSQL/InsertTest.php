@@ -8,7 +8,7 @@ namespace OlajosCs\QueryBuilder\PostgreSQL;
  *
  * Test insert statements
  */
-class InsertTest extends PostgreSQL
+class InsertTest extends PostgreSQLTestCase
 {
     /**
      * Test insert statements then check the results
@@ -17,7 +17,7 @@ class InsertTest extends PostgreSQL
      */
     public function testInsert()
     {
-        $statement = $this->getConnection()
+        $statement = $this->getQueryBuilderConnection()
             ->insert()
             ->into('querybuilder_tests')
             ->values(
@@ -31,7 +31,7 @@ class InsertTest extends PostgreSQL
         $this->assertInstanceOf(\PDOStatement::class, $statement);
         $this->assertEquals(1, $statement->rowCount());
 
-        $result = $this->getConnection()->getOneField(
+        $result = $this->getQueryBuilderConnection()->getOneField(
             'SELECT count(1) AS counter
             FROM querybuilder_tests',
             [],
@@ -40,7 +40,7 @@ class InsertTest extends PostgreSQL
 
         $this->assertEquals(11, $result);
 
-        $statement = $this->getConnection()
+        $statement = $this->getQueryBuilderConnection()
             ->insert(
                 [
                     'id'         => 11,
@@ -54,7 +54,7 @@ class InsertTest extends PostgreSQL
         $this->assertInstanceOf(\PDOStatement::class, $statement);
         $this->assertEquals(1, $statement->rowCount());
 
-        $result = $this->getConnection()->getOneField(
+        $result = $this->getQueryBuilderConnection()->getOneField(
             'SELECT count(1) AS counter
             FROM querybuilder_tests',
             [],
@@ -72,7 +72,7 @@ class InsertTest extends PostgreSQL
      */
     public function testMultipleInserts()
     {
-        $statement = $this->getConnection()
+        $statement = $this->getQueryBuilderConnection()
             ->insert()
             ->into('querybuilder_tests')
             ->values(
@@ -94,7 +94,7 @@ class InsertTest extends PostgreSQL
         $this->assertInstanceOf(\PDOStatement::class, $statement);
         $this->assertEquals(2, $statement->rowCount());
 
-        $result = $this->getConnection()->getOneField(
+        $result = $this->getQueryBuilderConnection()->getOneField(
             'SELECT count(1) AS counter
             FROM querybuilder_tests',
             [],
@@ -102,15 +102,6 @@ class InsertTest extends PostgreSQL
         );
 
         $this->assertEquals(12, $result);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
     }
 
 }

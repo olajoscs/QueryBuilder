@@ -7,7 +7,7 @@ namespace OlajosCs\QueryBuilder\PostgreSQL;
  *
  * Test RawExpression object and handling of it
  */
-class RawExpressionTest extends PostgreSQL
+class RawExpressionTest extends PostgreSQLTestCase
 {
     /**
      * Test RawExpression when it is in the field list of a select
@@ -16,7 +16,7 @@ class RawExpressionTest extends PostgreSQL
      */
     public function testRawInSelect()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $counter = $connection
             ->select($connection->createRawExpression('count(1)::integer as counter'))
@@ -42,7 +42,7 @@ class RawExpressionTest extends PostgreSQL
      */
     public function testRawInSelectWhere()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $counter = $connection
             ->select($connection->createRawExpression('count(1)::integer as counter'))
@@ -70,7 +70,7 @@ class RawExpressionTest extends PostgreSQL
      */
     public function testRawInUpdateWhere()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $statement = $connection
             ->update('querybuilder_tests')
@@ -93,7 +93,7 @@ class RawExpressionTest extends PostgreSQL
      */
     public function testRawInDeleteWhere()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $statement = $connection
             ->delete()
@@ -102,14 +102,5 @@ class RawExpressionTest extends PostgreSQL
             ->execute();
 
         $this->assertEquals(5, $statement->rowCount());
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
     }
 }

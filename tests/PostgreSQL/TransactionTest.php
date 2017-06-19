@@ -7,7 +7,7 @@ namespace OlajosCs\QueryBuilder\PostgreSQL;
  *
  * Testing transaction in mysql
  */
-class TransactionTest extends PostgreSQL
+class TransactionTest extends PostgreSQLTestCase
 {
     /**
      * Test the rollback of the transaction
@@ -16,7 +16,7 @@ class TransactionTest extends PostgreSQL
      */
     public function testRollback()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $before = $connection->getOneField(
             'SELECT count(1) AS counter FROM querybuilder_tests',
@@ -61,7 +61,7 @@ class TransactionTest extends PostgreSQL
      */
     public function testCommit()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $before = $connection->getOneField(
             'SELECT count(1) AS counter FROM querybuilder_tests',
@@ -90,14 +90,5 @@ class TransactionTest extends PostgreSQL
         );
 
         $this->assertEquals($before + 1, $after);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
     }
 }

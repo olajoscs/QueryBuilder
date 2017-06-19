@@ -11,7 +11,7 @@ use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
  *
  * Testing where clauses of the query builder
  */
-class SelectWhereTest extends MySQL
+class SelectWhereTest extends MySQLTestCase
 {
     /**
      * Test a basic where clause
@@ -69,7 +69,7 @@ class SelectWhereTest extends MySQL
      */
     public function testWhere()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $string = 'SELECT * FROM strings WHERE id > :where0';
         $query = $connection
@@ -87,7 +87,7 @@ class SelectWhereTest extends MySQL
      */
     public function testWhereOr()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $query = $connection
             ->select('id')
@@ -107,7 +107,7 @@ class SelectWhereTest extends MySQL
      */
     public function testWhereIn()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $query = $connection
             ->select('id')
@@ -121,13 +121,33 @@ class SelectWhereTest extends MySQL
 
 
     /**
-     * Tests where in condition
+     * Test where in condition with an empty list
+     *
+     * @return void
+     */
+    public function testWhereInEmptyList()
+    {
+        $connection = $this->getQueryBuilderConnection();
+
+        $query = $connection
+            ->select('id')
+            ->from('strings')
+            ->whereIn('id', []);
+
+        $string = 'SELECT id FROM strings WHERE false';
+
+        $this->assertEquals($string, $query->asString());
+    }
+
+
+    /**
+     * Tests where not in condition
      *
      * @return void
      */
     public function testWhereNotIn()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $query = $connection
             ->select('id')
@@ -141,13 +161,33 @@ class SelectWhereTest extends MySQL
 
 
     /**
+     * Test where not in condition with an empty list
+     *
+     * @return void
+     */
+    public function testWhereNotInEmptyList()
+    {
+        $connection = $this->getQueryBuilderConnection();
+
+        $query = $connection
+            ->select('id')
+            ->from('strings')
+            ->whereNotIn('id', []);
+
+        $string = 'SELECT id FROM strings WHERE true';
+
+        $this->assertEquals($string, $query->asString());
+    }
+
+
+    /**
      * Tests where between condition
      *
      * @return void
      */
     public function testWhereBetween()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $query = $connection
             ->select('id')
@@ -184,7 +224,7 @@ class SelectWhereTest extends MySQL
      */
     public function testIsNull()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $statement = $connection->select()
             ->from('strings')

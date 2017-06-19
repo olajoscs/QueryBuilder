@@ -7,7 +7,7 @@ namespace OlajosCs\QueryBuilder\MySQL;
  *
  * Testing the select part of querybuilder
  */
-class SelectTest extends MySQL
+class SelectTest extends MySQLTestCase
 {
     /**
      * Testing selcect from and asString
@@ -16,7 +16,7 @@ class SelectTest extends MySQL
      */
     public function testSelect()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $string = 'SELECT * FROM strings';
         $query = $connection->select()->from('strings');
@@ -50,7 +50,7 @@ class SelectTest extends MySQL
      */
     public function testInvalidLimit()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
         $this->expectException(\InvalidArgumentException::class);
 
         $query = $connection->select()->from('strings')->limit('hello');
@@ -64,7 +64,7 @@ class SelectTest extends MySQL
      */
     public function testInvalidOffset()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
         $this->expectException(\InvalidArgumentException::class);
 
         $query = $connection->select()->from('strings')->offset('hello');

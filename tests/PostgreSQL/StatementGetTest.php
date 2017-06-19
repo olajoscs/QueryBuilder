@@ -11,7 +11,7 @@ use OlajosCs\QueryBuilder\Exceptions\FieldNotFoundException;
  *
  * Test the querybuilder
  */
-class StatementGetTest extends PostgreSQL
+class StatementGetTest extends PostgreSQLTestCase
 {
     /**
      * Test the default get method of the connection class
@@ -20,7 +20,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testGet()
     {
-        $result = $this->getConnection()
+        $result = $this->getQueryBuilderConnection()
             ->select()
             ->from('querybuilder_tests')
             ->where('id', '<', 10)
@@ -57,7 +57,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testGetAsClasses()
     {
-        $result = $this->getConnection()
+        $result = $this->getQueryBuilderConnection()
             ->select()
             ->from('querybuilder_tests')
             ->orderBy('id')
@@ -73,7 +73,7 @@ class StatementGetTest extends PostgreSQL
         $this->assertEquals($expected, $result);
 
 
-        $result = $this->getConnection()->getAsClasses(
+        $result = $this->getQueryBuilderConnection()->getAsClasses(
             'SELECT * FROM "querybuilder_tests" WHERE "id" = :id',
             [
                 'id' => 5,
@@ -96,7 +96,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testGetOne()
     {
-        $result = $this->getConnection()
+        $result = $this->getQueryBuilderConnection()
             ->select()
             ->from('querybuilder_tests')
             ->where('field', '=', 'ffff')
@@ -120,7 +120,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testGetOneClass()
     {
-        $result = $this->getConnection()
+        $result = $this->getQueryBuilderConnection()
             ->select()
             ->from('querybuilder_tests')
             ->where('id', '=', 1)
@@ -139,7 +139,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testGetOneField()
     {
-        $result = $this->getConnection()
+        $result = $this->getQueryBuilderConnection()
             ->select('field')
             ->from('querybuilder_tests')
             ->where('id', '=', 1)
@@ -149,7 +149,7 @@ class StatementGetTest extends PostgreSQL
 
         $this->expectException(FieldNotFoundException::class);
 
-        $this->getConnection()
+        $this->getQueryBuilderConnection()
             ->select('field')
             ->from('querybuilder_tests')
             ->where('id', '=', 1)
@@ -164,7 +164,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testGetList()
     {
-        $result = $this->getConnection()
+        $result = $this->getQueryBuilderConnection()
             ->select('field')
             ->from('querybuilder_tests')
             ->where('id', '>', 7)
@@ -188,7 +188,7 @@ class StatementGetTest extends PostgreSQL
     {
         $this->expectException(FieldNotFoundException::class);
 
-        $this->getConnection()
+        $this->getQueryBuilderConnection()
             ->select('field')
             ->from('querybuilder_tests')
             ->where('id', '>', 7)
@@ -203,7 +203,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testGetWithKey()
     {
-        $result = $this->getConnection()
+        $result = $this->getQueryBuilderConnection()
             ->select()
             ->from('querybuilder_tests')
             ->where('id', '<', 2)
@@ -226,7 +226,7 @@ class StatementGetTest extends PostgreSQL
 
         $this->expectException(FieldNotFoundException::class);
 
-        $this->getConnection()
+        $this->getQueryBuilderConnection()
             ->select()
             ->from('querybuilder_tests')
             ->where('id', '<', 2)
@@ -241,7 +241,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testGetClassesWithKey()
     {
-        $result = $this->getConnection()
+        $result = $this->getQueryBuilderConnection()
             ->select()
             ->from('querybuilder_tests')
             ->where('id', '<', 2)
@@ -256,7 +256,7 @@ class StatementGetTest extends PostgreSQL
 
         $this->expectException(FieldNotFoundException::class);
 
-        $this->getConnection()
+        $this->getQueryBuilderConnection()
             ->select()
             ->from('querybuilder_tests')
             ->where('id', '<', 2)
@@ -271,7 +271,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testExecute()
     {
-        $statement = $this->getConnection()
+        $statement = $this->getQueryBuilderConnection()
             ->select()
             ->from('querybuilder_tests')
             ->execute();
@@ -288,7 +288,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testFull()
     {
-        $result = $this->getConnection()
+        $result = $this->getQueryBuilderConnection()
             ->select(
                 [
                     'field',
@@ -329,7 +329,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testWhereInWithEmpty()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $results = $connection
             ->select('id')
@@ -348,7 +348,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testWhereNotInWithEmpty()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $results = $connection
             ->select('id')
@@ -374,7 +374,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testEmptyList()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $results = $connection
             ->select('id')
@@ -393,7 +393,7 @@ class StatementGetTest extends PostgreSQL
      */
     public function testEmptyListWithKeys()
     {
-        $connection = $this->getConnection();
+        $connection = $this->getQueryBuilderConnection();
 
         $results = $connection
             ->select('id')
@@ -402,14 +402,5 @@ class StatementGetTest extends PostgreSQL
             ->getWithKey('id');
 
         $this->assertEquals([], $results);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    protected function setUp()
-    {
-        $this->seed();
     }
 }
