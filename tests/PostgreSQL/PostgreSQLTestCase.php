@@ -72,11 +72,11 @@ abstract class PostgreSQLTestCase extends \PHPUnit_Extensions_Database_TestCase
         $connection = $this->getConnection()->getConnection();
 
         $connection->exec(
-            'CREATE TABLE IF NOT EXISTS querybuilder_test_languages (id INT PRIMARY KEY, code VARCHAR(2))'
+            'CREATE TABLE IF NOT EXISTS querybuilder_test_languages ("id" INT PRIMARY KEY, "code" VARCHAR(2))'
         );
 
         $connection->exec(
-            'CREATE TABLE IF NOT EXISTS querybuilder_tests (id INT PRIMARY KEY, languageId INT, field VARCHAR(6))'
+            'CREATE TABLE IF NOT EXISTS querybuilder_tests ("id" INT PRIMARY KEY, "languageId" INT, "field" VARCHAR(6))'
         );
 
         parent::setUp();
