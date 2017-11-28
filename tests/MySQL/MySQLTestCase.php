@@ -4,6 +4,8 @@ namespace OlajosCs\QueryBuilder\MySQL;
 
 use OlajosCs\QueryBuilder\ConnectionFactory;
 use OlajosCs\QueryBuilder\Contracts\Connection;
+use OlajosCs\QueryBuilder\PDO;
+use OlajosCs\QueryBuilder\TestConfig;
 
 
 /**
@@ -37,8 +39,13 @@ abstract class MySQLTestCase extends \PHPUnit_Extensions_Database_TestCase
     protected function getConnection()
     {
         if ($this->connection === null) {
-            $this->queryBuilderConnection = ConnectionFactory::get('mysql');
-            $this->connection             = $this->createDefaultDBConnection($this->queryBuilderConnection->getPdo());
+            $configArray = require(__DIR__ . '/../../config/config.php');
+            $config      = new TestConfig($configArray['mysql']);
+
+            $connectionFactory = new ConnectionFactory();
+            $pdo               = new PDO($config);
+            $this->queryBuilderConnection  = $connectionFactory->create($pdo);
+            $this->connection  = $this->createDefaultDBConnection($this->queryBuilderConnection->getPdo());
         }
 
         return $this->connection;

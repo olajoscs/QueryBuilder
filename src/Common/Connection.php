@@ -59,17 +59,11 @@ abstract class Connection implements ConnectionInterface
     /**
      * Create a new Connection object
      *
-     * @param string $host
-     * @param string $username
-     * @param string $password
-     * @param string $database
-     * @param array  $options
+     * @param \PDO $pdo
      */
-    public function __construct($host, $username, $password, $database, array $options)
+    public function __construct(\PDO $pdo)
     {
-        $dsn = "{$this->getDatabaseType()}:host={$host};dbname={$database};";
-
-        $this->pdo = new \PDO($dsn, $username, $password, $options);
+        $this->pdo = $pdo;
     }
 
 

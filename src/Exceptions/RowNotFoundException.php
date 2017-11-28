@@ -7,7 +7,7 @@ namespace OlajosCs\QueryBuilder\Exceptions;
  *
  * Exception for not finding any rows in the result of a one-row-query
  */
-class RowNotFoundException extends QueryBuilderException
+class RowNotFoundException extends NotOneFoundException
 {
 
 }
