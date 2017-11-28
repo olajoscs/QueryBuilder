@@ -55,15 +55,4 @@ class Connection extends ConnectionCommon
     {
         return new RawExpression($expression);
     }
-
-
-    /**
-     * Return the type of the database
-     *
-     * @return string
-     */
-    protected function getDatabaseType()
-    {
-        return 'mysql';
-    }
 }
