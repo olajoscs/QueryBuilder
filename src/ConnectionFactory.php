@@ -4,6 +4,8 @@ namespace OlajosCs\QueryBuilder;
 
 use OlajosCs\QueryBuilder\Contracts\Connection;
 use OlajosCs\QueryBuilder\Exceptions\InvalidDriverException;
+use OlajosCs\QueryBuilder\MySQL\Connection as MySqlConnection;
+use OlajosCs\QueryBuilder\PostgreSQL\Connection as PostgreSqlConnection;
 
 /**
  * Class ConnectionFactory
@@ -24,10 +26,10 @@ class ConnectionFactory
     {
         switch ($pdo->getDatabaseType()) {
             case 'mysql':
-                $connection = new Mysql\Connection($pdo);
+                $connection = new MySqlConnection($pdo);
                 break;
             case 'pgsql':
-                $connection = new PostgreSQL\Connection($pdo);
+                $connection = new PostgreSqlConnection($pdo);
                 break;
             default:
                 throw new InvalidDriverException('Not implemented driver: ' . $pdo->getDatabaseType());

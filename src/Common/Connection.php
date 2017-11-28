@@ -377,12 +377,4 @@ abstract class Connection implements ConnectionInterface
     {
         return $this->pdo;
     }
-
-
-    /**
-     * Return the type of the database
-     *
-     * @return string
-     */
-    abstract protected function getDatabaseType();
 }
