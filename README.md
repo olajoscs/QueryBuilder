@@ -14,7 +14,7 @@ The constructor is the same as the one in the PDO class.
 
 ```php
   $myDIContainer->singleton('connection', function() {
-    // Create a config object, which implements the Config interface
+    // Create an own config object, which extends the ConnectionConfig abstract class, or implements the Config interface
     $configArray = include(..);
     $config = new Config($configArray);
     
