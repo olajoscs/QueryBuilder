@@ -6,6 +6,7 @@ php:
 services:
   - mysql
   - postgresql
+  - sqlite3
 before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction
