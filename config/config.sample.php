@@ -41,4 +41,15 @@ return [
             \PDO::ATTR_CASE => \PDO::CASE_NATURAL
         ],
     ],
+
+    'sqlite_memory' => [
+        'type'     => 'sqlite',
+        'host'     => ':memory:',
+        'database' => null,
+        'user'     => null,
+        'password' => null,
+        'options'  => [
+            \PDO::ATTR_CASE => \PDO::CASE_NATURAL
+        ],
+    ],
 ];

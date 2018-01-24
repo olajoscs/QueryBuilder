@@ -40,7 +40,7 @@ abstract class SQLiteTestCase extends \PHPUnit_Extensions_Database_TestCase
     {
         if ($this->connection === null) {
             $configArray = require(__DIR__ . '/../../config/config.php');
-            $config      = new TestConfig($configArray['sqlite']);
+            $config      = new TestConfig($configArray['sqlite_memory']);
 
             $connectionFactory = new ConnectionFactory();
             $pdo               = new PDO($config);
