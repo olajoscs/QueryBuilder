@@ -296,7 +296,7 @@ abstract class Connection implements ConnectionInterface
      * @throws MultipleRowFoundException
      * @throws RowNotFoundException
      */
-    private function readOne($query, $parameters)
+    protected function readOne($query, $parameters)
     {
         $statement = $this->execute($query, $parameters);
 

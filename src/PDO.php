@@ -22,12 +22,20 @@ class PDO extends \PDO
      */
     public function __construct(Config $config)
     {
-        $dsn = sprintf(
-            '%s:host=%s;dbname=%s',
-            $config->getDatabaseType(),
-            $config->getHost(),
-            $config->getDatabase()
-        );
+        if ($config->getHost() === ':memory:') {
+            $dsn = sprintf(
+                '%s:%s',
+                $config->getDatabaseType(),
+                $config->getHost()
+            );
+        } else {
+            $dsn = sprintf(
+                '%s:host=%s;dbname=%s',
+                $config->getDatabaseType(),
+                $config->getHost(),
+                $config->getDatabase()
+            );
+        }
 
         parent::__construct($dsn, $config->getUser(), $config->getPassword(), $config->getOptions());
 

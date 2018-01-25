@@ -1,11 +1,16 @@
 [![Build Status](https://travis-ci.org/olajoscs/QueryBuilder.svg?branch=master)](https://travis-ci.org/olajoscs/QueryBuilder)
 [![Latest Stable Version](https://poser.pugx.org/olajoscs/querybuilder/v/stable)](https://packagist.org/packages/olajoscs/querybuilder)
 # QueryBuilder
-A simple query builder for relational databases, currently with MySQL and PostgreSQL support. 100% of the code is unit tested.
+A simple query builder for relational databases, currently working with:
+ - MySQL, 
+ - PostgreSQL, 
+ - SQLite. 
+
+100% of the code is unit tested.
 
 Contains the 4 basic (CRUD) operations with transaction handling.
 
-Minimum requirements: PHP 5.5+ with MySQL or PostgreSQL.
+Minimum requirements: PHP 5.5+ with any of the databases above.
 
 # Creating the connection
 The Connection class extends the built-in PDO class. It is the starting point of creating statements.
