@@ -20,4 +20,34 @@ abstract class DeleteStatement extends WhereStatement implements DeleteStatement
 
         return $this;
     }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function asString()
+    {
+        $query = sprintf(
+            'DELETE FROM %s',
+            $this->getNormalizedTableName()
+        );
+
+        if ($this->whereContainer->has()) {
+            $query .= $this->whereContainer->asString();
+            $this->parameters += $this->whereContainer->getParameters();
+        }
+
+        return $query;
+    }
+
+
+    /**
+     * Return the table name normalized
+     *
+     * @return string
+     */
+    protected function getNormalizedTableName()
+    {
+        return $this->table;
+    }
 }

@@ -19,31 +19,6 @@ class UpdateStatement extends UpdateStatementCommon
     /**
      * @inheritDoc
      */
-    public function asString()
-    {
-        $values = [];
-        foreach ($this->names as $field => $name) {
-            $values[] = $field . ' = ' . $name;
-        }
-
-        $query = sprintf(
-            'UPDATE %s SET %s',
-            $this->table,
-            implode(', ', $values)
-        );
-
-        if ($this->whereContainer->has()) {
-            $query .= $this->whereContainer->asString();
-            $this->parameters += $this->whereContainer->getParameters();
-        }
-
-        return $query;
-    }
-
-
-    /**
-     * @inheritDoc
-     */
     protected function createWhereContainer()
     {
         return new WhereContainer();

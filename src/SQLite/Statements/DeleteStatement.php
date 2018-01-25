@@ -18,25 +18,6 @@ class DeleteStatement extends DeleteStatementCommon
     /**
      * @inheritDoc
      */
-    public function asString()
-    {
-        $query = sprintf(
-            'DELETE FROM %s',
-            $this->table
-        );
-
-        if ($this->whereContainer->has()) {
-            $query .= $this->whereContainer->asString();
-            $this->parameters += $this->whereContainer->getParameters();
-        }
-
-        return $query;
-    }
-
-
-    /**
-     * @inheritDoc
-     */
     protected function createWhereContainer()
     {
         return new WhereContainer();

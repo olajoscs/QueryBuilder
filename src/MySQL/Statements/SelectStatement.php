@@ -22,48 +22,6 @@ use OlajosCs\QueryBuilder\MySQL\Clauses\WhereElement;
 class SelectStatement extends SelectStatementCommon
 {
     /**
-     * @inheritdoc
-     */
-    public function asString()
-    {
-        $this->parameters = [];
-
-        $query = sprintf(
-            'SELECT %s FROM %s',
-            implode(', ', $this->fields),
-            $this->table
-        );
-
-        if ($this->joinContainer->has()) {
-            $query .= $this->joinContainer->asString();
-        }
-
-        if ($this->whereContainer->has()) {
-            $query .= $this->whereContainer->asString();
-            $this->parameters += $this->whereContainer->getParameters();
-        }
-
-        if ($this->orderByContainer->has()) {
-            $query .= $this->orderByContainer->asString();
-        }
-
-        if ($this->groupByContainer->has()) {
-            $query .= $this->groupByContainer->asString();
-        }
-
-        if ($this->limit !== null) {
-            $query .= sprintf(' LIMIT %s', $this->limit);
-        }
-
-        if ($this->offset !== null) {
-            $query .= sprintf(' OFFSET %s', $this->offset);
-        }
-
-        return $query;
-    }
-
-
-    /**
      * @inheritDoc
      */
     protected function createJoinContainer()

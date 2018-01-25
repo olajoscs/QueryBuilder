@@ -12,11 +12,4 @@ use OlajosCs\QueryBuilder\Common\Clauses\RawWhereElement as RawWhereElementCommo
  */
 class RawWhereElement extends RawWhereElementCommon
 {
-    /**
-     * @inheritDoc
-     */
-    public function asString()
-    {
-        return $this->expression->asString();
-    }
 }

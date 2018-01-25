@@ -27,4 +27,22 @@ abstract class RawExpression implements RawExpressionInterface
     {
         $this->expression = $expression;
     }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function asString()
+    {
+        return $this->expression;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function __toString()
+    {
+        return $this->asString();
+    }
 }

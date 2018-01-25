@@ -11,12 +11,4 @@ use OlajosCs\QueryBuilder\Common\Clauses\GroupByElement as GroupByElementCommon;
  */
 class GroupByElement extends GroupByElementCommon
 {
-
-    /**
-     * @inheritdoc
-     */
-    public function asString()
-    {
-        return $this->field;
-    }
 }

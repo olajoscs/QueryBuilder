@@ -86,4 +86,13 @@ abstract class RawWhereElement implements WhereElementInterface
         return WhereElementInterface::GLUE_AND;
     }
 
+
+    /**
+     * @inheritDoc
+     */
+    public function asString()
+    {
+        return $this->expression->asString();
+    }
+
 }

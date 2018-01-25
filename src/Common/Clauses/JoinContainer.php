@@ -17,4 +17,23 @@ abstract class JoinContainer extends Container implements JoinContainerInterface
      * @var JoinElement[]
      */
     protected $list = [];
+
+
+    /**
+     * Return the join of clauses as a string
+     *
+     * @return mixed
+     */
+    public function asString()
+    {
+        $query = '';
+
+        if (!empty($this->list)) {
+            foreach ($this->list as $clause) {
+                $query .= $clause->asString();
+            }
+        }
+
+        return $query;
+    }
 }

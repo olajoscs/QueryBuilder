@@ -15,44 +15,14 @@ class WhereElement extends WhereElementCommon
 {
     use NameNormalizer;
 
+
     /**
-     * @inheritdoc
+     * Return the normalized field name
+     *
+     * @return string
      */
-    public function asString()
+    protected function getNormalizedField()
     {
-        if ($this->hasNullValueOperator()) {
-            $this->values = [];
-
-            return sprintf(
-                '%s %s',
-                $this->normalize($this->getField()),
-                $this->getOperator()
-            );
-        }
-
-        if ($this->hasArrayOperator()) {
-            if ($this->operator === Operator::BETWEEN) {
-                $name = $this->names[0] . ' AND ' . $this->names[1];
-            } else {
-                $name = '(' . implode(',', $this->names) . ')';
-            }
-        } else {
-            $name = $this->names[0];
-        }
-
-        if ($this->operator === Operator::IN && empty($this->values)) {
-            return 'false';
-        }
-
-        if ($this->operator === Operator::NOTIN && empty($this->values)) {
-            return 'true';
-        }
-
-        return sprintf(
-            '%s %s %s',
-            $this->normalize($this->getField()),
-            $this->getOperator(),
-            $name
-        );
+        return $this->normalize($this->getField());
     }
 }

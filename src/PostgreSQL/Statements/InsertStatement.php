@@ -19,13 +19,7 @@ class InsertStatement extends InsertStatementCommon
      */
     public function asString()
     {
-        // Gathering the array of the bracketed rows into the insert statement
-        $values = array_map(
-            function($values) {
-                return '(' . implode(', ', $values) . ')';
-            },
-            $this->names
-        );
+        $values = $this->generateValues();
 
         $query = sprintf(
             'INSERT INTO %s (%s) VALUES %s',

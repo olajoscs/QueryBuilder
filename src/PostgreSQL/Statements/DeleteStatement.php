@@ -18,22 +18,15 @@ class DeleteStatement extends DeleteStatementCommon
 {
     use NameNormalizer;
 
+
     /**
-     * @inheritDoc
+     * Return the table name normalized
+     *
+     * @return string
      */
-    public function asString()
+    protected function getNormalizedTableName()
     {
-        $query = sprintf(
-            'DELETE FROM %s',
-            $this->normalize($this->table)
-        );
-
-        if ($this->whereContainer->has()) {
-            $query .= $this->whereContainer->asString();
-            $this->parameters += $this->whereContainer->getParameters();
-        }
-
-        return $query;
+        return $this->normalize($this->table);
     }
 
 

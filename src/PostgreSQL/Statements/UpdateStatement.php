@@ -18,30 +18,6 @@ class UpdateStatement extends UpdateStatementCommon
 {
     use NameNormalizer;
 
-    /**
-     * @inheritDoc
-     */
-    public function asString()
-    {
-        $values = [];
-        foreach ($this->names as $field => $name) {
-            $values[] = $this->normalize($field) . ' = ' . $name;
-        }
-
-        $query = sprintf(
-            'UPDATE %s SET %s',
-            $this->normalize($this->table),
-            implode(', ', $values)
-        );
-
-        if ($this->whereContainer->has()) {
-            $query .= $this->whereContainer->asString();
-            $this->parameters += $this->whereContainer->getParameters();
-        }
-
-        return $query;
-    }
-
 
     /**
      * @inheritDoc

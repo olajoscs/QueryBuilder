@@ -66,6 +66,24 @@ abstract class JoinElement implements JoinElementInterface
 
 
     /**
+     * @inheritdoc
+     */
+    public function asString()
+    {
+        return sprintf(
+            ' %s JOIN %s ON %s.%s %s %s.%s',
+            $this->getType(),
+            $this->getTableRight(),
+            $this->getTableLeft(),
+            $this->getFieldLeft(),
+            $this->getOperator(),
+            $this->getTableRight(),
+            $this->getFieldRight()
+        );
+    }
+
+
+    /**
      * @inheitdoc
      */
     public function getTableLeft()

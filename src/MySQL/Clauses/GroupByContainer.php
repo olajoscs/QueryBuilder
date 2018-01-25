@@ -10,20 +10,6 @@ use OlajosCs\QueryBuilder\Contracts\Clauses\GroupByContainer as GroupByContainer
  *
  * Defines a group by element to the query
  */
-class GroupByContainer extends GroupByContainerCommon implements GroupByContainerInterface
+class GroupByContainer extends GroupByContainerCommon
 {
-    /**
-     * @inheritdoc
-     */
-    public function asString()
-    {
-        $strings = array_map(
-            function(GroupByElement $element) {
-                return $element->asString();
-            },
-            $this->get()
-        );
-
-        return sprintf(' GROUP BY %s', implode(', ', $strings));
-    }
 }

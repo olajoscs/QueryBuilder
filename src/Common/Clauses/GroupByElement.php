@@ -37,4 +37,13 @@ abstract class GroupByElement implements GroupByElementInterface
     {
         return $this->field;
     }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function asString()
+    {
+        return $this->field;
+    }
 }

@@ -22,6 +22,21 @@ use OlajosCs\QueryBuilder\Contracts\Statements\SelectStatement as SelectStatemen
 abstract class SelectStatement extends WhereStatement implements SelectStatementInterface
 {
     /**
+     * SelectStatement constructor.
+     *
+     * @param Connection $connection
+     */
+    public function __construct(Connection $connection)
+    {
+        parent::__construct($connection);
+
+        $this->joinContainer    = $this->createJoinContainer();
+        $this->orderByContainer = $this->createOrderByContainer();
+        $this->groupByContainer = $this->createGroupByContainer();
+    }
+
+
+    /**
      * @var array The name of the fields to get in the query
      */
     protected $fields;
@@ -53,97 +68,44 @@ abstract class SelectStatement extends WhereStatement implements SelectStatement
 
 
     /**
-     * Create and return a new JoinContainer object
-     *
-     * @return JoinContainer
-     */
-    abstract protected function createJoinContainer();
-
-
-    /**
-     * Create and return a new GroupByContainer object
-     *
-     * @return GroupByContainer
-     */
-    abstract protected function createGroupByContainer();
-
-
-    /**
-     * Create and return a new OrderByContainer
-     *
-     * @return OrderByContainer
-     */
-    abstract protected function createOrderByContainer();
-
-
-    /**
-     * Create and return a JoinElement
-     *
-     * @param string $tableLeft
-     * @param string $fieldLeft
-     * @param string $operator
-     * @param string $tableRight
-     * @param string $fieldRight
-     * @param string $type
-     *
-     * @return JoinElement
-     */
-    abstract protected function createJoinElement($tableLeft, $fieldLeft, $operator, $tableRight, $fieldRight, $type);
-
-
-    /**
-     * Create and return an OrderByElement
-     *
-     * @param string $field         Name of the field to order by
-     * @param string $order         Type of the order (one of the OrderByElement::ORDER_ constants)
-     * @param string $nullsPosition Position of the null values (one of the OrderByElement::NULLS_ constans)
-     *
-     * @return OrderByElement
-     */
-    abstract protected function createOrderByElement($field, $order = null, $nullsPosition = null);
-
-
-    /**
-     * Create and return a GroupByElement
-     *
-     * @param string $field
-     *
-     * @return GroupByElement
-     */
-    abstract protected function createGroupByElement($field);
-
-
-    /**
-     * SelectStatement constructor.
-     *
-     * @param Connection $connection
-     */
-    public function __construct(Connection $connection)
-    {
-        parent::__construct($connection);
-
-        $this->joinContainer    = $this->createJoinContainer();
-        $this->orderByContainer = $this->createOrderByContainer();
-        $this->groupByContainer = $this->createGroupByContainer();
-    }
-
-
-    /**
      * @inheritdoc
      */
-    public function setFields($fields)
+    public function asString()
     {
-        if (empty($fields)) {
-            $fields = ['*'];
+        $this->parameters = [];
+
+        $query = sprintf(
+            'SELECT %s FROM %s',
+            $this->getImplodedFields(),
+            $this->getNormalizedTableName()
+        );
+
+        if ($this->joinContainer->has()) {
+            $query .= $this->joinContainer->asString();
         }
 
-        if (!is_array($fields)) {
-            $fields = [$fields];
+        if ($this->whereContainer->has()) {
+            $query .= $this->whereContainer->asString();
+            $this->parameters += $this->whereContainer->getParameters();
         }
 
-        $this->fields = $fields;
+        if ($this->orderByContainer->has()) {
+            $query .= $this->orderByContainer->asString();
+        }
 
-        return $this;
+        if ($this->groupByContainer->has()) {
+            $query .= $this->groupByContainer->asString();
+        }
+
+        if ($this->limit !== null) {
+            $query .= sprintf(' LIMIT %s', $this->limit);
+        }
+
+        if ($this->offset !== null) {
+            $query .= sprintf(' OFFSET %s', $this->offset);
+        }
+
+        return $query;
     }
 
 
@@ -364,5 +326,106 @@ abstract class SelectStatement extends WhereStatement implements SelectStatement
     public function __toString()
     {
         return $this->asString();
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function setFields($fields)
+    {
+        if (empty($fields)) {
+            $fields = ['*'];
+        }
+
+        if (!is_array($fields)) {
+            $fields = [$fields];
+        }
+
+        $this->fields = $fields;
+
+        return $this;
+    }
+
+    /**
+     * Create and return a new JoinContainer object
+     *
+     * @return JoinContainer
+     */
+    abstract protected function createJoinContainer();
+
+
+    /**
+     * Create and return a new GroupByContainer object
+     *
+     * @return GroupByContainer
+     */
+    abstract protected function createGroupByContainer();
+
+
+    /**
+     * Create and return a new OrderByContainer
+     *
+     * @return OrderByContainer
+     */
+    abstract protected function createOrderByContainer();
+
+
+    /**
+     * Create and return a JoinElement
+     *
+     * @param string $tableLeft
+     * @param string $fieldLeft
+     * @param string $operator
+     * @param string $tableRight
+     * @param string $fieldRight
+     * @param string $type
+     *
+     * @return JoinElement
+     */
+    abstract protected function createJoinElement($tableLeft, $fieldLeft, $operator, $tableRight, $fieldRight, $type);
+
+
+    /**
+     * Create and return an OrderByElement
+     *
+     * @param string $field         Name of the field to order by
+     * @param string $order         Type of the order (one of the OrderByElement::ORDER_ constants)
+     * @param string $nullsPosition Position of the null values (one of the OrderByElement::NULLS_ constans)
+     *
+     * @return OrderByElement
+     */
+    abstract protected function createOrderByElement($field, $order = null, $nullsPosition = null);
+
+
+    /**
+     * Create and return a GroupByElement
+     *
+     * @param string $field
+     *
+     * @return GroupByElement
+     */
+    abstract protected function createGroupByElement($field);
+
+
+    /**
+     * Return the imploded field names into the select statement
+     *
+     * @return string
+     */
+    protected function getImplodedFields()
+    {
+        return implode(', ', $this->fields);
+    }
+
+
+    /**
+     * Return the normalized table name
+     *
+     * @return string
+     */
+    protected function getNormalizedTableName()
+    {
+        return $this->table;
     }
 }

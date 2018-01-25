@@ -12,20 +12,4 @@ use OlajosCs\QueryBuilder\Common\RawExpression as RawExpressionCommon;
  */
 class RawExpression extends RawExpressionCommon
 {
-    /**
-     * @inheritdoc
-     */
-    public function asString()
-    {
-        return $this->expression;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function __toString()
-    {
-        return $this->asString();
-    }
 }

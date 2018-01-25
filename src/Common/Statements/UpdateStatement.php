@@ -37,6 +37,42 @@ abstract class UpdateStatement extends WhereStatement implements UpdateStatement
 
 
     /**
+     * @inheritDoc
+     */
+    public function asString()
+    {
+        $values = [];
+        foreach ($this->names as $field => $name) {
+            $values[] = $this->normalize($field) . ' = ' . $name;
+        }
+
+        $query = sprintf(
+            'UPDATE %s SET %s',
+            $this->normalize($this->table),
+            implode(', ', $values)
+        );
+
+        if ($this->whereContainer->has()) {
+            $query .= $this->whereContainer->asString();
+            $this->parameters += $this->whereContainer->getParameters();
+        }
+
+        return $query;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function setTable($table)
+    {
+        $this->table = $table;
+
+        return $this;
+    }
+
+
+    /**
      * Add a value to the update statement.
      * It is added as a placeholder to the values, and the real value is added to the binding list
      *
@@ -54,13 +90,8 @@ abstract class UpdateStatement extends WhereStatement implements UpdateStatement
     }
 
 
-    /**
-     * @inheritDoc
-     */
-    public function setTable($table)
+    public function normalize($name)
     {
-        $this->table = $table;
-
-        return $this;
+        return $name;
     }
 }

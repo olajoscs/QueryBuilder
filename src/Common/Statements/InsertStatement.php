@@ -62,6 +62,43 @@ abstract class InsertStatement extends Statement implements InsertStatementInter
     }
 
 
+    /**
+     * @inheritDoc
+     */
+    public function asString()
+    {
+        $values = $this->generateValues();
+
+        $query = sprintf(
+            'INSERT INTO %s (%s) VALUES %s',
+            $this->table,
+            implode(', ', array_keys(reset($this->names))),
+            implode(', ', $values)
+        );
+
+        return $query;
+    }
+
+
+    /**
+     * Gather the array of the bracketed rows into the insert statement
+     *
+     * @return array
+     */
+    protected function generateValues()
+    {
+        // Gathering the array of the bracketed rows into the insert statement
+        $values = array_map(
+            function($values) {
+                return '(' . implode(', ', $values) . ')';
+            },
+            $this->names
+        );
+
+        return $values;
+    }
+
+
     private function addValues($arrayKey, array $values)
     {
         foreach ($values as $field => $value) {

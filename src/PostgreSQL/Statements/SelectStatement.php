@@ -24,55 +24,6 @@ class SelectStatement extends SelectStatementCommon
 {
     use NameNormalizer;
 
-    /**
-     * @inheritdoc
-     */
-    public function asString()
-    {
-        $this->parameters = [];
-
-        $query = sprintf(
-            'SELECT %s FROM %s',
-            implode(
-                ', ',
-                array_map(
-                    function($field) {
-                        return $this->normalize($field);
-                    },
-                    $this->fields
-                )
-            ),
-            $this->normalize($this->table)
-        );
-
-        if ($this->joinContainer->has()) {
-            $query .= $this->joinContainer->asString();
-        }
-
-        if ($this->whereContainer->has()) {
-            $query .= $this->whereContainer->asString();
-            $this->parameters += $this->whereContainer->getParameters();
-        }
-
-        if ($this->orderByContainer->has()) {
-            $query .= $this->orderByContainer->asString();
-        }
-
-        if ($this->groupByContainer->has()) {
-            $query .= $this->groupByContainer->asString();
-        }
-
-        if ($this->limit !== null) {
-            $query .= sprintf(' LIMIT %s', $this->limit);
-        }
-
-        if ($this->offset !== null) {
-            $query .= sprintf(' OFFSET %s', $this->offset);
-        }
-
-        return $query;
-    }
-
 
     /**
      * @inheritDoc
@@ -152,5 +103,35 @@ class SelectStatement extends SelectStatementCommon
     protected function createRawWhereElement(RawExpression $expression, array $bindings = [])
     {
         return new RawWhereElement($this->whereContainer, $expression, $bindings);
+    }
+
+
+    /**
+     * Return the imploded field names into the select statement
+     *
+     * @return string
+     */
+    protected function getImplodedFields()
+    {
+        return implode(
+            ', ',
+            array_map(
+                function ($field) {
+                    return $this->normalize($field);
+                },
+                $this->fields
+            )
+        );
+    }
+
+
+    /**
+     * Return the normalized table name
+     *
+     * @return string
+     */
+    protected function getNormalizedTableName()
+    {
+        return $this->normalize($this->table);
     }
 }

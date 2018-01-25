@@ -94,6 +94,48 @@ abstract class WhereElement implements WhereElementInterface
 
 
     /**
+     * @inheritdoc
+     */
+    public function asString()
+    {
+        if ($this->hasNullValueOperator()) {
+            $this->values = [];
+
+            return sprintf(
+                '%s %s',
+                $this->getNormalizedField(),
+                $this->getOperator()
+            );
+        }
+
+        if ($this->hasArrayOperator()) {
+            if ($this->operator === Operator::BETWEEN) {
+                $name = $this->names[0] . ' AND ' . $this->names[1];
+            } else {
+                $name = '(' . implode(',', $this->names) . ')';
+            }
+        } else {
+            $name = $this->names[0];
+        }
+
+        if ($this->operator === Operator::IN && empty($this->values)) {
+            return '1 = 0';
+        }
+
+        if ($this->operator === Operator::NOTIN && empty($this->values)) {
+            return '1 = 1';
+        }
+
+        return sprintf(
+            '%s %s %s',
+            $this->getNormalizedField(),
+            $this->getOperator(),
+            $name
+        );
+    }
+
+
+    /**
      * Add a value to the value list
      *
      * @param mixed $value
@@ -164,5 +206,16 @@ abstract class WhereElement implements WhereElementInterface
     protected function hasNullValueOperator()
     {
         return in_array($this->getOperator(), self::$nullValueOperators);
+    }
+
+
+    /**
+     * Return the normalized field name
+     *
+     * @return string
+     */
+    protected function getNormalizedField()
+    {
+        return $this->field;
     }
 }

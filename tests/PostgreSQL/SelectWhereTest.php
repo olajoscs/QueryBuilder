@@ -134,7 +134,7 @@ class SelectWhereTest extends PostgreSQLTestCase
             ->from('strings')
             ->whereIn('id', []);
 
-        $string = 'SELECT "id" FROM "strings" WHERE false';
+        $string = 'SELECT "id" FROM "strings" WHERE 1 = 0';
 
         $this->assertEquals($string, $query->asString());
     }
@@ -174,7 +174,7 @@ class SelectWhereTest extends PostgreSQLTestCase
             ->from('strings')
             ->whereNotIn('id', []);
 
-        $string = 'SELECT "id" FROM "strings" WHERE true';
+        $string = 'SELECT "id" FROM "strings" WHERE 1 = 1';
 
         $this->assertEquals($string, $query->asString());
     }
