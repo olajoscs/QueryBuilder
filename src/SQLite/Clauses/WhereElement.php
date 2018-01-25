@@ -3,7 +3,6 @@
 namespace OlajosCs\QueryBuilder\SQLite\Clauses;
 
 use OlajosCs\QueryBuilder\Common\Clauses\WhereElement as WhereElementCommon;
-use OlajosCs\QueryBuilder\Operator;
 
 /**
  * Class WhereElement

@@ -111,8 +111,9 @@ abstract class InsertStatement extends Statement implements InsertStatementInter
      * Add a value to the update statement.
      * It is added as a placeholder to the values, and the real value is added to the binding list
      *
-     * @param string $field
-     * @param mixed  $value
+     * @param string     $field
+     * @param mixed      $value
+     * @param int|string $arrayKey
      *
      * @return void
      */

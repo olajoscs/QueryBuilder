@@ -3,7 +3,6 @@
 namespace OlajosCs\QueryBuilder\PostgreSQL\Clauses;
 
 use OlajosCs\QueryBuilder\Common\Clauses\WhereElement as WhereElementCommon;
-use OlajosCs\QueryBuilder\Operator;
 use OlajosCs\QueryBuilder\PostgreSQL\NameNormalizer;
 
 /**
